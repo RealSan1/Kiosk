@@ -11,10 +11,9 @@ public class Main extends javax.swing.JFrame {
     
     static String orcle_url = "jdbc:oracle:thin:@localhost:1521:orcl"; //DB URL
     static String orcle_ID = "c##san"; //DB ID
-    static String orcle_PW = "123"; // DB Password    
-    String User_Name = null;
-    String User_RemainTime = null;
-    String User_UseTime = null;
+    static String orcle_PW = "123"; // DB Password  
+    static User_Info Info;
+
     /**
      * Creates new form Login
      */
@@ -138,11 +137,6 @@ public class Main extends javax.swing.JFrame {
         Order.setBackground(new java.awt.Color(35, 35, 35));
         Order.setPreferredSize(new java.awt.Dimension(700, 500));
         Order.setRequestFocusEnabled(false);
-        Order.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                OrderFocusGained(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -243,7 +237,13 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_Sing_Up_ButtonMouseClicked
 
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
-        boolean connection = false; //접속상태확인
+        boolean connection = false; //접속상태확인     
+        String User_ID = null; 
+        String User_PW = null;
+        String User_Name = null;
+        String User_RemainTime = null;
+        String User_UseTime = null;
+        
         try {
             String sql = "select * from users"; //sql명령문
             Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
@@ -251,28 +251,30 @@ public class Main extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery(sql);
             // DB 접근과정
             
-            while(rs.next()){ // 
-                String User_ID = rs.getString("User_ID");
-                String User_PW = rs.getString("User_PW");
+            while(rs.next()){ //DB 입력
+                User_ID = rs.getString("User_ID");
+                User_PW = rs.getString("User_PW");
                 User_Name = rs.getString("User_Name");
-                User_RemainTime = rs.getString("USER_REMAINTIME");
-                User_UseTime = rs.getString("USER_USETIME");
+                User_RemainTime = rs.getString("User_RemainTime");
+                User_UseTime = rs.getString("User_UseTime");
                 if (User_ID.equals(Input_ID_TextField.getText()) && User_PW.equals(Input_PW_TextField.getText())){
                     connection = true; // ID랑 PW같다면 로그인
+                    break;
                  }
                 }
-                if (connection){
-                    Login.setVisible(false);
-                    Order.setVisible(true);
-                    User_name_Text.setText(User_Name);
-                    User_RemainTime_Text.setText(User_RemainTime);
-                    User_UseTime_Text.setText(User_UseTime);
+                if (connection){  //로그인 완료 시                    
+                    Info = new User_Info(User_ID, User_PW, User_Name, User_RemainTime, User_UseTime); //생성자
+                    if (Info.getUser_RemainTime().equals("0")) {
+                        new AddTime().setVisible(true);
+                    }
+                    User_name_Text.setText(Info.getUser_Name());
+
                 } else{
                     JOptionPane.showMessageDialog(null, "등록된 아이디가 아닙니다.");
                 }
             
         } catch (SQLException ex) {
-            System.err.println("로그인 오류");
+            System.err.println("Login Error");
         }
 
     }//GEN-LAST:event_Login_ButtonActionPerformed
@@ -296,10 +298,6 @@ public class Main extends javax.swing.JFrame {
     private void Find_PW_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Find_PW_ButtonMouseClicked
         //비밀번호 찾기
     }//GEN-LAST:event_Find_PW_ButtonMouseClicked
-
-    private void OrderFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_OrderFocusGained
-        
-    }//GEN-LAST:event_OrderFocusGained
 
     /**
      * @param args the command line arguments

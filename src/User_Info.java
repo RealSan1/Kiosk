@@ -15,30 +15,26 @@ public class User_Info {
     private String User_RemainTime;
     private String User_UseTime;
     
+    public User_Info(String User_ID, String User_PW, String User_Name, String User_RemainTime, String User_UseTime){
+        this.User_ID = User_ID;
+        this.User_PW = User_PW;
+        this.User_Name = User_Name;
+        this.User_RemainTime = User_RemainTime;
+        this.User_UseTime= User_UseTime;
+
+    }
     public String getUser_ID(){
         return User_ID;
-    }
-    
-    public void setUser_ID(String User_ID){
-        this.User_ID = User_ID;
     }
     
     public String getUser_PW(){
         return User_PW;
     }
     
-    public void setUser_PW(String User_PW){
-        this.User_PW = User_PW;
-    }
-    
     public String getUser_Name(){
         return User_Name;
     }
-    
-    public void setUser_Name(String User_Name){
-        this.User_Name = User_Name;
-    }
-    
+
     public String getUser_RemainTime(){
         return User_RemainTime;
     }

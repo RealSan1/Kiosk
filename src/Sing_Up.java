@@ -55,6 +55,7 @@ public class Sing_Up extends javax.swing.JFrame {
         Sing_button.setBackground(new java.awt.Color(211, 211, 211));
         Sing_button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         Sing_button.setText("계정 생성");
+        Sing_button.setEnabled(false);
         Sing_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Sing_buttonActionPerformed(evt);
@@ -161,17 +162,19 @@ public class Sing_Up extends javax.swing.JFrame {
             // DB 접근과정
             if(status == false){
                 JOptionPane.showMessageDialog(null, "중복확인 해주세요");
+                
             }
             else{
+                
                 pstmt.setString(1, Input_ID_text.getText());
                 pstmt.setString(2, Input_PW_text.getText());
                 pstmt.setString(3, Input_Name_text.getText());
-                pstmt.executeUpdate();
+                pstmt.executeUpdate(); //입력값 DB 업데이트
                 JOptionPane.showMessageDialog(null, "회원가입 완료");
                 dispose();
             }
         } catch (SQLException ex) {
-            System.err.println("회원가입 오류");
+            System.err.println("Sing_Up Error");
         }
     }//GEN-LAST:event_Sing_buttonActionPerformed
 
@@ -187,18 +190,19 @@ public class Sing_Up extends javax.swing.JFrame {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             // DB 접근과정
+            
             while(rs.next()){ 
                 String User_ID = rs.getString("User_ID");
                 if(User_ID.equals(Input_ID_text.getText())){
                     JOptionPane.showMessageDialog(null, "중복된 아이디 입니다.");
-                    break;
                 } else{
                     status = true;
+                    Sing_button.setEnabled(status); //중복이 아니면 가입버튼 활성화
                 }
             }
             
         } catch (SQLException ex) {
-            System.err.println("중복검사 오류");
+            System.err.println("Duplicate Error");
         }
             
     }//GEN-LAST:event_Duplicate_buttonActionPerformed
