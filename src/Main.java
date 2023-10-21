@@ -12,6 +12,9 @@ public class Main extends javax.swing.JFrame {
     static String orcle_url = "jdbc:oracle:thin:@localhost:1521:orcl"; //DB URL
     static String orcle_ID = "c##san"; //DB ID
     static String orcle_PW = "123"; // DB Password    
+    String User_Name = null;
+    String User_RemainTime = null;
+    String User_UseTime = null;
     /**
      * Creates new form Login
      */
@@ -30,14 +33,21 @@ public class Main extends javax.swing.JFrame {
 
         Main = new javax.swing.JPanel();
         Login = new javax.swing.JPanel();
-        Input_PW = new javax.swing.JPasswordField();
-        Input_ID = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        Sing_Up = new javax.swing.JLabel();
-        Find_PW = new javax.swing.JLabel();
+        Input_PW_TextField = new javax.swing.JPasswordField();
+        Input_ID_TextField = new javax.swing.JTextField();
+        Login_Button = new javax.swing.JButton();
+        Sing_Up_Button = new javax.swing.JLabel();
+        Find_PW_Button = new javax.swing.JLabel();
         Order = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        User_name = new javax.swing.JLabel();
+        User_name_Text = new javax.swing.JLabel();
+        User_UseTime_Text = new javax.swing.JLabel();
+        User_RemainTime_Text = new javax.swing.JLabel();
+        User_name_Text1 = new javax.swing.JLabel();
+        User_UseTime_Text1 = new javax.swing.JLabel();
+        User_RemainTime_Text1 = new javax.swing.JLabel();
+
+        setTitle("로그인 창");
 
         Main.setBackground(new java.awt.Color(35, 35, 35));
         Main.setPreferredSize(new java.awt.Dimension(700, 500));
@@ -46,41 +56,46 @@ public class Main extends javax.swing.JFrame {
         Login.setBackground(new java.awt.Color(35, 35, 35));
         Login.setPreferredSize(new java.awt.Dimension(700, 500));
 
-        Input_PW.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Input_PW.setText("Password");
-        Input_PW.addFocusListener(new java.awt.event.FocusAdapter() {
+        Input_PW_TextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        Input_PW_TextField.setText("Password");
+        Input_PW_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                Input_PWFocusGained(evt);
+                Input_PW_TextFieldFocusGained(evt);
             }
         });
 
-        Input_ID.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Input_ID.setText("ID");
-        Input_ID.addFocusListener(new java.awt.event.FocusAdapter() {
+        Input_ID_TextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        Input_ID_TextField.setText("ID");
+        Input_ID_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                Input_IDFocusGained(evt);
+                Input_ID_TextFieldFocusGained(evt);
             }
         });
 
-        jButton1.setText("로그인");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Login_Button.setText("로그인");
+        Login_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Login_ButtonActionPerformed(evt);
             }
         });
 
-        Sing_Up.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        Sing_Up.setForeground(new java.awt.Color(255, 255, 255));
-        Sing_Up.setText("계정 생성");
-        Sing_Up.addMouseListener(new java.awt.event.MouseAdapter() {
+        Sing_Up_Button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        Sing_Up_Button.setForeground(new java.awt.Color(255, 255, 255));
+        Sing_Up_Button.setText("계정 생성");
+        Sing_Up_Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sing_UpMouseClicked(evt);
+                Sing_Up_ButtonMouseClicked(evt);
             }
         });
 
-        Find_PW.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        Find_PW.setForeground(new java.awt.Color(255, 255, 255));
-        Find_PW.setText("비밀번호 찾기");
+        Find_PW_Button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        Find_PW_Button.setForeground(new java.awt.Color(255, 255, 255));
+        Find_PW_Button.setText("비밀번호 찾기");
+        Find_PW_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Find_PW_ButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout LoginLayout = new javax.swing.GroupLayout(Login);
         Login.setLayout(LoginLayout);
@@ -90,15 +105,15 @@ public class Main extends javax.swing.JFrame {
                 .addGap(265, 265, 265)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(LoginLayout.createSequentialGroup()
-                        .addComponent(Sing_Up, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Sing_Up_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Find_PW))
+                        .addComponent(Find_PW_Button))
                     .addGroup(LoginLayout.createSequentialGroup()
                         .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Input_ID)
-                            .addComponent(Input_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(Input_ID_TextField)
+                            .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(Login_Button)))
                 .addGap(265, 265, 265))
         );
         LoginLayout.setVerticalGroup(
@@ -107,14 +122,14 @@ public class Main extends javax.swing.JFrame {
                 .addGap(200, 200, 200)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(LoginLayout.createSequentialGroup()
-                        .addComponent(Input_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Input_ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Input_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Sing_Up)
-                    .addComponent(Find_PW))
+                    .addComponent(Sing_Up_Button)
+                    .addComponent(Find_PW_Button))
                 .addContainerGap(216, Short.MAX_VALUE))
         );
 
@@ -123,34 +138,81 @@ public class Main extends javax.swing.JFrame {
         Order.setBackground(new java.awt.Color(35, 35, 35));
         Order.setPreferredSize(new java.awt.Dimension(700, 500));
         Order.setRequestFocusEnabled(false);
+        Order.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                OrderFocusGained(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("주문화면");
 
-        User_name.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
-        User_name.setForeground(new java.awt.Color(255, 255, 255));
-        User_name.setText("사용자 이름");
+        User_name_Text.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        User_name_Text.setForeground(new java.awt.Color(255, 255, 255));
+        User_name_Text.setText("이름");
+
+        User_UseTime_Text.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        User_UseTime_Text.setForeground(new java.awt.Color(255, 255, 255));
+        User_UseTime_Text.setText("0");
+
+        User_RemainTime_Text.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        User_RemainTime_Text.setForeground(new java.awt.Color(255, 255, 255));
+        User_RemainTime_Text.setText("0");
+        User_RemainTime_Text.setToolTipText("");
+
+        User_name_Text1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        User_name_Text1.setForeground(new java.awt.Color(255, 255, 255));
+        User_name_Text1.setText("사용자 이름");
+
+        User_UseTime_Text1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        User_UseTime_Text1.setForeground(new java.awt.Color(255, 255, 255));
+        User_UseTime_Text1.setText("사용시간");
+
+        User_RemainTime_Text1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        User_RemainTime_Text1.setForeground(new java.awt.Color(255, 255, 255));
+        User_RemainTime_Text1.setText("남은시간");
+        User_RemainTime_Text1.setToolTipText("");
 
         javax.swing.GroupLayout OrderLayout = new javax.swing.GroupLayout(Order);
         Order.setLayout(OrderLayout);
         OrderLayout.setHorizontalGroup(
             OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OrderLayout.createSequentialGroup()
-                .addGap(264, 264, 264)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OrderLayout.createSequentialGroup()
+                .addContainerGap(212, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-                .addComponent(User_name, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addGap(62, 62, 62)
+                .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(User_UseTime_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(User_RemainTime_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(User_name_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(User_UseTime_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(User_RemainTime_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(User_name_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
         );
         OrderLayout.setVerticalGroup(
             OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OrderLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(User_name, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(397, Short.MAX_VALUE))
+                    .addGroup(OrderLayout.createSequentialGroup()
+                        .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(User_name_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addComponent(User_RemainTime_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(User_UseTime_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(OrderLayout.createSequentialGroup()
+                        .addComponent(User_name_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(User_RemainTime_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(User_UseTime_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         Main.add(Order, "card2");
@@ -175,12 +237,12 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Sing_UpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sing_UpMouseClicked
-        new Setting().setVisible(true);
+    private void Sing_Up_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sing_Up_ButtonMouseClicked
+        new Sing_Up().setVisible(true);
 
-    }//GEN-LAST:event_Sing_UpMouseClicked
+    }//GEN-LAST:event_Sing_Up_ButtonMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
         boolean connection = false; //접속상태확인
         try {
             String sql = "select * from users"; //sql명령문
@@ -192,14 +254,19 @@ public class Main extends javax.swing.JFrame {
             while(rs.next()){ // 
                 String User_ID = rs.getString("User_ID");
                 String User_PW = rs.getString("User_PW");
-                String User_Name = rs.getString("User_Name");
-                if (User_ID.equals(Input_ID.getText()) && User_PW.equals(Input_PW.getText())){
+                User_Name = rs.getString("User_Name");
+                User_RemainTime = rs.getString("USER_REMAINTIME");
+                User_UseTime = rs.getString("USER_USETIME");
+                if (User_ID.equals(Input_ID_TextField.getText()) && User_PW.equals(Input_PW_TextField.getText())){
                     connection = true; // ID랑 PW같다면 로그인
                  }
                 }
                 if (connection){
                     Login.setVisible(false);
                     Order.setVisible(true);
+                    User_name_Text.setText(User_Name);
+                    User_RemainTime_Text.setText(User_RemainTime);
+                    User_UseTime_Text.setText(User_UseTime);
                 } else{
                     JOptionPane.showMessageDialog(null, "등록된 아이디가 아닙니다.");
                 }
@@ -208,23 +275,31 @@ public class Main extends javax.swing.JFrame {
             System.err.println("로그인 오류");
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Login_ButtonActionPerformed
 
-    private void Input_IDFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Input_IDFocusGained
+    private void Input_ID_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Input_ID_TextFieldFocusGained
         //로그인 편의기능
-        String status = Input_ID.getText();
+        String status = Input_ID_TextField.getText();
         if(status.equals("ID")){
-            Input_ID.setText(null);
+            Input_ID_TextField.setText(null);
         }
-    }//GEN-LAST:event_Input_IDFocusGained
+    }//GEN-LAST:event_Input_ID_TextFieldFocusGained
 
-    private void Input_PWFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Input_PWFocusGained
+    private void Input_PW_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Input_PW_TextFieldFocusGained
         //로그인 편의기능
-        String status = Input_PW.getText();
+        String status = Input_PW_TextField.getText();
         if(status.equals("Password")){
-            Input_PW.setText(null);
+            Input_PW_TextField.setText(null);
         }
-    }//GEN-LAST:event_Input_PWFocusGained
+    }//GEN-LAST:event_Input_PW_TextFieldFocusGained
+
+    private void Find_PW_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Find_PW_ButtonMouseClicked
+        //비밀번호 찾기
+    }//GEN-LAST:event_Find_PW_ButtonMouseClicked
+
+    private void OrderFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_OrderFocusGained
+        
+    }//GEN-LAST:event_OrderFocusGained
 
     /**
      * @param args the command line arguments
@@ -263,15 +338,20 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Find_PW;
-    private javax.swing.JTextField Input_ID;
-    private javax.swing.JPasswordField Input_PW;
+    private javax.swing.JLabel Find_PW_Button;
+    private javax.swing.JTextField Input_ID_TextField;
+    private javax.swing.JPasswordField Input_PW_TextField;
     private javax.swing.JPanel Login;
+    private javax.swing.JButton Login_Button;
     private javax.swing.JPanel Main;
     private javax.swing.JPanel Order;
-    private javax.swing.JLabel Sing_Up;
-    private javax.swing.JLabel User_name;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel Sing_Up_Button;
+    private javax.swing.JLabel User_RemainTime_Text;
+    private javax.swing.JLabel User_RemainTime_Text1;
+    private javax.swing.JLabel User_UseTime_Text;
+    private javax.swing.JLabel User_UseTime_Text1;
+    private javax.swing.JLabel User_name_Text;
+    private javax.swing.JLabel User_name_Text1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
