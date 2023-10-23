@@ -2,14 +2,13 @@ package sw;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author 산
  */
 public class Main extends javax.swing.JFrame {
     
-    static String orcle_url = "jdbc:oracle:thin:@localhost:1521:orcl"; //DB URL
+    static String orcle_url = "jdbc:oracle:thin:@116.39.188.187:1521:orcl"; //DB URL
     static String orcle_ID = "c##san"; //DB ID
     static String orcle_PW = "123"; // DB Password  
     static User_Info Info;
@@ -105,7 +104,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(LoginLayout.createSequentialGroup()
                         .addComponent(Sing_Up_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addComponent(Find_PW_Button))
                     .addGroup(LoginLayout.createSequentialGroup()
                         .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +264,10 @@ public class Main extends javax.swing.JFrame {
                 if (connection){  //로그인 완료 시                    
                     Info = new User_Info(User_ID, User_PW, User_Name, User_RemainTime, User_UseTime); //생성자
                     if (Info.getUser_RemainTime().equals("0")) {
-                        new AddTime().setVisible(true);
+                        new AddTime().setVisible(true); //만약 시간이 남은시간이 0이면 충전화면 창 뜨기
+                        } else{
+                        Login.setVisible(false);
+                        Order.setVisible(true);
                     }
                     User_name_Text.setText(Info.getUser_Name());
 
