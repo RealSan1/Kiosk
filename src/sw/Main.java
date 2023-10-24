@@ -2,13 +2,13 @@ package sw;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-//114.71.137.110
+//114.71.137.110 태성
+
 /**
  *
  * @author 산
  */
 public class Main extends javax.swing.JFrame {
-
     static String orcle_url = "jdbc:oracle:thin:@116.39.188.187:1521:orcl"; //DB URL
     static String orcle_ID = "c##san"; //DB ID
     static String orcle_PW = "123"; // DB Password  
@@ -243,7 +243,7 @@ public class Main extends javax.swing.JFrame {
         String User_Name = null;
         String User_RemainTime = null;
         String User_UseTime = null;
-        try {
+            try {
             String sql = "select * from users"; //sql명령문
             Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
             Statement stmt = con.createStatement();
@@ -266,18 +266,20 @@ public class Main extends javax.swing.JFrame {
                     if (Info.getUser_RemainTime().equals("0")) {  // 만약 보유시간이 0이면 충전화면 출력
                         new AddTime().setVisible(true);
                     }
-                    else {
-                        Main.setVisible(false);
+                    if (Info.getUser_RemainTime().equals("0")) {
+                        new AddTime().setVisible(true); //만약 시간이 남은시간이 0이면 충전화면 창 뜨기
+                        } else {
+                        Login.setVisible(false);
                         Order.setVisible(true);
-                    }
+                        }   
                 } else{
                     JOptionPane.showMessageDialog(null, "등록된 아이디가 아닙니다.");
                 }
             
-        } catch (SQLException ex) {
+         } catch (SQLException ex) {
             System.err.println("Login Error");
         }
-
+             
     }//GEN-LAST:event_Login_ButtonActionPerformed
 
     private void Input_ID_TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Input_ID_TextFieldFocusGained

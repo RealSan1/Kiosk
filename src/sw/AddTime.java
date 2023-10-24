@@ -181,7 +181,7 @@ public class AddTime extends javax.swing.JFrame {
             
             Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
             PreparedStatement pstmt = con.prepareStatement(sql);
-            
+            System.out.println("Update");
        } catch (SQLException ex) {
             System.err.println("Update Error");
         }
