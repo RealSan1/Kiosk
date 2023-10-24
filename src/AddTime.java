@@ -1,5 +1,10 @@
 package sw;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import static sw.Main.Info;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -55,6 +60,11 @@ public class AddTime extends javax.swing.JFrame {
 
         AddTime_1.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         AddTime_1.setText("1시간");
+        AddTime_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddTime_1ActionPerformed(evt);
+            }
+        });
 
         AddTime_4.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         AddTime_4.setText("4시간");
@@ -72,6 +82,11 @@ public class AddTime extends javax.swing.JFrame {
 
         Exit_Button.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         Exit_Button.setText("닫기");
+        Exit_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Exit_ButtonActionPerformed(evt);
+            }
+        });
 
         User_Name_Text.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         User_Name_Text.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,6 +170,27 @@ public class AddTime extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AddTime_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTime_1ActionPerformed
+       String Input_time = "60";  //1시간(60분)
+       String current_time = Info.getUser_RemainTime(); //사용자가 보유하고 시간
+       int result = Integer.parseInt(Input_time) + Integer.parseInt(current_time);  //String -> int
+       Info.setUser_RemainTime(Integer.toString(result));
+       try {
+            String sql = "Update users set User_RemainTime = " + Info.getUser_RemainTime() +" where User_ID = '" + Info.getUser_ID() + "'"; // DML 명령어
+            
+            Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            
+       } catch (SQLException ex) {
+            System.err.println("Update Error");
+        }
+       
+    }//GEN-LAST:event_AddTime_1ActionPerformed
+
+    private void Exit_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Exit_ButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_Exit_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
