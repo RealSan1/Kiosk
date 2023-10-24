@@ -174,7 +174,7 @@ public class Sing_Up extends javax.swing.JFrame {
                 dispose();
             }
         } catch (SQLException ex) {
-            System.err.println("Sing_Up Error");
+            System.out.println("Sing_Up Error");
         }
     }//GEN-LAST:event_Sing_buttonActionPerformed
 
@@ -184,8 +184,9 @@ public class Sing_Up extends javax.swing.JFrame {
     }//GEN-LAST:event_Cancel_buttonActionPerformed
 
     private void Duplicate_buttonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_Duplicate_buttonActionPerformed
-        try{
-        String sql = "select USER_ID from users"; //sql명령문
+        try
+            {
+            String sql = "select USER_ID from users"; //sql명령문
             Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -196,13 +197,14 @@ public class Sing_Up extends javax.swing.JFrame {
                 if(User_ID.equals(Input_ID_text.getText())){
                     JOptionPane.showMessageDialog(null, "중복된 아이디 입니다.");
                 } else{
+                    System.out.println("Yes");
                     status = true;
                     Sing_button.setEnabled(status); //중복이 아니면 가입버튼 활성화
                 }
             }
             
         } catch (SQLException ex) {
-            System.err.println("Duplicate Error");
+            System.out.println("Duplicate Error");
         }
             
     }//GEN-LAST:event_Duplicate_buttonActionPerformed

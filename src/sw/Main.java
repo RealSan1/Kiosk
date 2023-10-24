@@ -2,7 +2,6 @@ package sw;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-//114.71.137.110 태성
 
 /**
  *
@@ -271,6 +270,8 @@ public class Main extends javax.swing.JFrame {
                         } else {
                         Login.setVisible(false);
                         Order.setVisible(true);
+                        User_name_Text.setText(Info.getUser_Name());
+                        User_RemainTime_Text.setText(Info.getUser_RemainTime());
                         }   
                 } else{
                     JOptionPane.showMessageDialog(null, "등록된 아이디가 아닙니다.");

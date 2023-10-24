@@ -176,7 +176,6 @@ public class AddTime extends javax.swing.JFrame {
        String current_time = Info.getUser_RemainTime(); //사용자가 보유하고 시간
        int result = Integer.parseInt(Input_time) + Integer.parseInt(current_time);  //String -> int
        Info.setUser_RemainTime(Integer.toString(result));
-        System.out.println("Update users set User_RemainTime = " + Info.getUser_RemainTime() +" where User_ID = '" + Info.getUser_ID() + "'");
        try {
             String sql = "Update users set User_RemainTime = " + Info.getUser_RemainTime() +" where User_ID = '" + Info.getUser_ID() + "'"; // DML 명령어
             
