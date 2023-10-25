@@ -21,6 +21,7 @@ public class AddTime extends javax.swing.JFrame {
         User_Name_Text.setText(Info.getUser_Name());
     }
     public void Call_DB(String Input_Time){
+        //DB 시간추가 메소드
         
        String current_time = Info.getUser_RemainTime(); //사용자가 보유하고 시간
        int result = Integer.parseInt(Input_Time) + Integer.parseInt(current_time);  //String -> int

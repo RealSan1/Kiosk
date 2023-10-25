@@ -303,10 +303,13 @@ public class Main extends javax.swing.JFrame {
                     if (Info.getUser_RemainTime().equals("0")) {
                         new AddTime().setVisible(true); //만약 시간이 남은시간이 0이면 충전화면 창 뜨기
                         } else {
-                        Login.setVisible(false);
-                        Order.setVisible(true);
-                        User_name_Text.setText(Info.getUser_Name());
-                        User_RemainTime_Text.setText(Info.getUser_RemainTime());
+                        dispose();
+                        new Order().setVisible(true);
+                        
+//                        Login.setVisible(false);
+//                        Order.setVisible(true);
+//                        User_name_Text.setText(Info.getUser_Name());
+//                        User_RemainTime_Text.setText(Info.getUser_RemainTime());
                         }   
                 } else{
                     JOptionPane.showMessageDialog(null, "등록된 아이디가 아닙니다.");
