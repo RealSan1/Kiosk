@@ -36,23 +36,30 @@ public class Main extends javax.swing.JFrame {
         Login_Button = new javax.swing.JButton();
         Sing_Up_Button = new javax.swing.JLabel();
         Find_PW_Button = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         Order = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        User_name_Text = new javax.swing.JLabel();
-        User_UseTime_Text = new javax.swing.JLabel();
-        User_RemainTime_Text = new javax.swing.JLabel();
+        User_Info_Panel = new javax.swing.JPanel();
         User_name_Text1 = new javax.swing.JLabel();
-        User_UseTime_Text1 = new javax.swing.JLabel();
         User_RemainTime_Text1 = new javax.swing.JLabel();
+        User_UseTime_Text1 = new javax.swing.JLabel();
+        User_name_Text = new javax.swing.JLabel();
+        User_RemainTime_Text = new javax.swing.JLabel();
+        User_UseTime_Text = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("로그인 창");
+        setMinimumSize(new java.awt.Dimension(970, 500));
+        setName("frame"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(970, 535));
 
         Main.setBackground(new java.awt.Color(35, 35, 35));
-        Main.setPreferredSize(new java.awt.Dimension(700, 500));
+        Main.setPreferredSize(new java.awt.Dimension(970, 500));
+        Main.setRequestFocusEnabled(false);
         Main.setLayout(new java.awt.CardLayout());
 
         Login.setBackground(new java.awt.Color(35, 35, 35));
-        Login.setPreferredSize(new java.awt.Dimension(700, 500));
+        Login.setMinimumSize(new java.awt.Dimension(970, 500));
+        Login.setPreferredSize(new java.awt.Dimension(970, 500));
 
         Input_PW_TextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         Input_PW_TextField.setText("Password");
@@ -95,117 +102,145 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("종료");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout LoginLayout = new javax.swing.GroupLayout(Login);
         Login.setLayout(LoginLayout);
         LoginLayout.setHorizontalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginLayout.createSequentialGroup()
-                .addGap(265, 265, 265)
-                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(388, 388, 388)
+                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(LoginLayout.createSequentialGroup()
                         .addComponent(Sing_Up_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Find_PW_Button))
                     .addGroup(LoginLayout.createSequentialGroup()
-                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Input_ID_TextField)
-                            .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Input_ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Input_PW_TextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Login_Button)))
-                .addGap(265, 265, 265))
+                .addGap(358, 358, 358))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addGap(28, 28, 28))
         );
         LoginLayout.setVerticalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(195, Short.MAX_VALUE)
+                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(LoginLayout.createSequentialGroup()
                         .addComponent(Input_ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(Login_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Sing_Up_Button)
-                    .addComponent(Find_PW_Button))
-                .addContainerGap(216, Short.MAX_VALUE))
+                    .addComponent(Find_PW_Button)
+                    .addComponent(Sing_Up_Button))
+                .addGap(174, 174, 174)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18))
         );
 
         Main.add(Login, "card3");
 
         Order.setBackground(new java.awt.Color(35, 35, 35));
-        Order.setPreferredSize(new java.awt.Dimension(700, 500));
+        Order.setMinimumSize(new java.awt.Dimension(970, 500));
+        Order.setPreferredSize(new java.awt.Dimension(970, 500));
         Order.setRequestFocusEnabled(false);
 
-        jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("주문화면");
+        User_Info_Panel.setBackground(new java.awt.Color(80, 80, 80));
+        User_Info_Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        User_name_Text1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        User_name_Text1.setForeground(new java.awt.Color(255, 255, 255));
+        User_name_Text1.setText("이름 :");
+
+        User_RemainTime_Text1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        User_RemainTime_Text1.setForeground(new java.awt.Color(255, 255, 255));
+        User_RemainTime_Text1.setText("남은시간 :");
+        User_RemainTime_Text1.setToolTipText("");
+
+        User_UseTime_Text1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        User_UseTime_Text1.setForeground(new java.awt.Color(255, 255, 255));
+        User_UseTime_Text1.setText("사용시간 :");
 
         User_name_Text.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         User_name_Text.setForeground(new java.awt.Color(255, 255, 255));
         User_name_Text.setText("이름");
-
-        User_UseTime_Text.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
-        User_UseTime_Text.setForeground(new java.awt.Color(255, 255, 255));
-        User_UseTime_Text.setText("0");
 
         User_RemainTime_Text.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         User_RemainTime_Text.setForeground(new java.awt.Color(255, 255, 255));
         User_RemainTime_Text.setText("0");
         User_RemainTime_Text.setToolTipText("");
 
-        User_name_Text1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
-        User_name_Text1.setForeground(new java.awt.Color(255, 255, 255));
-        User_name_Text1.setText("사용자 이름");
+        User_UseTime_Text.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        User_UseTime_Text.setForeground(new java.awt.Color(255, 255, 255));
+        User_UseTime_Text.setText("0");
 
-        User_UseTime_Text1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
-        User_UseTime_Text1.setForeground(new java.awt.Color(255, 255, 255));
-        User_UseTime_Text1.setText("사용시간");
-
-        User_RemainTime_Text1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
-        User_RemainTime_Text1.setForeground(new java.awt.Color(255, 255, 255));
-        User_RemainTime_Text1.setText("남은시간");
-        User_RemainTime_Text1.setToolTipText("");
+        javax.swing.GroupLayout User_Info_PanelLayout = new javax.swing.GroupLayout(User_Info_Panel);
+        User_Info_Panel.setLayout(User_Info_PanelLayout);
+        User_Info_PanelLayout.setHorizontalGroup(
+            User_Info_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(User_Info_PanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(User_Info_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(User_Info_PanelLayout.createSequentialGroup()
+                        .addGroup(User_Info_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(User_RemainTime_Text1)
+                            .addComponent(User_UseTime_Text1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addGroup(User_Info_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(User_UseTime_Text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(User_RemainTime_Text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(User_Info_PanelLayout.createSequentialGroup()
+                        .addComponent(User_name_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(User_name_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        User_Info_PanelLayout.setVerticalGroup(
+            User_Info_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(User_Info_PanelLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(User_Info_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(User_name_Text1)
+                    .addComponent(User_name_Text))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(User_Info_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(User_UseTime_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(User_UseTime_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(User_Info_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(User_RemainTime_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(User_RemainTime_Text1))
+                .addContainerGap(137, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout OrderLayout = new javax.swing.GroupLayout(Order);
         Order.setLayout(OrderLayout);
         OrderLayout.setHorizontalGroup(
             OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OrderLayout.createSequentialGroup()
-                .addContainerGap(212, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(62, 62, 62)
-                .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(User_UseTime_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(User_RemainTime_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(User_name_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(User_UseTime_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(User_RemainTime_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(User_name_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                .addContainerGap(708, Short.MAX_VALUE)
+                .addComponent(User_Info_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         OrderLayout.setVerticalGroup(
             OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OrderLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(OrderLayout.createSequentialGroup()
-                        .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(User_name_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addComponent(User_RemainTime_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(User_UseTime_Text1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(OrderLayout.createSequentialGroup()
-                        .addComponent(User_name_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(User_RemainTime_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(User_UseTime_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(User_Info_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         Main.add(Order, "card2");
@@ -215,7 +250,7 @@ public class Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(Main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -303,6 +338,10 @@ public class Main extends javax.swing.JFrame {
         //비밀번호 찾기
     }//GEN-LAST:event_Find_PW_ButtonMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -348,12 +387,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel Main;
     private javax.swing.JPanel Order;
     private javax.swing.JLabel Sing_Up_Button;
+    private javax.swing.JPanel User_Info_Panel;
     private javax.swing.JLabel User_RemainTime_Text;
     private javax.swing.JLabel User_RemainTime_Text1;
     private javax.swing.JLabel User_UseTime_Text;
     private javax.swing.JLabel User_UseTime_Text1;
     private javax.swing.JLabel User_name_Text;
     private javax.swing.JLabel User_name_Text1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

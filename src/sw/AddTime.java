@@ -1,8 +1,5 @@
 package sw;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import static sw.Main.Info;
 
 /*
@@ -23,7 +20,24 @@ public class AddTime extends javax.swing.JFrame {
         initComponents();
         User_Name_Text.setText(Info.getUser_Name());
     }
-
+    public void Call_DB(String Input_Time){
+        
+       String current_time = Info.getUser_RemainTime(); //사용자가 보유하고 시간
+       int result = Integer.parseInt(Input_Time) + Integer.parseInt(current_time);  //String -> int
+       Info.setUser_RemainTime(Integer.toString(result));
+        
+       try {
+            String sql = "Update users set User_RemainTime = " + Info.getUser_RemainTime() +" where User_ID = '" + Info.getUser_ID() + "'"; // DML 명령어
+            
+            Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.executeUpdate();
+            System.out.println("Time Update");
+            
+            } catch (SQLException ex) {
+            System.err.println("Update Error");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,7 +117,9 @@ public class AddTime extends javax.swing.JFrame {
                         .addComponent(Exit_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(145, 145, 145))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(AddTime_2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(User_Name_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AddTime_2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(62, 62, 62))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,9 +136,7 @@ public class AddTime extends javax.swing.JFrame {
                                 .addComponent(AddTime_4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(146, 146, 146)
-                        .addComponent(AddTime_Label)
-                        .addGap(18, 18, 18)
-                        .addComponent(User_Name_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(AddTime_Label)))
                 .addContainerGap(62, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -172,21 +186,7 @@ public class AddTime extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddTime_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTime_1ActionPerformed
-       String Input_time = "60";  //1시간(60분)
-       String current_time = Info.getUser_RemainTime(); //사용자가 보유하고 시간
-       int result = Integer.parseInt(Input_time) + Integer.parseInt(current_time);  //String -> int
-       Info.setUser_RemainTime(Integer.toString(result));
-       try {
-            String sql = "Update users set User_RemainTime = " + Info.getUser_RemainTime() +" where User_ID = '" + Info.getUser_ID() + "'"; // DML 명령어
-            
-            Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.executeUpdate();
-            System.out.println("Update");
-       } catch (SQLException ex) {
-            System.err.println("Update Error");
-        }
-       
+            Call_DB("60");
     }//GEN-LAST:event_AddTime_1ActionPerformed
 
     private void Exit_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Exit_ButtonActionPerformed
