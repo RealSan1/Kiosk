@@ -12,10 +12,9 @@ import javax.swing.table.DefaultTableModel;
  * @author 산
  */
 public class Order extends javax.swing.JFrame {
-
-    int count = 1;
-    int price = 1000;
-    String temp = null;
+    int counts = 1;
+    Cart cart;
+    Cart cart1;
 
     /**
      * Creates new form Order
@@ -44,10 +43,9 @@ public class Order extends javax.swing.JFrame {
 
     }
 
-    public void CountTable() {
+    public void CountTable(String Menu, int count, int price) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        count += 1;
-        String targetValue = "Ramen";
+        String targetValue = Menu;
         int targetRow = -1; // 초기값으로 -1 설정
 
         for (int row = 0; row < model.getRowCount(); row++) {
@@ -58,7 +56,7 @@ public class Order extends javax.swing.JFrame {
             }
         }
         jTable1.setValueAt(count, targetRow, 1);
-        jTable1.setValueAt(price * count, targetRow, 2);
+        jTable1.setValueAt(count * price, targetRow, 2);
     }
 
     /**
@@ -91,6 +89,7 @@ public class Order extends javax.swing.JFrame {
         Food = new javax.swing.JPanel();
         Ramen = new javax.swing.JPanel();
         RamenBtn = new javax.swing.JButton();
+        RamenBtn1 = new javax.swing.JButton();
         Snack = new javax.swing.JPanel();
         Sncak1 = new javax.swing.JPanel();
         Can = new javax.swing.JPanel();
@@ -142,11 +141,6 @@ public class Order extends javax.swing.JFrame {
 
         btnExit.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnExit.setText("종료");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
-            }
-        });
 
         lblUser.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(255, 255, 255));
@@ -289,21 +283,33 @@ public class Order extends javax.swing.JFrame {
             }
         });
 
+        RamenBtn1.setText("Ramen1");
+        RamenBtn1.setToolTipText("");
+        RamenBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RamenBtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout RamenLayout = new javax.swing.GroupLayout(Ramen);
         Ramen.setLayout(RamenLayout);
         RamenLayout.setHorizontalGroup(
             RamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RamenLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(48, 48, 48)
                 .addComponent(RamenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(508, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(RamenBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(358, Short.MAX_VALUE))
         );
         RamenLayout.setVerticalGroup(
             RamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RamenLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(RamenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addGroup(RamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RamenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RamenBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
 
         Menu.addTab("라면", Ramen);
@@ -392,7 +398,7 @@ public class Order extends javax.swing.JFrame {
                 .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         OrderLayout.setVerticalGroup(
             OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,7 +414,7 @@ public class Order extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Order, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Order, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,24 +429,48 @@ public class Order extends javax.swing.JFrame {
         int rowCount = jTable1.getRowCount();
         for (int i = 0; i < rowCount; i++) {
             Object value = jTable1.getValueAt(i, 0);
-            if (value != null && value.toString().equalsIgnoreCase("Ramen")) {
+            if (value != null && value.toString().equalsIgnoreCase(cart.getMenu())) {
                 status = true;
                 break;
             }
         }
         if (!status) {
             // 버튼 최초 클릭시
-            AddTable("Ramen", 1, 1000);
+            
+            cart = new Cart(RamenBtn.getText(), 1, 2000);
+            AddTable(cart.getMenu(), cart.getCount(), cart.getPrice());
         } else {
             // 수량 추가
-            CountTable();
+            counts = cart.getCount();
+            counts += 1;
+            cart.setCount(counts);
+            CountTable(cart.getMenu(), cart.getCount(), cart.getPrice());
         }
 
     }//GEN-LAST:event_RamenBtnActionPerformed
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btnExitActionPerformed
+    private void RamenBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RamenBtn1ActionPerformed
+        boolean status = false;
+        int rowCount = jTable1.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            Object value = jTable1.getValueAt(i, 0);
+            if (value != null && value.toString().equalsIgnoreCase(RamenBtn1.getText())) {
+                status = true;
+                break;
+            }
+        }
+        if (!status) {
+            // 버튼 최초 클릭시
+            cart1 = new Cart(RamenBtn1.getText(), 1, 1000);
+            AddTable(cart1.getMenu(), cart1.getCount(), cart1.getPrice());
+        } else {
+            // 수량 추가
+            counts = cart1.getCount();
+            counts += 1;
+            cart1.setCount(counts);
+            CountTable(cart1.getMenu(), cart1.getCount(), cart1.getPrice());
+        }
+    }//GEN-LAST:event_RamenBtn1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -486,6 +516,7 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JPanel Order;
     private javax.swing.JPanel Ramen;
     private javax.swing.JButton RamenBtn;
+    private javax.swing.JButton RamenBtn1;
     private javax.swing.JPanel Snack;
     private javax.swing.JPanel Sncak1;
     private javax.swing.JPanel Topping;
