@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package sw;
-import static sw.Main.Info;
+//import static sw.Main.Info;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,11 +13,52 @@ import static sw.Main.Info;
  */
 public class Order extends javax.swing.JFrame {
 
+    int count = 1;
+    int price = 1000;
+    String temp = null;
+
     /**
      * Creates new form Order
      */
     public Order() {
         initComponents();
+//        lblUser.setText(Info.getUser_Name());
+//        lblRtIme.setText(Info.getUser_RemainTime());
+//        lblUtime.setText(Info.getUser_UseTime());
+
+    }
+
+    public void AddTable(String menu, int count, int price) {
+        int iCntRow = 0;
+        iCntRow = jTable1.getRowCount();
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            if (jTable1.getValueAt(i, 0) == null) {
+                iCntRow = i;
+                break;
+            }
+        }
+
+        jTable1.setValueAt(menu, iCntRow, 0);
+        jTable1.setValueAt(count, iCntRow, 1);
+        jTable1.setValueAt(price, iCntRow, 2);
+
+    }
+
+    public void CountTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        count += 1;
+        String targetValue = "Ramen";
+        int targetRow = -1; // 초기값으로 -1 설정
+
+        for (int row = 0; row < model.getRowCount(); row++) {
+            String cellValue = (String) model.getValueAt(row, 0); // 0은 열 인덱스
+            if (cellValue.equals(targetValue)) {
+                targetRow = row;
+                break;
+            }
+        }
+        jTable1.setValueAt(count, targetRow, 1);
+        jTable1.setValueAt(price * count, targetRow, 2);
     }
 
     /**
@@ -29,8 +72,6 @@ public class Order extends javax.swing.JFrame {
 
         Order = new javax.swing.JPanel();
         subPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
         btnReset = new javax.swing.JButton();
         btnOrder = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -43,34 +84,29 @@ public class Order extends javax.swing.JFrame {
         lblUser = new javax.swing.JLabel();
         lblRtIme = new javax.swing.JLabel();
         lblUtime = new javax.swing.JLabel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        Menu = new javax.swing.JTabbedPane();
+        All = new javax.swing.JPanel();
+        Food = new javax.swing.JPanel();
+        Ramen = new javax.swing.JPanel();
+        RamenBtn = new javax.swing.JButton();
+        Snack = new javax.swing.JPanel();
+        Sncak1 = new javax.swing.JPanel();
+        Can = new javax.swing.JPanel();
+        Topping = new javax.swing.JPanel();
+        Cafe = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(970, 535));
 
         Order.setBackground(new java.awt.Color(35, 35, 35));
-        Order.setMinimumSize(new java.awt.Dimension(970, 500));
+        Order.setMinimumSize(new java.awt.Dimension(1072, 606));
+        Order.setPreferredSize(new java.awt.Dimension(1072, 606));
         Order.setRequestFocusEnabled(false);
 
         subPanel.setBackground(new java.awt.Color(80, 80, 80));
         subPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        jList1.setBackground(new java.awt.Color(204, 204, 204));
-        jList1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jList1.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "메뉴1" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
 
         btnReset.setBackground(new java.awt.Color(204, 204, 204));
         btnReset.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
@@ -106,6 +142,11 @@ public class Order extends javax.swing.JFrame {
 
         btnExit.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnExit.setText("종료");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         lblUser.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,6 +160,25 @@ public class Order extends javax.swing.JFrame {
         lblUtime.setForeground(new java.awt.Color(255, 255, 255));
         lblUtime.setText("00:00");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Menu", "Count", "Price"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout subPanelLayout = new javax.swing.GroupLayout(subPanel);
         subPanel.setLayout(subPanelLayout);
         subPanelLayout.setHorizontalGroup(
@@ -126,7 +186,7 @@ public class Order extends javax.swing.JFrame {
             .addGroup(subPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, subPanelLayout.createSequentialGroup()
                         .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -138,12 +198,9 @@ public class Order extends javax.swing.JFrame {
                     .addGroup(subPanelLayout.createSequentialGroup()
                         .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblName)
-                            .addGroup(subPanelLayout.createSequentialGroup()
-                                .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblRemainTime)
-                                    .addComponent(lblUsedTime))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(95, 95, 95)
+                            .addComponent(lblRemainTime)
+                            .addComponent(lblUsedTime))
+                        .addGap(95, 99, Short.MAX_VALUE)
                         .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblRtIme)
                             .addComponent(lblUser)
@@ -163,7 +220,7 @@ public class Order extends javax.swing.JFrame {
                         .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblName)
                             .addComponent(lblUser))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(9, 9, 9)
                         .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblRemainTime)
                             .addComponent(lblRtIme))
@@ -175,9 +232,9 @@ public class Order extends javax.swing.JFrame {
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAddTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(txtPrice))
@@ -188,149 +245,163 @@ public class Order extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane2.setBackground(new java.awt.Color(80, 80, 80));
-        jTabbedPane2.setForeground(new java.awt.Color(255, 255, 255));
-        jTabbedPane2.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        Menu.setBackground(new java.awt.Color(80, 80, 80));
+        Menu.setForeground(new java.awt.Color(255, 255, 255));
+        Menu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(80, 80, 80));
+        All.setBackground(new java.awt.Color(80, 80, 80));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout AllLayout = new javax.swing.GroupLayout(All);
+        All.setLayout(AllLayout);
+        AllLayout.setHorizontalGroup(
+            AllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 636, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+        AllLayout.setVerticalGroup(
+            AllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("전체", jPanel1);
+        Menu.addTab("전체", All);
 
-        jPanel2.setBackground(new java.awt.Color(80, 80, 80));
+        Food.setBackground(new java.awt.Color(80, 80, 80));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout FoodLayout = new javax.swing.GroupLayout(Food);
+        Food.setLayout(FoodLayout);
+        FoodLayout.setHorizontalGroup(
+            FoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 636, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+        FoodLayout.setVerticalGroup(
+            FoodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("식사", jPanel2);
+        Menu.addTab("식사", Food);
 
-        jPanel3.setBackground(new java.awt.Color(80, 80, 80));
+        Ramen.setBackground(new java.awt.Color(80, 80, 80));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        RamenBtn.setText("Ramen");
+        RamenBtn.setToolTipText("");
+        RamenBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RamenBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout RamenLayout = new javax.swing.GroupLayout(Ramen);
+        Ramen.setLayout(RamenLayout);
+        RamenLayout.setHorizontalGroup(
+            RamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RamenLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(RamenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(508, Short.MAX_VALUE))
+        );
+        RamenLayout.setVerticalGroup(
+            RamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RamenLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(RamenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(363, Short.MAX_VALUE))
+        );
+
+        Menu.addTab("라면", Ramen);
+
+        Snack.setBackground(new java.awt.Color(80, 80, 80));
+
+        javax.swing.GroupLayout SnackLayout = new javax.swing.GroupLayout(Snack);
+        Snack.setLayout(SnackLayout);
+        SnackLayout.setHorizontalGroup(
+            SnackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 636, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+        SnackLayout.setVerticalGroup(
+            SnackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("라면", jPanel3);
+        Menu.addTab("간식", Snack);
 
-        jPanel4.setBackground(new java.awt.Color(80, 80, 80));
+        Sncak1.setBackground(new java.awt.Color(80, 80, 80));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Sncak1Layout = new javax.swing.GroupLayout(Sncak1);
+        Sncak1.setLayout(Sncak1Layout);
+        Sncak1Layout.setHorizontalGroup(
+            Sncak1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 636, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+        Sncak1Layout.setVerticalGroup(
+            Sncak1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("간식", jPanel4);
+        Menu.addTab("과자", Sncak1);
 
-        jPanel5.setBackground(new java.awt.Color(80, 80, 80));
+        Can.setBackground(new java.awt.Color(80, 80, 80));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout CanLayout = new javax.swing.GroupLayout(Can);
+        Can.setLayout(CanLayout);
+        CanLayout.setHorizontalGroup(
+            CanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 636, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+        CanLayout.setVerticalGroup(
+            CanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("과자", jPanel5);
+        Menu.addTab("캔음료", Can);
 
-        jPanel7.setBackground(new java.awt.Color(80, 80, 80));
+        Topping.setBackground(new java.awt.Color(80, 80, 80));
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout ToppingLayout = new javax.swing.GroupLayout(Topping);
+        Topping.setLayout(ToppingLayout);
+        ToppingLayout.setHorizontalGroup(
+            ToppingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 636, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+        ToppingLayout.setVerticalGroup(
+            ToppingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("캔음료", jPanel7);
+        Menu.addTab("토핑", Topping);
 
-        jPanel8.setBackground(new java.awt.Color(80, 80, 80));
+        Cafe.setBackground(new java.awt.Color(80, 80, 80));
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout CafeLayout = new javax.swing.GroupLayout(Cafe);
+        Cafe.setLayout(CafeLayout);
+        CafeLayout.setHorizontalGroup(
+            CafeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 636, Short.MAX_VALUE)
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+        CafeLayout.setVerticalGroup(
+            CafeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("토핑", jPanel8);
-
-        jPanel6.setBackground(new java.awt.Color(80, 80, 80));
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 636, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("카페음료", jPanel6);
+        Menu.addTab("카페음료", Cafe);
 
         javax.swing.GroupLayout OrderLayout = new javax.swing.GroupLayout(Order);
         Order.setLayout(OrderLayout);
         OrderLayout.setHorizontalGroup(
             OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OrderLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(44, 44, 44)
+                .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addGap(44, 44, 44))
         );
         OrderLayout.setVerticalGroup(
             OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OrderLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(subPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane2))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -346,6 +417,30 @@ public class Order extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void RamenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RamenBtnActionPerformed
+        boolean status = false;
+        int rowCount = jTable1.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            Object value = jTable1.getValueAt(i, 0);
+            if (value != null && value.toString().equalsIgnoreCase("Ramen")) {
+                status = true;
+                break;
+            }
+        }
+        if (!status) {
+            // 버튼 최초 클릭시
+            AddTable("Ramen", 1, 1000);
+        } else {
+            // 수량 추가
+            CountTable();
+        }
+
+    }//GEN-LAST:event_RamenBtnActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -383,23 +478,24 @@ public class Order extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel All;
+    private javax.swing.JPanel Cafe;
+    private javax.swing.JPanel Can;
+    private javax.swing.JPanel Food;
+    private javax.swing.JTabbedPane Menu;
     private javax.swing.JPanel Order;
+    private javax.swing.JPanel Ramen;
+    private javax.swing.JButton RamenBtn;
+    private javax.swing.JPanel Snack;
+    private javax.swing.JPanel Sncak1;
+    private javax.swing.JPanel Topping;
     private javax.swing.JButton btnAddTime;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnReset;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRemainTime;
     private javax.swing.JLabel lblRtIme;
