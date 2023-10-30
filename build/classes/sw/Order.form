@@ -217,6 +217,7 @@
                   <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#xac00;&#xaca9; : "/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblName">
