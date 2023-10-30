@@ -91,6 +91,7 @@ public class Sign_Up extends javax.swing.JFrame {
         Input_PW_text.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         Input_PW_text.setForeground(new java.awt.Color(255, 255, 255));
         Input_PW_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        Input_PW_text.setToolTipText("");
         Input_PW_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         Input_PWC_text.setBackground(new java.awt.Color(25, 25, 25));
@@ -211,9 +212,12 @@ public class Sign_Up extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
             PreparedStatement pstmt = con.prepareStatement(sql);
             
+            boolean lengthBool = false;
             boolean numBool = false;
             boolean engBool = false;
             
+            if (Input_PW_text.getText().length() >= 8 && Input_PW_text.getText().length() <= 16)
+                lengthBool = true;
             // 비밀번호 문자로 쪼개서 검사
             if (Input_PW_text.getText().length() > 0){
                 String[] token = Input_PW_text.getText().split("");
@@ -226,7 +230,7 @@ public class Sign_Up extends javax.swing.JFrame {
                 }
             }
 
-            if(numBool == true && engBool == true){
+            if(lengthBool == true && numBool == true && engBool == true){
                 lblWarn.setForeground(Sign.getBackground());
             }
             if(Input_PW_text.getText().equals(Input_PWC_text.getText())){
@@ -240,7 +244,7 @@ public class Sign_Up extends javax.swing.JFrame {
             else if (Input_PW_text.getText().trim().equals("")){
                 JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요.");
             }
-            else if(numBool == false || engBool == false){
+            else if(lengthBool == false || numBool == false || engBool == false){
                 lblWarn.setForeground(Color.red);
             }
             else if(!(Input_PW_text.getText().equals(Input_PWC_text.getText()))){
