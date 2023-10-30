@@ -174,7 +174,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#xacc4;&#xc815; &#xc0dd;&#xc131;"/>
+            <Property name="text" type="java.lang.String" value="&#xd68c;&#xc6d0; &#xac00;&#xc785;"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
