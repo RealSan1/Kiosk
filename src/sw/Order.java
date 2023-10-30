@@ -85,7 +85,6 @@ public class Order extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         Menu = new javax.swing.JTabbedPane();
-        All = new javax.swing.JPanel();
         Food = new javax.swing.JPanel();
         Ramen = new javax.swing.JPanel();
         RamenBtn = new javax.swing.JButton();
@@ -242,21 +241,6 @@ public class Order extends javax.swing.JFrame {
         Menu.setBackground(new java.awt.Color(80, 80, 80));
         Menu.setForeground(new java.awt.Color(255, 255, 255));
         Menu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-
-        All.setBackground(new java.awt.Color(80, 80, 80));
-
-        javax.swing.GroupLayout AllLayout = new javax.swing.GroupLayout(All);
-        All.setLayout(AllLayout);
-        AllLayout.setHorizontalGroup(
-            AllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 636, Short.MAX_VALUE)
-        );
-        AllLayout.setVerticalGroup(
-            AllLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
-        );
-
-        Menu.addTab("전체", All);
 
         Food.setBackground(new java.awt.Color(80, 80, 80));
 
@@ -508,7 +492,6 @@ public class Order extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel All;
     private javax.swing.JPanel Cafe;
     private javax.swing.JPanel Can;
     private javax.swing.JPanel Food;

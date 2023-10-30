@@ -167,7 +167,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Sing_Up_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sing_Up_ButtonMouseClicked
-        new Sing_Up().setVisible(true);
+        new Sign_Up().setVisible(true);
 
     }//GEN-LAST:event_Sing_Up_ButtonMouseClicked
 
