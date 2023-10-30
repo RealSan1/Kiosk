@@ -34,7 +34,7 @@ public class Main extends javax.swing.JFrame {
         Input_PW_TextField = new javax.swing.JPasswordField();
         Input_ID_TextField = new javax.swing.JTextField();
         Login_Button = new javax.swing.JButton();
-        Sing_Up_Button = new javax.swing.JLabel();
+        Sign_Up_Button = new javax.swing.JLabel();
         Find_PW_Button = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         lblPW = new javax.swing.JLabel();
@@ -75,12 +75,12 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Sing_Up_Button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        Sing_Up_Button.setForeground(new java.awt.Color(255, 255, 255));
-        Sing_Up_Button.setText("계정 생성");
-        Sing_Up_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+        Sign_Up_Button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        Sign_Up_Button.setForeground(new java.awt.Color(255, 255, 255));
+        Sign_Up_Button.setText("회원 가입");
+        Sign_Up_Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sing_Up_ButtonMouseClicked(evt);
+                Sign_Up_ButtonMouseClicked(evt);
             }
         });
 
@@ -138,7 +138,7 @@ public class Main extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Login_Button))
                             .addGroup(LoginLayout.createSequentialGroup()
-                                .addComponent(Sing_Up_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Sign_Up_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(45, 45, 45)
                                 .addComponent(Find_PW_Button)
                                 .addGap(21, 21, 21)))
@@ -163,7 +163,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(Login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Sing_Up_Button)
+                    .addComponent(Sign_Up_Button)
                     .addComponent(Find_PW_Button))
                 .addGap(208, 208, 208)
                 .addComponent(jButton1)
@@ -192,10 +192,10 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Sing_Up_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sing_Up_ButtonMouseClicked
+    private void Sign_Up_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sign_Up_ButtonMouseClicked
         new Sign_Up().setVisible(true);
 
-    }//GEN-LAST:event_Sing_Up_ButtonMouseClicked
+    }//GEN-LAST:event_Sign_Up_ButtonMouseClicked
 
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
         boolean connection = false; //접속상태확인     
@@ -323,7 +323,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel Login;
     private javax.swing.JButton Login_Button;
     private javax.swing.JPanel Main;
-    private javax.swing.JLabel Sing_Up_Button;
+    private javax.swing.JLabel Sign_Up_Button;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblPW;

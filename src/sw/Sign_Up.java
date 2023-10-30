@@ -64,7 +64,7 @@ public class Sign_Up extends javax.swing.JFrame {
 
         Sign_button.setBackground(new java.awt.Color(211, 211, 211));
         Sign_button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        Sign_button.setText("계정 생성");
+        Sign_button.setText("회원 가입");
         Sign_button.setEnabled(false);
         Sign_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
