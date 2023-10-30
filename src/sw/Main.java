@@ -37,12 +37,13 @@ public class Main extends javax.swing.JFrame {
         Sing_Up_Button = new javax.swing.JLabel();
         Find_PW_Button = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        lblPW = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("로그인 창");
         setMinimumSize(new java.awt.Dimension(1072, 606));
         setName("frame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1072, 606));
 
         Main.setBackground(new java.awt.Color(35, 35, 35));
         Main.setPreferredSize(new java.awt.Dimension(1072, 606));
@@ -54,7 +55,6 @@ public class Main extends javax.swing.JFrame {
         Login.setPreferredSize(new java.awt.Dimension(970, 500));
 
         Input_PW_TextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Input_PW_TextField.setText("Password");
         Input_PW_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 Input_PW_TextFieldFocusGained(evt);
@@ -62,7 +62,6 @@ public class Main extends javax.swing.JFrame {
         });
 
         Input_ID_TextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Input_ID_TextField.setText("ID");
         Input_ID_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 Input_ID_TextFieldFocusGained(evt);
@@ -101,25 +100,48 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        lblPW.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblPW.setForeground(new java.awt.Color(255, 255, 255));
+        lblPW.setText("비밀번호");
+        lblPW.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPWMouseClicked(evt);
+            }
+        });
+
+        lblID.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblID.setForeground(new java.awt.Color(255, 255, 255));
+        lblID.setText("ID");
+        lblID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIDMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout LoginLayout = new javax.swing.GroupLayout(Login);
         Login.setLayout(LoginLayout);
         LoginLayout.setHorizontalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginLayout.createSequentialGroup()
-                .addContainerGap(441, Short.MAX_VALUE)
+                .addContainerGap(363, Short.MAX_VALUE)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
-                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(LoginLayout.createSequentialGroup()
-                                .addComponent(Sing_Up_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Find_PW_Button))
-                            .addGroup(LoginLayout.createSequentialGroup()
+                                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblPW, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Input_ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Login_Button)))
+                                .addComponent(Login_Button))
+                            .addGroup(LoginLayout.createSequentialGroup()
+                                .addComponent(Sing_Up_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(Find_PW_Button)
+                                .addGap(21, 21, 21)))
                         .addGap(433, 433, 433))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -131,9 +153,13 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(237, Short.MAX_VALUE)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(LoginLayout.createSequentialGroup()
-                        .addComponent(Input_ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Input_ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblID))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPW)))
                     .addComponent(Login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -246,6 +272,14 @@ public class Main extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void lblPWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPWMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblPWMouseClicked
+
+    private void lblIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIDMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblIDMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -291,5 +325,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel Main;
     private javax.swing.JLabel Sing_Up_Button;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblPW;
     // End of variables declaration//GEN-END:variables
 }
