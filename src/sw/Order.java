@@ -122,6 +122,7 @@ public class Order extends javax.swing.JFrame {
         txtPrice.setBackground(new java.awt.Color(204, 204, 204));
         txtPrice.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         txtPrice.setText("가격 : ");
+        txtPrice.setFocusable(false);
 
         lblName.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         lblName.setForeground(new java.awt.Color(255, 255, 255));

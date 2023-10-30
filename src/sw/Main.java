@@ -227,9 +227,7 @@ public class Main extends javax.swing.JFrame {
                     if (Info.getUser_RemainTime().equals("0")) {  // 만약 보유시간이 0이면 충전화면 출력
                         new AddTime().setVisible(true);
                     }
-                    if (Info.getUser_RemainTime().equals("0")) {
-                        new AddTime().setVisible(true); //만약 시간이 남은시간이 0이면 충전화면 창 뜨기
-                        } else {
+                    else {
                         dispose();
                         new Order().setVisible(true);
                         
@@ -237,7 +235,7 @@ public class Main extends javax.swing.JFrame {
 //                        Order.setVisible(true);
 //                        User_name_Text.setText(Info.getUser_Name());
 //                        User_RemainTime_Text.setText(Info.getUser_RemainTime());
-                        }   
+                    }   
                 } else{
                     JOptionPane.showMessageDialog(null, "아이디 또는 패스워드가 일치하지 않습니다.");
                 }
