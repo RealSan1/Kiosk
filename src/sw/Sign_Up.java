@@ -1,4 +1,5 @@
 package sw;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -7,14 +8,15 @@ import static sw.Main.orcle_PW;
 import static sw.Main.orcle_url;
 
 public class Sign_Up extends javax.swing.JFrame {
-    
+   
     boolean status = false; //중복검사 확인 (중복 검사버튼을 누르지 않으면 회원가입 불가)
     
     public Sign_Up() {
         initComponents();
-        lblWarn.hide();
-        lblWarn1.hide();
+        lblWarn.setForeground(Sign.getBackground());
+        lblWarn1.setForeground(Sign.getBackground());
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,8 +46,9 @@ public class Sign_Up extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Sign.setBackground(new java.awt.Color(35, 35, 35));
-        Sign.setMinimumSize(new java.awt.Dimension(356, 402));
-        Sign.setPreferredSize(new java.awt.Dimension(356, 402));
+        Sign.setMaximumSize(new java.awt.Dimension(405, 410));
+        Sign.setMinimumSize(new java.awt.Dimension(405, 410));
+        Sign.setPreferredSize(new java.awt.Dimension(405, 410));
 
         Sign_Up_Label.setFont(new java.awt.Font("맑은 고딕", 1, 24)); // NOI18N
         Sign_Up_Label.setForeground(new java.awt.Color(255, 255, 255));
@@ -122,7 +125,7 @@ public class Sign_Up extends javax.swing.JFrame {
         lblPWC.setText("비밀번호 확인");
 
         lblWarn.setForeground(new java.awt.Color(255, 0, 0));
-        lblWarn.setText("* 비밀번호: 8~16자, 특수문자를 사용해 주세요. ");
+        lblWarn.setText("* 비밀번호: 8~16자의 영문 소문자, 숫자를 사용해 주세요. ");
 
         lblWarn1.setForeground(new java.awt.Color(255, 0, 0));
         lblWarn1.setText("* 비밀번호 확인: 비밀번호가 일치하지 않습니다.");
@@ -131,38 +134,37 @@ public class Sign_Up extends javax.swing.JFrame {
         Sign.setLayout(SignLayout);
         SignLayout.setHorizontalGroup(
             SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Cancel_button)
+                .addGap(67, 67, 67)
+                .addComponent(Sign_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
             .addGroup(SignLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignLayout.createSequentialGroup()
                         .addComponent(Sign_Up_Label)
-                        .addGap(140, 140, 140))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignLayout.createSequentialGroup()
-                        .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblWarn)
-                            .addGroup(SignLayout.createSequentialGroup()
-                                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblPWC)
-                                    .addComponent(lblPW, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblName, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblID, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(15, 15, 15)
-                                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Input_Name_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(SignLayout.createSequentialGroup()
-                                        .addComponent(Input_ID_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Duplicate_button))
-                                    .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblWarn1))
-                        .addGap(11, 11, 11))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(Cancel_button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Sign_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                        .addGap(129, 129, 129))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblWarn)
+                        .addGroup(SignLayout.createSequentialGroup()
+                            .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblPWC)
+                                .addComponent(lblPW, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblName, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblID, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGap(15, 15, 15)
+                            .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Input_Name_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(SignLayout.createSequentialGroup()
+                                    .addComponent(Input_ID_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(Duplicate_button))
+                                .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblWarn1)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         SignLayout.setVerticalGroup(
             SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,33 +192,61 @@ public class Sign_Up extends javax.swing.JFrame {
                 .addComponent(lblWarn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblWarn1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Sign_button)
                     .addComponent(Cancel_button))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(59, 59, 59))
         );
 
         getContentPane().add(Sign, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
     private void Sign_buttonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_Sign_buttonActionPerformed
         try {
             String sql = "insert into USERS(USER_ID, USER_PW, USER_NAME)" + "values (?,?,?)"; // DML 명령어
             Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
             PreparedStatement pstmt = con.prepareStatement(sql);
+            
+            boolean numBool = false;
+            boolean engBool = false;
+            
+            // 비밀번호 문자로 쪼개서 검사
+            if (Input_PW_text.getText().length() > 0){
+                String[] token = Input_PW_text.getText().split("");
+                for (int i=0; i<token.length; i++){
+                    char c = token[i].charAt(0);
+                    if(c > 48 && c < 57)
+                        numBool = true;
+                    if (c > 97 && c < 122)
+                        engBool = true;
+                }
+            }
+
+            if(numBool == true && engBool == true){
+                lblWarn.setForeground(Sign.getBackground());
+            }
+            if(Input_PW_text.getText().equals(Input_PWC_text.getText())){
+                lblWarn1.setForeground(Sign.getBackground());
+            }
+            
             // DB 접근과정
-            if(status == false){
-                JOptionPane.showMessageDialog(null, "중복확인 해주세요");
-                
+            if(Input_Name_text.getText().trim().equals("")){
+                JOptionPane.showMessageDialog(null, "이름을 입력하세요.");
+            }
+            else if (Input_PW_text.getText().trim().equals("")){
+                JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요.");
+            }
+            else if(numBool == false || engBool == false){
+                lblWarn.setForeground(Color.red);
             }
             else if(!(Input_PW_text.getText().equals(Input_PWC_text.getText()))){
-                lblWarn1.show();
+                lblWarn1.setForeground(Color.red);
             }
             else{
-                
                 pstmt.setString(1, Input_ID_text.getText());
                 pstmt.setString(2, Input_PW_text.getText());
                 pstmt.setString(3, Input_Name_text.getText());
@@ -245,14 +275,22 @@ public class Sign_Up extends javax.swing.JFrame {
             
             while(rs.next()){ 
                 String User_ID = rs.getString("User_ID");
-                if(User_ID.equals(Input_ID_text.getText())){
+                if(Input_ID_text.getText().trim().equals("")){
+                    JOptionPane.showMessageDialog(null, "아이디를 입력하세요.");
+                    status = false;
+                    break;
+                }
+                else if (User_ID.equals(Input_ID_text.getText())){
                     JOptionPane.showMessageDialog(null, "중복된 아이디 입니다.");
-                } else{
+                    status = false;
+                    break;
+                }
+                else{
                     System.out.println("Yes");
                     status = true;
-                    Sign_button.setEnabled(status); //중복이 아니면 가입버튼 활성화
                 }
             }
+            Sign_button.setEnabled(status);
             
         } catch (SQLException ex) {
             System.out.println("Duplicate Error");
