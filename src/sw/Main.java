@@ -162,7 +162,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(lblPW)))
                     .addComponent(Login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Sign_Up_Button)
                     .addComponent(Find_PW_Button))
                 .addGap(208, 208, 208)
@@ -239,7 +239,7 @@ public class Main extends javax.swing.JFrame {
 //                        User_RemainTime_Text.setText(Info.getUser_RemainTime());
                         }   
                 } else{
-                    JOptionPane.showMessageDialog(null, "등록된 아이디가 아닙니다.");
+                    JOptionPane.showMessageDialog(null, "아이디 또는 패스워드가 일치하지 않습니다.");
                 }
             
          } catch (SQLException ex) {
