@@ -192,7 +192,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#xbe44;&#xbc00;&#xbc88;&#xd638; &#xcc3e;&#xae30;"/>
+                <Property name="text" type="java.lang.String" value="ID / &#xbe44;&#xbc00;&#xbc88;&#xd638; &#xcc3e;&#xae30;"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Find_PW_ButtonMouseClicked"/>
