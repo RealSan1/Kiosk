@@ -138,7 +138,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#xd68c;&#xc6d0;&#xac00;&#xc785;"/>
+            <Property name="text" type="java.lang.String" value="&#xd68c;&#xc6d0; &#xac00;&#xc785;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="Input_ID_text">

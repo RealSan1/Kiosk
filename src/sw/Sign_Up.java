@@ -52,7 +52,7 @@ public class Sign_Up extends javax.swing.JFrame {
 
         Sign_Up_Label.setFont(new java.awt.Font("맑은 고딕", 1, 24)); // NOI18N
         Sign_Up_Label.setForeground(new java.awt.Color(255, 255, 255));
-        Sign_Up_Label.setText("회원가입");
+        Sign_Up_Label.setText("회원 가입");
 
         Input_ID_text.setBackground(new java.awt.Color(25, 25, 25));
         Input_ID_text.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N

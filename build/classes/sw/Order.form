@@ -195,6 +195,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#xc8fc;&#xbb38;&#xd558;&#xae30;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrderActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnDelete">
               <Properties>
@@ -312,10 +315,10 @@
                 <Component class="javax.swing.JTable" name="jTable1">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="10">
-                        <Column editable="true" title="Menu" type="java.lang.Object"/>
-                        <Column editable="true" title="Count" type="java.lang.Object"/>
-                        <Column editable="true" title="Price" type="java.lang.Object"/>
+                      <Table columnCount="3" rowCount="1">
+                        <Column editable="true" title="&#xba54;&#xb274;" type="java.lang.Object"/>
+                        <Column editable="true" title="&#xc218;&#xb7c9;" type="java.lang.Object"/>
+                        <Column editable="true" title="&#xac00;&#xaca9;" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -384,9 +387,9 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                           <Component id="RamenBtn" min="-2" pref="92" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="RamenBtn1" min="-2" pref="92" max="-2" attributes="0"/>
                           <EmptySpace pref="358" max="32767" attributes="0"/>
                       </Group>
@@ -394,11 +397,11 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="RamenBtn" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                               <Component id="RamenBtn1" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                              <Component id="RamenBtn" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="344" max="32767" attributes="0"/>
                       </Group>
@@ -408,7 +411,7 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="RamenBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ramen"/>
+                    <Property name="text" type="java.lang.String" value="Raman"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
@@ -417,7 +420,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="RamenBtn1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ramen1"/>
+                    <Property name="text" type="java.lang.String" value="Ramen2"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>

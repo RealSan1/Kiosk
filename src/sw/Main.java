@@ -2,11 +2,6 @@ package sw;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-
-/**
- *
- * @author 산
- */
 public class Main extends javax.swing.JFrame {
     static String orcle_url = "jdbc:oracle:thin:@116.39.188.187:1521:orcl"; //DB URL
     static String orcle_ID = "c##san"; //DB ID
