@@ -466,25 +466,30 @@ public class Order extends javax.swing.JFrame {
         String Count;
         String Price;
         int GetSize = jTable1.getRowCount() - 1; // 행 개수 구하기
-        Menu = (String) jTable1.getValueAt(0, 0).toString();
-        Count = (String) jTable1.getValueAt(0, 1).toString();
-        Price = jTable1.getValueAt(0, 2).toString();
-        Date.add(Menu);
-        Date.add(Count);
-        Date.add(Price);
-        
+        for (int i = 0; i < GetSize; i++) {
+            Menu = jTable1.getValueAt(i, 0).toString();
+            Count = jTable1.getValueAt(i, 1).toString();
+            Price = jTable1.getValueAt(i, 2).toString();
+            Date.add(Menu);
+            Date.add(Count);
+            Date.add(Price);
+        }
+
         try {
             String sql = "insert into Cart(USER_ID, MENU_NAME, COUNT, PRICE)" + "values (?,?,?,?)"; // DML 명령어
             Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
             PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, Info.getUser_ID());
-            pstmt.setString(2, Date.get(0));
-            pstmt.setString(3, Date.get(1));
-            pstmt.setString(4, Date.get(2));
-            pstmt.executeUpdate(); //입력값 DB 업데이트
-            } catch (SQLException ex) {
+            for (int i = 0; i < GetSize; i++) {
+                pstmt.setString(1, Info.getUser_ID());
+                pstmt.setString(2, Date.get(i*3));
+                pstmt.setString(3, Date.get(1+i*3));
+                pstmt.setString(4, Date.get(2+i*3));
+                pstmt.executeUpdate(); //입력값 DB 업데이트
+            }
+        } catch (SQLException ex) {
             ex.printStackTrace();
-    System.out.println("DB Error");        }
+            System.out.println("DB Error");
+        }
 
         
     }//GEN-LAST:event_btnOrderActionPerformed
