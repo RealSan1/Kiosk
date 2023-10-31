@@ -547,9 +547,9 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnCheckRequest" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblCheck" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCheck" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnCheck" min="-2" pref="35" max="-2" attributes="0"/>

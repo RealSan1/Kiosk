@@ -12,6 +12,7 @@ public class Sign_Up extends javax.swing.JFrame {
 
     String phoneNum;
     String userName;
+    String userBirth;
     
     boolean phonecheck = false;
     boolean status = false; //중복검사 확인 (중복 검사버튼을 누르지 않으면 회원가입 불가)
@@ -486,9 +487,9 @@ public class Sign_Up extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCheckRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCheck))
+                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCheck, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(52, Short.MAX_VALUE))
@@ -502,7 +503,7 @@ public class Sign_Up extends javax.swing.JFrame {
 
     private void Sign_buttonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_Sign_buttonActionPerformed
         try {
-            String sql = "insert into USERS(USER_ID, USER_PW, USER_NAME)" + "values (?,?,?)"; // DML 명령어
+            String sql = "insert into USERS(USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_BIRTH)" + "values (?,?,?,?,?)"; // DML 명령어
             Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
             PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -546,13 +547,15 @@ public class Sign_Up extends javax.swing.JFrame {
             } else {
                 pstmt.setString(1, Input_ID_text.getText());
                 pstmt.setString(2, Input_PW_text.getText());
-                pstmt.setString(3, Input_Name_text.getText());
+                pstmt.setString(3, userName);
+                pstmt.setString(4, phoneNum);
+                pstmt.setString(5, userBirth);
                 pstmt.executeUpdate(); //입력값 DB 업데이트
                 JOptionPane.showMessageDialog(null, "회원가입 완료");
                 dispose();
             }
         } catch (SQLException ex) {
-            System.out.println("Sign_Up Error");
+            System.out.println("Sign_Up Error" + ex.getMessage());
         }
     }//GEN-LAST:event_Sign_buttonActionPerformed
 
@@ -660,6 +663,7 @@ public class Sign_Up extends javax.swing.JFrame {
             if(phonecheck == true){
                 JOptionPane.showMessageDialog(null, "휴대폰 인증 완료");
                 userName = txtName.getText().trim();
+                userBirth = txtBirth.getText().trim();
                 Sign.setVisible(true);
                 Check.setVisible(false);
                 Input_PhoneNum_text.setText(phoneNum);
