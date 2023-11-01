@@ -42,8 +42,6 @@ public class Sign_Up extends javax.swing.JFrame {
         Sign_button = new javax.swing.JButton();
         Cancel_button = new javax.swing.JButton();
         Input_Name_text = new javax.swing.JTextField();
-        Input_PW_text = new javax.swing.JTextField();
-        Input_PWC_text = new javax.swing.JTextField();
         Duplicate_button = new javax.swing.JButton();
         lblID = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
@@ -54,6 +52,8 @@ public class Sign_Up extends javax.swing.JFrame {
         btn_check = new javax.swing.JButton();
         lblPhoneNum = new javax.swing.JLabel();
         Input_PhoneNum_text = new javax.swing.JTextField();
+        Input_PW_text = new javax.swing.JPasswordField();
+        Input_PWC_text = new javax.swing.JPasswordField();
         Check = new javax.swing.JPanel();
         radioKT = new javax.swing.JRadioButton();
         radioSKT = new javax.swing.JRadioButton();
@@ -124,19 +124,6 @@ public class Sign_Up extends javax.swing.JFrame {
         Input_Name_text.setEnabled(false);
         Input_Name_text.setFocusable(false);
 
-        Input_PW_text.setBackground(new java.awt.Color(25, 25, 25));
-        Input_PW_text.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        Input_PW_text.setForeground(new java.awt.Color(255, 255, 255));
-        Input_PW_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Input_PW_text.setToolTipText("");
-        Input_PW_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
-        Input_PWC_text.setBackground(new java.awt.Color(25, 25, 25));
-        Input_PWC_text.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        Input_PWC_text.setForeground(new java.awt.Color(255, 255, 255));
-        Input_PWC_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Input_PWC_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
         Duplicate_button.setBackground(new java.awt.Color(211, 211, 211));
         Duplicate_button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         Duplicate_button.setText("중복 확인");
@@ -192,6 +179,16 @@ public class Sign_Up extends javax.swing.JFrame {
         Input_PhoneNum_text.setEnabled(false);
         Input_PhoneNum_text.setFocusable(false);
 
+        Input_PW_text.setBackground(new java.awt.Color(35, 35, 35));
+        Input_PW_text.setForeground(new java.awt.Color(255, 255, 255));
+        Input_PW_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        Input_PW_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        Input_PWC_text.setBackground(new java.awt.Color(35, 35, 35));
+        Input_PWC_text.setForeground(new java.awt.Color(255, 255, 255));
+        Input_PWC_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        Input_PWC_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
         javax.swing.GroupLayout SignLayout = new javax.swing.GroupLayout(Sign);
         Sign.setLayout(SignLayout);
         SignLayout.setHorizontalGroup(
@@ -205,33 +202,39 @@ public class Sign_Up extends javax.swing.JFrame {
             .addGroup(SignLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblWarn)
-                    .addComponent(lblWarn1)
                     .addGroup(SignLayout.createSequentialGroup()
-                        .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPWC)
-                            .addComponent(lblPW, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(15, 15, 15)
-                        .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(SignLayout.createSequentialGroup()
-                            .addComponent(lblID)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Input_ID_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(Duplicate_button))
-                        .addGroup(SignLayout.createSequentialGroup()
-                            .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblPhoneNum)
-                                .addComponent(lblName))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                            .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(SignLayout.createSequentialGroup()
-                                    .addComponent(Input_PhoneNum_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btn_check, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(Input_Name_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(lblID)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Input_ID_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Duplicate_button))
+                    .addGroup(SignLayout.createSequentialGroup()
+                        .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPhoneNum)
+                            .addComponent(lblName))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Input_Name_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(SignLayout.createSequentialGroup()
+                                .addComponent(Input_PhoneNum_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_check, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(SignLayout.createSequentialGroup()
+                        .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblWarn)
+                            .addComponent(lblWarn1)
+                            .addGroup(SignLayout.createSequentialGroup()
+                                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblPWC)
+                                    .addComponent(lblPW, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(SignLayout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(SignLayout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(24, 24, 24))
             .addGroup(SignLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
@@ -262,17 +265,17 @@ public class Sign_Up extends javax.swing.JFrame {
                     .addComponent(lblName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPW))
+                    .addComponent(lblPW)
+                    .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPWC))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(lblPWC)
+                    .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addComponent(lblWarn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblWarn1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Sign_button)
                     .addComponent(Cancel_button))
@@ -725,8 +728,8 @@ public class Sign_Up extends javax.swing.JFrame {
     private javax.swing.JButton Duplicate_button;
     private javax.swing.JTextField Input_ID_text;
     private javax.swing.JTextField Input_Name_text;
-    private javax.swing.JTextField Input_PWC_text;
-    private javax.swing.JTextField Input_PW_text;
+    private javax.swing.JPasswordField Input_PWC_text;
+    private javax.swing.JPasswordField Input_PW_text;
     private javax.swing.JTextField Input_PhoneNum_text;
     private javax.swing.JPanel Sign;
     private javax.swing.JLabel Sign_Up_Label;
