@@ -81,7 +81,7 @@ public class Main extends javax.swing.JFrame {
 
         Find_PW_Button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         Find_PW_Button.setForeground(new java.awt.Color(255, 255, 255));
-        Find_PW_Button.setText("비밀번호 찾기");
+        Find_PW_Button.setText("ID / 비밀번호 찾기");
         Find_PW_Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Find_PW_ButtonMouseClicked(evt);
