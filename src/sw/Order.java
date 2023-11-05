@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.*;
 import javax.swing.JOptionPane;
+import java.util.TimerTask;
+import javax.swing.Timer;
 //import static sw.Main.Info;
 
 import java.sql.*;
@@ -66,22 +68,15 @@ public class Order extends javax.swing.JFrame {
                 int umins = elapsed%60;
                 lblRtIme.setText(String.format("%02d:%02d",hours,mins));
                 lblUtime.setText(String.format("%02d:%02d",uhours,umins));
+                if(remain==0){
+                    ((Timer)e.getSource()).stop();
+                    dispose();
+                }
             }
         });
         timer.start();
         lblRtIme.setText(String.format("%02d:%02d",hour,min));
         lblUtime.setText(String.format("%02d:%02d",uhour,umin));
-    }
-    
-    public void Timer(){    //타이머 메소드
-        Timer t = new Timer();
-        TimerTask tm = new TimerTask(){
-            @Override
-            public void run() {
-                
-            }
-        };
-        t.schedule(tm,120);
     }
     
 
