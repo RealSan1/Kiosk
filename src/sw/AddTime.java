@@ -20,6 +20,10 @@ public class AddTime extends javax.swing.JFrame {
         initComponents();
         User_Name_Text.setText(Info.getUser_Name());
     }
+    public AddTime(String name, String useTime, String remainTime){
+        initComponents();
+        User_Name_Text.setText(name);
+    }
     public void Call_DB(String Input_Time){
         //DB 시간추가 메소드
         
