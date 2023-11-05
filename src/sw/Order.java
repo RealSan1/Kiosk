@@ -1,5 +1,12 @@
 package sw;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
+import java.util.*;
+import javax.swing.JOptionPane;
+//import static sw.Main.Info;
+
 import java.sql.*;
 import java.util.*;
 
@@ -18,13 +25,75 @@ public class Order extends javax.swing.JFrame {
     int counts = 1;
     Cart cart;
     Cart cart1;
+    private static javax.swing.Timer timer;
+    int hour, min, sec, remain, uhour, umin, usec, elapsed;
 
     public Order() {
         initComponents();
 //        lblUser.setText(Info.getUser_Name());
 //        lblRtIme.setText(Info.getUser_RemainTime());
 //        lblUtime.setText(Info.getUser_UseTime());
+    }
 
+    public Order(String name, String remaintime, String usetime) {
+        initComponents();
+        lblUser.setText(name);
+        long rmTime = Integer.parseInt(remaintime);//분 단위
+        lblRtIme.setText(remaintime);
+        lblUtime.setText(usetime);
+        lblUser.setText(name);
+        remain = Integer.parseInt(remaintime);//남은 시간
+        min = remain % 60;
+        sec = 0;
+        hour = remain / 60;
+        elapsed = 0;//사용시간 계산하기 위해 필요 
+        uhour = elapsed / 60;
+        umin = elapsed % 60;
+        usec = 0;
+
+        timer = new javax.swing.Timer(60000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                remain--;
+                elapsed++;
+                if (remain == 30) {
+                    JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
+                } else if (remain == 10) {
+                    JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
+                } else if (remain == 5) {
+                    JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
+                }
+                int hours = remain / 60;
+                int mins = remain % 60;
+                int uhours = elapsed / 60;
+                int umins = elapsed % 60;
+                lblRtIme.setText(String.format("%02d:%02d", hours, mins));
+                lblUtime.setText(String.format("%02d:%02d", uhours, umins));
+            }
+        });
+        timer.start();
+        lblRtIme.setText(String.format("%02d:%02d", hour, min));
+        lblUtime.setText(String.format("%02d:%02d", uhour, umin));
+    }
+
+    public void Timer() {    //타이머 메소드
+        Timer t = new Timer();
+        TimerTask tm = new TimerTask() {
+            @Override
+            public void run() {
+
+            }
+        };
+        t.schedule(tm, 120);
+    }
+
+    static class HookThread extends Thread {
+
+        //만약 사용자가 프로그램 강제 종료 시 사용시간 DB전송
+        //수정해야함
+        public void run() {
+            System.out.println("Hook Run");
+        }
     }
 
     public class MakeRowData {
@@ -570,6 +639,7 @@ public class Order extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        Runtime.getRuntime().addShutdownHook(new HookThread());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Order().setVisible(true);
