@@ -12,7 +12,8 @@ import static sw.Main.Info;
  * @author 산
  */
 public class AddTime extends javax.swing.JFrame {
-
+    static int remain;
+    static boolean OrderCon;
     /**
      * Creates new form AddTime
      */
@@ -20,17 +21,33 @@ public class AddTime extends javax.swing.JFrame {
         initComponents();
         User_Name_Text.setText(Info.getUser_Name());
     }
-    public AddTime(String name, String useTime, String remainTime){
+    public AddTime(boolean OrderCon, int remain){
         initComponents();
-        User_Name_Text.setText(name);
+        AddTime.remain = remain;
+        AddTime.OrderCon = OrderCon;
+        User_Name_Text.setText(Info.getUser_Name());
     }
+    
+    private void btn_AddTime(int btn){
+        if(OrderCon){
+            int remainTime = remain+btn;
+            Order.order.remain = remainTime;
+            Order.order.set_lblRtime(remainTime);
+            OrderCon = false;
+        }else{
+            int remainTime = Integer.parseInt(Info.getUser_RemainTime())+btn;
+            new Order().setVisible(true);
+        }
+        dispose();
+    }
+    
     public void Call_DB(String Input_Time){
         //DB 시간추가 메소드
-        
+       
        String current_time = Info.getUser_RemainTime(); //사용자가 보유하고 시간
        int result = Integer.parseInt(Input_Time) + Integer.parseInt(current_time);  //String -> int
        Info.setUser_RemainTime(Integer.toString(result));
-        
+       
        try {
             String sql = "Update users set User_RemainTime = " + Info.getUser_RemainTime() +" where User_ID = '" + Info.getUser_ID() + "'"; // DML 명령어
             
@@ -76,6 +93,11 @@ public class AddTime extends javax.swing.JFrame {
 
         AddTime_2.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         AddTime_2.setText("2시간");
+        AddTime_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddTime_2ActionPerformed(evt);
+            }
+        });
 
         AddTime_1.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         AddTime_1.setText("1시간");
@@ -87,17 +109,37 @@ public class AddTime extends javax.swing.JFrame {
 
         AddTime_4.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         AddTime_4.setText("4시간");
+        AddTime_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddTime_4ActionPerformed(evt);
+            }
+        });
 
         AddTime_3.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         AddTime_3.setText("3시간");
         AddTime_3.setToolTipText("");
+        AddTime_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddTime_3ActionPerformed(evt);
+            }
+        });
 
         AddTime_10.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         AddTime_10.setText("10시간");
         AddTime_10.setToolTipText("");
+        AddTime_10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddTime_10ActionPerformed(evt);
+            }
+        });
 
         AddTime_5.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         AddTime_5.setText("5시간");
+        AddTime_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddTime_5ActionPerformed(evt);
+            }
+        });
 
         Exit_Button.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         Exit_Button.setText("닫기");
@@ -192,11 +234,37 @@ public class AddTime extends javax.swing.JFrame {
 
     private void AddTime_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTime_1ActionPerformed
             Call_DB("60");
+            btn_AddTime(60);
     }//GEN-LAST:event_AddTime_1ActionPerformed
 
     private void Exit_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Exit_ButtonActionPerformed
         dispose();
     }//GEN-LAST:event_Exit_ButtonActionPerformed
+
+    private void AddTime_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTime_2ActionPerformed
+        Call_DB("120");
+        btn_AddTime(120);
+    }//GEN-LAST:event_AddTime_2ActionPerformed
+
+    private void AddTime_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTime_3ActionPerformed
+        Call_DB("180");
+        btn_AddTime(180);
+    }//GEN-LAST:event_AddTime_3ActionPerformed
+
+    private void AddTime_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTime_4ActionPerformed
+        Call_DB("240");
+        btn_AddTime(240);
+    }//GEN-LAST:event_AddTime_4ActionPerformed
+
+    private void AddTime_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTime_5ActionPerformed
+        Call_DB("300");
+        btn_AddTime(300);
+    }//GEN-LAST:event_AddTime_5ActionPerformed
+
+    private void AddTime_10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTime_10ActionPerformed
+        Call_DB("600");
+        btn_AddTime(600);
+    }//GEN-LAST:event_AddTime_10ActionPerformed
 
     /**
      * @param args the command line arguments

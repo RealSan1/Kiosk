@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.*;
 import javax.swing.JOptionPane;
+import java.util.TimerTask;
+import javax.swing.Timer;
 //import static sw.Main.Info;
 import java.sql.*;
 import java.util.*;
@@ -21,16 +23,27 @@ public class Order extends javax.swing.JFrame {
 
     int counts = 1;
     private static javax.swing.Timer timer;
+<<<<<<< HEAD
+    int hour,min,sec,remain,uhour,umin,usec,elapsed;
+    static Order order;
+=======
     int hour, min, sec, remain, uhour, umin, usec, elapsed;
     Cart Shin_Ramen;
     Cart RTA_Ramen;
 
+>>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
     public Order() {
         initComponents();
-//        lblUser.setText(Info.getUser_Name());
-//        lblRtIme.setText(Info.getUser_RemainTime());
-//        lblUtime.setText(Info.getUser_UseTime());
+        order = this;
+        lblUser.setText(Info.getUser_Name());
+        Timer_m();
     }
+<<<<<<< HEAD
+
+    private void Timer_m(){
+        remain = Integer.parseInt(Info.getUser_RemainTime());//남은 시간
+        min = remain%60;
+=======
     
     public String Setting_Price(String Menu_name){
         // 메뉴가격, 재고를 DB에서 갖고오는 메소드
@@ -62,6 +75,7 @@ public class Order extends javax.swing.JFrame {
         lblUser.setText(name);
         remain = Integer.parseInt(remaintime);//남은 시간
         min = remain % 60;
+>>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
         sec = 0;
         hour = remain / 60;
         elapsed = 0;//사용시간 계산하기 위해 필요 
@@ -74,6 +88,25 @@ public class Order extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 remain--;
                 elapsed++;
+<<<<<<< HEAD
+                if(remain==30){
+                    JOptionPane.showMessageDialog(null,Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
+                }else if(remain == 10){
+                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
+                }else if(remain == 5){
+                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
+                }
+                int hours = remain/60;
+                int mins = remain%60;
+                int uhours = elapsed/60;
+                int umins = elapsed%60;
+                lblRtIme.setText(String.format("%02d:%02d",hours,mins));
+                lblUtime.setText(String.format("%02d:%02d",uhours,umins));
+                if(remain==0){
+                    timer.stop();
+                    dispose();
+                }
+=======
                 if (remain == 30) {
                     JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
                 } else if (remain == 10) {
@@ -87,12 +120,16 @@ public class Order extends javax.swing.JFrame {
                 int umins = elapsed % 60;
                 lblRtIme.setText(String.format("%02d:%02d", hours, mins));
                 lblUtime.setText(String.format("%02d:%02d", uhours, umins));
+>>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
             }
         });
         timer.start();
         lblRtIme.setText(String.format("%02d:%02d", hour, min));
         lblUtime.setText(String.format("%02d:%02d", uhour, umin));
     }
+<<<<<<< HEAD
+    
+=======
 
     public void Timer() {    //타이머 메소드
         Timer t = new Timer();
@@ -113,6 +150,7 @@ public class Order extends javax.swing.JFrame {
             System.out.println("Hook Run");
         }
     }
+>>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
 
     public class MakeRowData {
 
@@ -242,9 +280,19 @@ public class Order extends javax.swing.JFrame {
 
         btnAddTime.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnAddTime.setText("시간 충전");
+        btnAddTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTimeActionPerformed(evt);
+            }
+        });
 
         btnExit.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnExit.setText("종료");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         lblUser.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(255, 255, 255));
@@ -631,13 +679,45 @@ public class Order extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
-
+    public void set_lblRtime(int remain){
+        int hour = remain/60;
+        int min = remain%60;
+        lblRtIme.setText(String.format("%02d:%02d",hour,min));
+    }
+    
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         Object[] reowData = {null, null, null};
         model.addRow(reowData);
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        try {
+            int remain = order.remain;
+            int use = order.elapsed;
+            String sql = "Update users set User_RemainTime = ? where user_id = ?"; // DML 명령어
+            String sql2 = "Update users set User_useTime = ? where user_id = ?";
+            Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, remain);
+            pstmt.setString(2,Info.getUser_ID());
+            pstmt.executeUpdate();
+            pstmt = con.prepareStatement(sql2);
+            pstmt.setInt(1, use);
+            pstmt.setString(2,Info.getUser_ID());
+            pstmt.executeUpdate();
+            System.out.println("Time Update");
+            dispose();
+        } catch (SQLException ex) {
+            System.err.println("Update Error"+ex);
+        }
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTimeActionPerformed
+        int remain = order.remain;
+        new AddTime(true, remain).setVisible(true);
+    }//GEN-LAST:event_btnAddTimeActionPerformed
 
     public static void main(String args[]) {
 

@@ -224,7 +224,7 @@ public class Main extends javax.swing.JFrame {
                     }
                     else {
                         dispose();
-                        new Order(User_Name, User_RemainTime, User_UseTime).setVisible(true);
+                        new Order().setVisible(true);
                         
 //                        Login.setVisible(false);
 //                        Order.setVisible(true);
