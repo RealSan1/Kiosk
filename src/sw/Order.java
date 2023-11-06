@@ -7,10 +7,8 @@ import javax.swing.JOptionPane;
 import java.util.TimerTask;
 import javax.swing.Timer;
 //import static sw.Main.Info;
-
 import java.sql.*;
 import java.util.*;
-
 import javax.swing.table.DefaultTableModel;
 import static sw.Main.Info;
 import static sw.Main.orcle_ID;
@@ -24,33 +22,73 @@ import static sw.Main.orcle_url;
 public class Order extends javax.swing.JFrame {
 
     int counts = 1;
-    Cart cart;
-    Cart cart1;
     private static javax.swing.Timer timer;
+<<<<<<< HEAD
     int hour,min,sec,remain,uhour,umin,usec,elapsed;
     static Order order;
+=======
+    int hour, min, sec, remain, uhour, umin, usec, elapsed;
+    Cart Shin_Ramen;
+    Cart RTA_Ramen;
+
+>>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
     public Order() {
         initComponents();
         order = this;
         lblUser.setText(Info.getUser_Name());
         Timer_m();
     }
+<<<<<<< HEAD
 
     private void Timer_m(){
         remain = Integer.parseInt(Info.getUser_RemainTime());//남은 시간
         min = remain%60;
+=======
+    
+    public String Setting_Price(String Menu_name){
+        // 메뉴가격, 재고를 DB에서 갖고오는 메소드
+        String Price = null;
+        String Inventory = null;
+        try {
+            String sql = "select Menu_Price,Menu_Inventory from menu where Menu_Name = '" + Menu_name + "'  ";   // DML 명령어
+            Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                Price = rs.getString("Menu_Price");
+                Inventory = rs.getString("Menu_Inventory");
+            }
+            return Price;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("DB Error");
+        }
+        return "1000";
+    }
+
+    public Order(String name, String remaintime, String usetime) {
+        initComponents();
+        lblUser.setText(name);
+        long rmTime = Integer.parseInt(remaintime);//분 단위
+        lblRtIme.setText(remaintime);
+        lblUtime.setText(usetime);
+        lblUser.setText(name);
+        remain = Integer.parseInt(remaintime);//남은 시간
+        min = remain % 60;
+>>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
         sec = 0;
-        hour = remain/60;
+        hour = remain / 60;
         elapsed = 0;//사용시간 계산하기 위해 필요 
-        uhour = elapsed/60;
-        umin = elapsed%60;
+        uhour = elapsed / 60;
+        umin = elapsed % 60;
         usec = 0;
-        
-        timer = new javax.swing.Timer(60000, new ActionListener(){
+
+        timer = new javax.swing.Timer(60000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 remain--;
                 elapsed++;
+<<<<<<< HEAD
                 if(remain==30){
                     JOptionPane.showMessageDialog(null,Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
                 }else if(remain == 10){
@@ -68,13 +106,51 @@ public class Order extends javax.swing.JFrame {
                     timer.stop();
                     dispose();
                 }
+=======
+                if (remain == 30) {
+                    JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
+                } else if (remain == 10) {
+                    JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
+                } else if (remain == 5) {
+                    JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
+                }
+                int hours = remain / 60;
+                int mins = remain % 60;
+                int uhours = elapsed / 60;
+                int umins = elapsed % 60;
+                lblRtIme.setText(String.format("%02d:%02d", hours, mins));
+                lblUtime.setText(String.format("%02d:%02d", uhours, umins));
+>>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
             }
         });
         timer.start();
-        lblRtIme.setText(String.format("%02d:%02d",hour,min));
-        lblUtime.setText(String.format("%02d:%02d",uhour,umin));
+        lblRtIme.setText(String.format("%02d:%02d", hour, min));
+        lblUtime.setText(String.format("%02d:%02d", uhour, umin));
     }
+<<<<<<< HEAD
     
+=======
+
+    public void Timer() {    //타이머 메소드
+        Timer t = new Timer();
+        TimerTask tm = new TimerTask() {
+            @Override
+            public void run() {
+
+            }
+        };
+        t.schedule(tm, 120);
+    }
+
+    static class HookThread extends Thread {
+
+        //만약 사용자가 프로그램 강제 종료 시 사용시간 DB전송
+        //수정해야함
+        public void run() {
+            System.out.println("Hook Run");
+        }
+    }
+>>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
 
     public class MakeRowData {
 
@@ -230,6 +306,7 @@ public class Order extends javax.swing.JFrame {
         lblUtime.setForeground(new java.awt.Color(255, 255, 255));
         lblUtime.setText("00:00");
 
+        jTable1.setBackground(new java.awt.Color(204, 204, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
@@ -327,7 +404,7 @@ public class Order extends javax.swing.JFrame {
 
         Ramen.setBackground(new java.awt.Color(80, 80, 80));
 
-        RamenBtn.setText("Raman");
+        RamenBtn.setText("신라면");
         RamenBtn.setToolTipText("");
         RamenBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -335,7 +412,7 @@ public class Order extends javax.swing.JFrame {
             }
         });
 
-        RamenBtn1.setText("Ramen2");
+        RamenBtn1.setText("너구리");
         RamenBtn1.setToolTipText("");
         RamenBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -478,29 +555,30 @@ public class Order extends javax.swing.JFrame {
 
     private void RamenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RamenBtnActionPerformed
         boolean status = false;
+        String Price = null;
         int rowCount = jTable1.getRowCount();
         for (int i = 0; i < rowCount; i++) {
             Object value = jTable1.getValueAt(i, 0);
-            if (value != null && value.toString().equalsIgnoreCase(cart.getMenu())) {
+            if (value != null && value.toString().equalsIgnoreCase(RamenBtn.getText())) {
                 status = true;
                 break;
             }
         }
         if (!status) {
             // 버튼 최초 클릭시
-            cart = new Cart(RamenBtn.getText(), 1, 2000);
-            MakeTable(cart.getMenu(), cart.getCount(), cart.getPrice());
-
+            Shin_Ramen = new Cart(RamenBtn.getText(), 1, Integer.parseInt(Setting_Price(RamenBtn.getText())));
+            MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+            
             //다음 주문내역을 위한 테이블 생성
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object[] reowData = {null, null, null};
             model.addRow(reowData);
         } else {
             // 수량 추가
-            counts = cart.getCount();
+            counts = Shin_Ramen.getCount();
             counts += 1;
-            cart.setCount(counts);
-            CountTable(cart.getMenu(), cart.getCount(), cart.getPrice());
+            Shin_Ramen.setCount(counts);
+            CountTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
         }
 
     }//GEN-LAST:event_RamenBtnActionPerformed
@@ -517,17 +595,17 @@ public class Order extends javax.swing.JFrame {
         }
         if (!status) {
             // 버튼 최초 클릭시
-            cart1 = new Cart(RamenBtn1.getText(), 1, 1000);
-            MakeTable(cart1.getMenu(), cart1.getCount(), cart1.getPrice());
+            RTA_Ramen = new Cart(RamenBtn1.getText(), 1, 1000);
+            MakeTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object[] reowData = {null, null, null};
             model.addRow(reowData);
         } else {
             // 수량 추가
-            counts = cart1.getCount();
+            counts = RTA_Ramen.getCount();
             counts += 1;
-            cart1.setCount(counts);
-            CountTable(cart1.getMenu(), cart1.getCount(), cart1.getPrice());
+            RTA_Ramen.setCount(counts);
+            CountTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
         }
     }//GEN-LAST:event_RamenBtn1ActionPerformed
 
@@ -559,6 +637,7 @@ public class Order extends javax.swing.JFrame {
                 pstmt.setString(4, Date.get(2 + i * 3));
                 pstmt.executeUpdate(); //입력값 DB 업데이트
             }
+            JOptionPane.showMessageDialog(null, "주문이 완료되었습니다.");
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("DB Error");
@@ -661,6 +740,7 @@ public class Order extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        Runtime.getRuntime().addShutdownHook(new HookThread());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Order().setVisible(true);
