@@ -269,6 +269,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#xc2dc;&#xac04; &#xcda9;&#xc804;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddTimeActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnExit">
               <Properties>
@@ -277,6 +280,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#xc885;&#xb8cc;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblUser">
               <Properties>
