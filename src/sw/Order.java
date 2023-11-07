@@ -23,90 +23,22 @@ public class Order extends javax.swing.JFrame {
 
     int counts = 1;
     private static javax.swing.Timer timer;
-<<<<<<< HEAD
     int hour,min,sec,remain,uhour,umin,usec,elapsed;
     static Order order;
-=======
     int hour, min, sec, remain, uhour, umin, usec, elapsed;
     Cart Shin_Ramen;
     Cart RTA_Ramen;
 
->>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
     public Order() {
         initComponents();
         order = this;
         lblUser.setText(Info.getUser_Name());
         Timer_m();
     }
-<<<<<<< HEAD
 
     private void Timer_m(){
         remain = Integer.parseInt(Info.getUser_RemainTime());//남은 시간
-        min = remain%60;
-=======
-    
-    public String Setting_Price(String Menu_name){
-        // 메뉴가격, 재고를 DB에서 갖고오는 메소드
-        String Price = null;
-        String Inventory = null;
-        try {
-            String sql = "select Menu_Price,Menu_Inventory from menu where Menu_Name = '" + Menu_name + "'  ";   // DML 명령어
-            Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while(rs.next()){
-                Price = rs.getString("Menu_Price");
-                Inventory = rs.getString("Menu_Inventory");
-            }
-            return Price;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            System.out.println("DB Error");
-        }
-        return "1000";
-    }
-
-    public Order(String name, String remaintime, String usetime) {
-        initComponents();
-        lblUser.setText(name);
-        long rmTime = Integer.parseInt(remaintime);//분 단위
-        lblRtIme.setText(remaintime);
-        lblUtime.setText(usetime);
-        lblUser.setText(name);
-        remain = Integer.parseInt(remaintime);//남은 시간
-        min = remain % 60;
->>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
-        sec = 0;
-        hour = remain / 60;
-        elapsed = 0;//사용시간 계산하기 위해 필요 
-        uhour = elapsed / 60;
-        umin = elapsed % 60;
-        usec = 0;
-
-        timer = new javax.swing.Timer(60000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                remain--;
-                elapsed++;
-<<<<<<< HEAD
-                if(remain==30){
-                    JOptionPane.showMessageDialog(null,Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
-                }else if(remain == 10){
-                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
-                }else if(remain == 5){
-                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
-                }
-                int hours = remain/60;
-                int mins = remain%60;
-                int uhours = elapsed/60;
-                int umins = elapsed%60;
-                lblRtIme.setText(String.format("%02d:%02d",hours,mins));
-                lblUtime.setText(String.format("%02d:%02d",uhours,umins));
-                if(remain==0){
-                    timer.stop();
-                    dispose();
-                }
-=======
+        min = remain%60;     
                 if (remain == 30) {
                     JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
                 } else if (remain == 10) {
@@ -120,7 +52,6 @@ public class Order extends javax.swing.JFrame {
                 int umins = elapsed % 60;
                 lblRtIme.setText(String.format("%02d:%02d", hours, mins));
                 lblUtime.setText(String.format("%02d:%02d", uhours, umins));
->>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
             }
         });
         timer.start();
