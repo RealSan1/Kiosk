@@ -23,54 +23,75 @@ public class Order extends javax.swing.JFrame {
 
     int counts = 1;
     private static javax.swing.Timer timer;
-    int hour,min,sec,remain,uhour,umin,usec,elapsed;
+    int hour,min,remain,uhour,umin,usec,elapsed;
     static Order order;
-    int hour, min, sec, remain, uhour, umin, usec, elapsed;
     Cart Shin_Ramen;
     Cart RTA_Ramen;
-
+    
+    public String Setting_Price(String Menu_name){
+        // 메뉴가격, 재고를 DB에서 갖고오는 메소드
+        String Price = null;
+        String Inventory = null;
+        try {
+            String sql = "select Menu_Price,Menu_Inventory from menu where Menu_Name = '" + Menu_name + "'  ";   // DML 명령어
+            Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                Price = rs.getString("Menu_Price");
+                Inventory = rs.getString("Menu_Inventory");
+            }
+            return Price;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("DB Error");
+        }
+        return "1000";
+    }
+    
     public Order() {
         initComponents();
         order = this;
         lblUser.setText(Info.getUser_Name());
         Timer_m();
     }
-
     private void Timer_m(){
-        remain = Integer.parseInt(Info.getUser_RemainTime());//남은 시간
-        min = remain%60;     
-                if (remain == 30) {
-                    JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
-                } else if (remain == 10) {
-                    JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
-                } else if (remain == 5) {
-                    JOptionPane.showMessageDialog(null, name + "님의 이용시간이 " + remain + "분 남았습니다.");
+        remain = Integer.parseInt(Info.getUser_RemainTime());
+        hour = remain/60;
+        min = remain%60;
+        timer = new javax.swing.Timer(60000, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                remain--;
+                elapsed++;
+                if(remain==30){
+                    JOptionPane.showMessageDialog(null,Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
+                }else if(remain == 10){
+                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
+                }else if(remain == 5){
+                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
                 }
-                int hours = remain / 60;
-                int mins = remain % 60;
-                int uhours = elapsed / 60;
-                int umins = elapsed % 60;
-                lblRtIme.setText(String.format("%02d:%02d", hours, mins));
-                lblUtime.setText(String.format("%02d:%02d", uhours, umins));
+                int hours = remain/60;
+                int mins = remain%60;
+                int uhours = elapsed/60;
+                int umins = elapsed%60;
+                lblRtIme.setText(String.format("%02d:%02d",hours,mins));
+                lblUtime.setText(String.format("%02d:%02d",uhours,umins));
+                if(remain==0){
+                    timer.stop();
+                    dispose();
+                }
             }
         });
         timer.start();
-        lblRtIme.setText(String.format("%02d:%02d", hour, min));
-        lblUtime.setText(String.format("%02d:%02d", uhour, umin));
+        System.out.println("Timertest");
+        lblRtIme.setText(String.format("%02d:%02d",hour,min));
+        lblUtime.setText(String.format("%02d:%02d",uhour,umin));
     }
-<<<<<<< HEAD
-    
-=======
-
-    public void Timer() {    //타이머 메소드
-        Timer t = new Timer();
-        TimerTask tm = new TimerTask() {
-            @Override
-            public void run() {
-
-            }
-        };
-        t.schedule(tm, 120);
+    public void set_lblRtime(int remain){
+        int hours = remain/60;
+        int mins= remain%60;
+        lblRtIme.setText(String.format("%02d:%02d",hours,mins));
     }
 
     static class HookThread extends Thread {
@@ -81,7 +102,6 @@ public class Order extends javax.swing.JFrame {
             System.out.println("Hook Run");
         }
     }
->>>>>>> a3d71378ffc3ada5f2bb1fecfa67844c22e7c2cf
 
     public class MakeRowData {
 
@@ -610,11 +630,7 @@ public class Order extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
-    public void set_lblRtime(int remain){
-        int hour = remain/60;
-        int min = remain%60;
-        lblRtIme.setText(String.format("%02d:%02d",hour,min));
-    }
+
     
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
