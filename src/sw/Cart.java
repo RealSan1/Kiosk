@@ -1,19 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sw;
-
-/**
- *
- * @author 산
- */
 public class Cart {
     private String Menu;
     private int Count;
     private int Price;
+    private int Inventory;
     
-    public Cart(String menu, int count, int price){
+    public Cart(String menu,int count, int price){
         this.Menu = menu;
         this.Count = count;
         this.Price = price;
@@ -41,5 +33,12 @@ public class Cart {
     public int getPrice(){
         return Price;
     }    
-
+    
+    public void setInventory(int inventory){
+        this.Inventory = inventory;
+    }
+    
+    public int getInventory(){
+        return Inventory;
+    }    
 }

@@ -40,20 +40,20 @@ public class Order extends javax.swing.JFrame {
     }
 
     public Order() {
-        if(order == null){
+        if (order == null) {
             initComponents();
             order = this;
-            int remain = Integer.parseInt(Info.getUser_RemainTime());
-            int hour = remain/60;
-            int min = remain%60;
-            lblRtIme.setText(String.format("%02d:%02d",hour,min));
-            if(!timer_run){AddTime.Timer_m();}
-            lblUser.setText(Info.getUser_Name());
+//            int remain = Integer.parseInt(Info.getUser_RemainTime());
+//            int hour = remain/60;
+//            int min = remain%60;
+//            lblRtIme.setText(String.format("%02d:%02d",hour,min));
+//            if(!timer_run){AddTime.Timer_m();}
+//            lblUser.setText(Info.getUser_Name());
         }
     }
 
-    public static Order getInstance(){
-        if(order == null){
+    public static Order getInstance() {
+        if (order == null) {
             order = new Order();
         }
         return order;
@@ -282,7 +282,7 @@ public class Order extends javax.swing.JFrame {
                         .addComponent(btnAddTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -300,6 +300,11 @@ public class Order extends javax.swing.JFrame {
         Menu.setBackground(new java.awt.Color(80, 80, 80));
         Menu.setForeground(new java.awt.Color(255, 255, 255));
         Menu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        Menu.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                MenuMouseMoved(evt);
+            }
+        });
 
         Food.setBackground(new java.awt.Color(80, 80, 80));
 
@@ -482,6 +487,7 @@ public class Order extends javax.swing.JFrame {
             // 버튼 최초 클릭시
             Shin_Ramen = new Cart(RamenBtn.getText(), 1, Integer.parseInt(Setting_Price(RamenBtn.getText())));
             OM.MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+            //MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
 
             //다음 주문내역을 위한 테이블 생성
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -510,7 +516,7 @@ public class Order extends javax.swing.JFrame {
         }
         if (!status) {
             // 버튼 최초 클릭시
-            RTA_Ramen = new Cart(RamenBtn1.getText(), 1, 1000);
+            RTA_Ramen = new Cart(RamenBtn1.getText(), 1, 10000);
             OM.MakeTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object[] reowData = {null, null, null};
@@ -610,12 +616,24 @@ public class Order extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddTimeActionPerformed
 
     private void btnCountPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountPlusActionPerformed
-        // TODO add your handling code here:
+        int temp = jTable1.getSelectedRow() + 1;
+        System.out.println(temp);
     }//GEN-LAST:event_btnCountPlusActionPerformed
 
     private void btnCountMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountMinusActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnCountMinusActionPerformed
+
+    private void MenuMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuMouseMoved
+        int Price;
+        int sum = 0;
+        int GetSize = jTable1.getRowCount() - 1; // 행 개수 구하기
+        for (int i = 0; i < GetSize; i++) {
+            Price = Integer.parseInt(jTable1.getValueAt(i, 2).toString());
+            sum += Price;
+        }
+        txtPrice.setText(Integer.toString(sum));
+    }//GEN-LAST:event_MenuMouseMoved
 
     public static void main(String args[]) {
 
