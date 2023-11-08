@@ -39,4 +39,15 @@ public class Order_Method {
         Order.order.jTable1.setValueAt(count, targetRow, 1);
         Order.order.jTable1.setValueAt(count * price, targetRow, 2);
     }
+     
+    public void ShowPrice(){
+        int table_price;
+        int table_sum = 0;
+        int GetSize = Order.order.jTable1.getRowCount() - 1; // 행 개수 구하기
+        for (int i = 0; i < GetSize; i++) {
+            table_price = Integer.parseInt(Order.order.jTable1.getValueAt(i, 2).toString());
+            table_sum += table_price;
+        }
+        Order.order.txtPrice.setText(Integer.toString(table_sum));
+    }
 }
