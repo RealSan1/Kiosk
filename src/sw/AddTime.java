@@ -66,7 +66,7 @@ public class AddTime extends javax.swing.JFrame {
     
     protected static void Timer_m(){
         remain = Integer.parseInt(Info.getUser_RemainTime());
-        timer = new javax.swing.Timer(1000, new ActionListener(){
+        timer = new javax.swing.Timer(60000, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 remain--;
