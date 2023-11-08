@@ -1,34 +1,24 @@
 package sw;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.*;
-import javax.swing.JOptionPane;
-import java.util.TimerTask;
+import javax.swing.*;
 import javax.swing.Timer;
-//import static sw.Main.Info;
-import java.sql.*;
-import java.util.*;
 import javax.swing.table.DefaultTableModel;
-import static sw.Main.Info;
-import static sw.Main.orcle_ID;
-import static sw.Main.orcle_PW;
-import static sw.Main.orcle_url;
+import static sw.Main.*;
 
-/**
- *
- * @author 산
- */
 public class Order extends javax.swing.JFrame {
 
+    Order_Method OM = new Order_Method();
     int counts = 1;
-    private static javax.swing.Timer timer;
-    int hour,min,remain,uhour,umin,usec,elapsed;
     static Order order;
+    static boolean timer_run;
     Cart Shin_Ramen;
     Cart RTA_Ramen;
-    
-    public String Setting_Price(String Menu_name){
+
+    public String Setting_Price(String Menu_name) {
         // 메뉴가격, 재고를 DB에서 갖고오는 메소드
         String Price = null;
         String Inventory = null;
@@ -37,7 +27,7 @@ public class Order extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            while(rs.next()){
+            while (rs.next()) {
                 Price = rs.getString("Menu_Price");
                 Inventory = rs.getString("Menu_Inventory");
             }
@@ -48,98 +38,36 @@ public class Order extends javax.swing.JFrame {
         }
         return "1000";
     }
-    
+
     public Order() {
-        initComponents();
-        order = this;
-        lblUser.setText(Info.getUser_Name());
-        Timer_m();
+        if(order == null){
+            initComponents();
+            order = this;
+            int remain = Integer.parseInt(Info.getUser_RemainTime());
+            int hour = remain/60;
+            int min = remain%60;
+            lblRtIme.setText(String.format("%02d:%02d",hour,min));
+            if(!timer_run){AddTime.Timer_m();}
+            lblUser.setText(Info.getUser_Name());
+        }
     }
-    private void Timer_m(){
-        remain = Integer.parseInt(Info.getUser_RemainTime());
-        hour = remain/60;
-        min = remain%60;
-        timer = new javax.swing.Timer(60000, new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                remain--;
-                elapsed++;
-                if(remain==30){
-                    JOptionPane.showMessageDialog(null,Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
-                }else if(remain == 10){
-                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
-                }else if(remain == 5){
-                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
-                }
-                int hours = remain/60;
-                int mins = remain%60;
-                int uhours = elapsed/60;
-                int umins = elapsed%60;
-                lblRtIme.setText(String.format("%02d:%02d",hours,mins));
-                lblUtime.setText(String.format("%02d:%02d",uhours,umins));
-                if(remain==0){
-                    timer.stop();
-                    dispose();
-                }
-            }
-        });
-        timer.start();
-        System.out.println("Timertest");
-        lblRtIme.setText(String.format("%02d:%02d",hour,min));
-        lblUtime.setText(String.format("%02d:%02d",uhour,umin));
-    }
-    public void set_lblRtime(int remain){
-        int hours = remain/60;
-        int mins= remain%60;
-        lblRtIme.setText(String.format("%02d:%02d",hours,mins));
+
+    public static Order getInstance(){
+        if(order == null){
+            order = new Order();
+        }
+        return order;
     }
 
     static class HookThread extends Thread {
 
-        //만약 사용자가 프로그램 강제 종료 시 사용시간 DB전송
-        //수정해야함
+        //만약 사용자가 프로그램 강제 종료 시 잔여시간 DB전송
+        //수정필요
         public void run() {
-            System.out.println("Hook Run");
+            AddTime.DBtimeUpdate();
+            //사용자 잔여시간 DB전송(코드작성)
+            System.out.println("Hook Run Test");
         }
-    }
-
-    public class MakeRowData {
-
-        public String Menu;
-        public int Count;
-        public int Price;
-    }
-
-    public void MakeTable(String menu, int count, int price) {
-        int iCntRow;
-        iCntRow = jTable1.getRowCount();
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            if (jTable1.getValueAt(i, 0) == null) {
-                iCntRow = i;
-                break;
-            }
-        }
-
-        jTable1.setValueAt(menu, iCntRow, 0);
-        jTable1.setValueAt(count, iCntRow, 1);
-        jTable1.setValueAt(price, iCntRow, 2);
-
-    }
-
-    public void CountTable(String Menu, int count, int price) {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        String targetValue = Menu;
-        int targetRow = -1; // 초기값으로 -1 설정
-
-        for (int row = 0; row < model.getRowCount(); row++) {
-            String cellValue = (String) model.getValueAt(row, 0); // 0은 열 인덱스
-            if (cellValue.equals(targetValue)) {
-                targetRow = row;
-                break;
-            }
-        }
-        jTable1.setValueAt(count, targetRow, 1);
-        jTable1.setValueAt(count * price, targetRow, 2);
     }
 
     @SuppressWarnings("unchecked")
@@ -162,6 +90,8 @@ public class Order extends javax.swing.JFrame {
         lblUtime = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnCountPlus = new javax.swing.JButton();
+        btnCountMinus = new javax.swing.JButton();
         Menu = new javax.swing.JTabbedPane();
         Food = new javax.swing.JPanel();
         Ramen = new javax.swing.JPanel();
@@ -265,8 +195,35 @@ public class Order extends javax.swing.JFrame {
             new String [] {
                 "메뉴", "수량", "가격"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(jTable1);
+
+        btnCountPlus.setBackground(new java.awt.Color(204, 204, 204));
+        btnCountPlus.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        btnCountPlus.setText("선택 메뉴 +1");
+        btnCountPlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCountPlusActionPerformed(evt);
+            }
+        });
+
+        btnCountMinus.setBackground(new java.awt.Color(204, 204, 204));
+        btnCountMinus.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        btnCountMinus.setText("선택 메뉴 -1");
+        btnCountMinus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCountMinusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout subPanelLayout = new javax.swing.GroupLayout(subPanel);
         subPanel.setLayout(subPanelLayout);
@@ -276,14 +233,6 @@ public class Order extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, subPanelLayout.createSequentialGroup()
-                        .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                            .addComponent(txtPrice)))
                     .addGroup(subPanelLayout.createSequentialGroup()
                         .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblName)
@@ -297,7 +246,17 @@ public class Order extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnAddTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, subPanelLayout.createSequentialGroup()
+                        .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCountPlus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                            .addComponent(txtPrice)
+                            .addComponent(btnCountMinus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         subPanelLayout.setVerticalGroup(
@@ -322,11 +281,15 @@ public class Order extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAddTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(txtPrice))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCountPlus, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(btnCountMinus, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
@@ -478,7 +441,7 @@ public class Order extends javax.swing.JFrame {
                 .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         OrderLayout.setVerticalGroup(
             OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,7 +450,7 @@ public class Order extends javax.swing.JFrame {
                 .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72))
+                .addGap(114, 114, 114))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -518,8 +481,8 @@ public class Order extends javax.swing.JFrame {
         if (!status) {
             // 버튼 최초 클릭시
             Shin_Ramen = new Cart(RamenBtn.getText(), 1, Integer.parseInt(Setting_Price(RamenBtn.getText())));
-            MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
-            
+            OM.MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+
             //다음 주문내역을 위한 테이블 생성
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object[] reowData = {null, null, null};
@@ -529,7 +492,8 @@ public class Order extends javax.swing.JFrame {
             counts = Shin_Ramen.getCount();
             counts += 1;
             Shin_Ramen.setCount(counts);
-            CountTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+            OM.CountTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+
         }
 
     }//GEN-LAST:event_RamenBtnActionPerformed
@@ -547,7 +511,7 @@ public class Order extends javax.swing.JFrame {
         if (!status) {
             // 버튼 최초 클릭시
             RTA_Ramen = new Cart(RamenBtn1.getText(), 1, 1000);
-            MakeTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
+            OM.MakeTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object[] reowData = {null, null, null};
             model.addRow(reowData);
@@ -556,7 +520,7 @@ public class Order extends javax.swing.JFrame {
             counts = RTA_Ramen.getCount();
             counts += 1;
             RTA_Ramen.setCount(counts);
-            CountTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
+            OM.CountTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
         }
     }//GEN-LAST:event_RamenBtn1ActionPerformed
 
@@ -599,17 +563,15 @@ public class Order extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         //메뉴 제거
-        MakeRowData objRowData;
+        Order_Method.MakeRowData objRowData;
         Vector myVC = new Vector();
 
-        int iCntRow = 0;
-        iCntRow = jTable1.getSelectedRow();
-
+        int iCntRow = jTable1.getSelectedRow();
         DefaultTableModel jTableModel = (DefaultTableModel) jTable1.getModel();
 
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             if (jTable1.getValueAt(i, 0) != null) {
-                objRowData = new MakeRowData();
+                objRowData = new Order_Method.MakeRowData();
                 objRowData.Menu = jTable1.getValueAt(i, 0).toString();
                 objRowData.Count = Integer.parseInt(jTable1.getValueAt(i, 1).toString());
                 objRowData.Price = Integer.parseInt(jTable1.getValueAt(i, 2).toString());
@@ -623,7 +585,7 @@ public class Order extends javax.swing.JFrame {
         jTableModel.removeRow(iCntRow);
 
         for (int i = 0; i < myVC.size(); i++) {
-            objRowData = (MakeRowData) myVC.get(i);
+            objRowData = (Order_Method.MakeRowData) myVC.get(i);
             jTable1.setValueAt(objRowData.Menu, i, 0);
             jTable1.setValueAt(objRowData.Count, i, 1);
             jTable1.setValueAt(objRowData.Price, i, 2);
@@ -631,7 +593,7 @@ public class Order extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    
+
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -640,31 +602,20 @@ public class Order extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        try {
-            int remain = order.remain;
-            int use = order.elapsed;
-            String sql = "Update users set User_RemainTime = ? where user_id = ?"; // DML 명령어
-            String sql2 = "Update users set User_useTime = ? where user_id = ?";
-            Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, remain);
-            pstmt.setString(2,Info.getUser_ID());
-            pstmt.executeUpdate();
-            pstmt = con.prepareStatement(sql2);
-            pstmt.setInt(1, use);
-            pstmt.setString(2,Info.getUser_ID());
-            pstmt.executeUpdate();
-            System.out.println("Time Update");
-            dispose();
-        } catch (SQLException ex) {
-            System.err.println("Update Error"+ex);
-        }
+        AddTime.DBtimeUpdate();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTimeActionPerformed
-        int remain = order.remain;
-        new AddTime(true, remain).setVisible(true);
+        new AddTime().setVisible(true);
     }//GEN-LAST:event_btnAddTimeActionPerformed
+
+    private void btnCountPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountPlusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCountPlusActionPerformed
+
+    private void btnCountMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountMinusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCountMinusActionPerformed
 
     public static void main(String args[]) {
 
@@ -684,9 +635,7 @@ public class Order extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         Runtime.getRuntime().addShutdownHook(new HookThread());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -708,18 +657,20 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JPanel Sncak1;
     private javax.swing.JPanel Topping;
     private javax.swing.JButton btnAddTime;
+    private javax.swing.JButton btnCountMinus;
+    private javax.swing.JButton btnCountPlus;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnReset;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRemainTime;
-    private javax.swing.JLabel lblRtIme;
+    protected static javax.swing.JLabel lblRtIme;
     private javax.swing.JLabel lblUsedTime;
-    private javax.swing.JLabel lblUser;
-    private javax.swing.JLabel lblUtime;
+    protected static javax.swing.JLabel lblUser;
+    protected static javax.swing.JLabel lblUtime;
     private javax.swing.JPanel subPanel;
     private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
