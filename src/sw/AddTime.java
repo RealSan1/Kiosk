@@ -1,6 +1,10 @@
 package sw;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
+import javax.swing.JOptionPane;
 import static sw.Main.Info;
+import javax.swing.Timer;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,35 +16,80 @@ import static sw.Main.Info;
  * @author 산
  */
 public class AddTime extends javax.swing.JFrame {
-    static int remain;
-    static boolean OrderCon;
+    protected static Timer timer;
+    static int remain, elapsed;
+    static Order order;
+    static boolean startTimer=false;
+    static Main m;
     /**
      * Creates new form AddTime
      */
     public AddTime() {
         initComponents();
         User_Name_Text.setText(Info.getUser_Name());
+        if(order == null){
+            Order.timer_run=true;
+            order = Order.getInstance();
+        }
     }
-    public AddTime(boolean OrderCon, int remain){
-        initComponents();
-        AddTime.remain = remain;
-        AddTime.OrderCon = OrderCon;
-        User_Name_Text.setText(Info.getUser_Name());
+    private static void MainCls(){
+        if(m==null)
+            m=Main.getInstance();
+        if(m.isVisible())
+            m.dispose();
+        else
+            m.setVisible(true);
     }
     
     private void btn_AddTime(int btn){
-        if(OrderCon){
-            int remainTime = remain+btn;
-            Order.order.remain = remainTime;
-            Order.order.set_lblRtime(remainTime);
-            OrderCon = false;
+        JOptionPane.showMessageDialog(null,btn/60+"시간이 충전 되었습니다.");
+        if(order.isVisible()){
+            remain+=btn;
+            SetTimePrt(remain,elapsed);
         }else{
-            int remainTime = Integer.parseInt(Info.getUser_RemainTime())+btn;
-            new Order().setVisible(true);
+            MainCls();
+            remain+=btn;
+            SetTimePrt(remain,0);
+            if(!startTimer){Timer_m(); startTimer=true;}
+            order.setVisible(true);
         }
         dispose();
     }
     
+    private static void SetTimePrt(int minute, int elapsed){
+        int hour = minute/60;
+        int min = minute%60;
+        int uhour = elapsed/60;
+        int umin = elapsed%60;
+        Order.lblRtIme.setText(String.format("%02d:%02d",hour,min));
+        Order.lblUtime.setText(String.format("%02d:%02d",uhour,umin));
+    }
+    
+    protected static void Timer_m(){
+        remain = Integer.parseInt(Info.getUser_RemainTime());
+        timer = new javax.swing.Timer(1000, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                remain--;
+                elapsed++;
+                if(remain==30){
+                    JOptionPane.showMessageDialog(null,Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
+                }else if(remain == 10){
+                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
+                }else if(remain == 5){
+                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
+                }
+                SetTimePrt(remain, elapsed);
+                if(remain==0){
+                    timer.stop();
+                    order.dispose();
+                }
+            }
+        });
+        timer.start();
+        order.timer_run=true;
+        SetTimePrt(remain, 0);
+    }
     public void Call_DB(String Input_Time){
         //DB 시간추가 메소드
        
@@ -58,6 +107,43 @@ public class AddTime extends javax.swing.JFrame {
             
             } catch (SQLException ex) {
             System.err.println("Update Error");
+        }
+    }
+    protected static void DBtimeUpdate(){
+        try{
+            String[] parts = Order.lblRtIme.getText().split(":");
+            int remain = (Integer.parseInt(parts[0])*60+Integer.parseInt(parts[1]));
+            parts = Order.lblUtime.getText().split(":");
+            int use = (Integer.parseInt(parts[0])*60+Integer.parseInt(parts[1]));
+            String sql = "Update users set User_RemainTime = ? where user_id = ?"; // DML 명령어
+            String sql2 = "Update users set User_useTime = ? where user_id = ?";
+            Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, remain);
+            pstmt.setString(2,Info.getUser_ID());
+            pstmt.executeUpdate();
+            pstmt = con.prepareStatement(sql2);
+            pstmt.setInt(1, use);
+            pstmt.setString(2,Info.getUser_ID());
+            pstmt.executeUpdate();
+            System.out.println("Time Update");
+            if(order == null){
+                order = Order.getInstance();
+                order.dispose();
+            }else{
+                order.dispose();
+            }
+            MainCls();
+            Order.timer_run=false;
+            Order.order=null;
+            elapsed = 0;
+            startTimer=false;
+            order=null;
+            timer.stop();
+            timer=null;
+            
+        }catch(SQLException ex){
+            System.err.println("Update Error"+ex);
         }
     }
     /**

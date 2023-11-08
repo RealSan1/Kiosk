@@ -3,16 +3,25 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
-    static String orcle_url = "jdbc:oracle:thin:@116.39.188.187:1521:orcl"; //DB URL
-    static String orcle_ID = "c##san"; //DB ID
-    static String orcle_PW = "123"; // DB Password  
+//    static String orcle_url = "jdbc:oracle:thin:@116.39.188.187:1521:orcl"; //DB URL
+//    static String orcle_ID = "c##san"; //DB ID
+//    static String orcle_PW = "123"; // DB Password  
     static User_Info Info;
-
+    
+    static String orcle_url = "jdbc:oracle:thin:@localhost:1521:xe";    
+    static String orcle_ID = "C##kiosk"; //DB ID
+    static String orcle_PW = "1234"; // DB Password  
+    static Main main;
+    
     /**
      * Creates new form Login
      */
     public Main() {
         initComponents();
+        main = this;
+    }
+    public static Main getInstance(){
+        return main;
     }
 
     /**

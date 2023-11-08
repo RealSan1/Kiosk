@@ -22,9 +22,8 @@ import static sw.Main.orcle_url;
 public class Order extends javax.swing.JFrame {
 
     int counts = 1;
-    private static javax.swing.Timer timer;
-    int hour,min,remain,uhour,umin,usec,elapsed;
     static Order order;
+    static boolean timer_run;
     Cart Shin_Ramen;
     Cart RTA_Ramen;
     
@@ -50,56 +49,29 @@ public class Order extends javax.swing.JFrame {
     }
     
     public Order() {
-        initComponents();
-        order = this;
-        lblUser.setText(Info.getUser_Name());
-        Timer_m();
+        if(order == null){
+            initComponents();
+            order = this;
+            int remain = Integer.parseInt(Info.getUser_RemainTime());
+            int hour = remain/60;
+            int min = remain%60;
+            lblRtIme.setText(String.format("%02d:%02d",hour,min));
+            if(!timer_run){AddTime.Timer_m();}
+            lblUser.setText(Info.getUser_Name());
+        }
     }
-    private void Timer_m(){
-        remain = Integer.parseInt(Info.getUser_RemainTime());
-        hour = remain/60;
-        min = remain%60;
-        timer = new javax.swing.Timer(60000, new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                remain--;
-                elapsed++;
-                if(remain==30){
-                    JOptionPane.showMessageDialog(null,Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
-                }else if(remain == 10){
-                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
-                }else if(remain == 5){
-                    JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
-                }
-                int hours = remain/60;
-                int mins = remain%60;
-                int uhours = elapsed/60;
-                int umins = elapsed%60;
-                lblRtIme.setText(String.format("%02d:%02d",hours,mins));
-                lblUtime.setText(String.format("%02d:%02d",uhours,umins));
-                if(remain==0){
-                    timer.stop();
-                    dispose();
-                }
-            }
-        });
-        timer.start();
-        System.out.println("Timertest");
-        lblRtIme.setText(String.format("%02d:%02d",hour,min));
-        lblUtime.setText(String.format("%02d:%02d",uhour,umin));
+    public static Order getInstance(){
+        if(order == null){
+            order = new Order();
+        }
+        return order;
     }
-    public void set_lblRtime(int remain){
-        int hours = remain/60;
-        int mins= remain%60;
-        lblRtIme.setText(String.format("%02d:%02d",hours,mins));
-    }
-
     static class HookThread extends Thread {
 
         //만약 사용자가 프로그램 강제 종료 시 사용시간 DB전송
         //수정해야함
         public void run() {
-            System.out.println("Hook Run");
+            AddTime.DBtimeUpdate();
         }
     }
 
@@ -640,30 +612,11 @@ public class Order extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        try {
-            int remain = order.remain;
-            int use = order.elapsed;
-            String sql = "Update users set User_RemainTime = ? where user_id = ?"; // DML 명령어
-            String sql2 = "Update users set User_useTime = ? where user_id = ?";
-            Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, remain);
-            pstmt.setString(2,Info.getUser_ID());
-            pstmt.executeUpdate();
-            pstmt = con.prepareStatement(sql2);
-            pstmt.setInt(1, use);
-            pstmt.setString(2,Info.getUser_ID());
-            pstmt.executeUpdate();
-            System.out.println("Time Update");
-            dispose();
-        } catch (SQLException ex) {
-            System.err.println("Update Error"+ex);
-        }
+        AddTime.DBtimeUpdate();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTimeActionPerformed
-        int remain = order.remain;
-        new AddTime(true, remain).setVisible(true);
+        new AddTime().setVisible(true);
     }//GEN-LAST:event_btnAddTimeActionPerformed
 
     public static void main(String args[]) {
@@ -716,10 +669,10 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRemainTime;
-    private javax.swing.JLabel lblRtIme;
+    protected static javax.swing.JLabel lblRtIme;
     private javax.swing.JLabel lblUsedTime;
-    private javax.swing.JLabel lblUser;
-    private javax.swing.JLabel lblUtime;
+    protected static javax.swing.JLabel lblUser;
+    protected static javax.swing.JLabel lblUtime;
     private javax.swing.JPanel subPanel;
     private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
