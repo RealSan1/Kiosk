@@ -1,33 +1,24 @@
 package sw;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.*;
-import javax.swing.JOptionPane;
-import java.util.TimerTask;
+import javax.swing.*;
 import javax.swing.Timer;
-//import static sw.Main.Info;
-import java.sql.*;
-import java.util.*;
 import javax.swing.table.DefaultTableModel;
-import static sw.Main.Info;
-import static sw.Main.orcle_ID;
-import static sw.Main.orcle_PW;
-import static sw.Main.orcle_url;
+import static sw.Main.*;
 
-/**
- *
- * @author 산
- */
 public class Order extends javax.swing.JFrame {
 
+    Order_Method OM = new Order_Method();
     int counts = 1;
     static Order order;
     static boolean timer_run;
     Cart Shin_Ramen;
     Cart RTA_Ramen;
-    
-    public String Setting_Price(String Menu_name){
+
+    public String Setting_Price(String Menu_name) {
         // 메뉴가격, 재고를 DB에서 갖고오는 메소드
         String Price = null;
         String Inventory = null;
@@ -36,7 +27,7 @@ public class Order extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            while(rs.next()){
+            while (rs.next()) {
                 Price = rs.getString("Menu_Price");
                 Inventory = rs.getString("Menu_Inventory");
             }
@@ -47,7 +38,7 @@ public class Order extends javax.swing.JFrame {
         }
         return "1000";
     }
-    
+
     public Order() {
         if(order == null){
             initComponents();
@@ -60,58 +51,23 @@ public class Order extends javax.swing.JFrame {
             lblUser.setText(Info.getUser_Name());
         }
     }
+
     public static Order getInstance(){
         if(order == null){
             order = new Order();
         }
         return order;
     }
+
     static class HookThread extends Thread {
 
-        //만약 사용자가 프로그램 강제 종료 시 사용시간 DB전송
-        //수정해야함
+        //만약 사용자가 프로그램 강제 종료 시 잔여시간 DB전송
+        //수정필요
         public void run() {
             AddTime.DBtimeUpdate();
+            //사용자 잔여시간 DB전송(코드작성)
+            System.out.println("Hook Run Test");
         }
-    }
-
-    public class MakeRowData {
-
-        public String Menu;
-        public int Count;
-        public int Price;
-    }
-
-    public void MakeTable(String menu, int count, int price) {
-        int iCntRow;
-        iCntRow = jTable1.getRowCount();
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            if (jTable1.getValueAt(i, 0) == null) {
-                iCntRow = i;
-                break;
-            }
-        }
-
-        jTable1.setValueAt(menu, iCntRow, 0);
-        jTable1.setValueAt(count, iCntRow, 1);
-        jTable1.setValueAt(price, iCntRow, 2);
-
-    }
-
-    public void CountTable(String Menu, int count, int price) {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        String targetValue = Menu;
-        int targetRow = -1; // 초기값으로 -1 설정
-
-        for (int row = 0; row < model.getRowCount(); row++) {
-            String cellValue = (String) model.getValueAt(row, 0); // 0은 열 인덱스
-            if (cellValue.equals(targetValue)) {
-                targetRow = row;
-                break;
-            }
-        }
-        jTable1.setValueAt(count, targetRow, 1);
-        jTable1.setValueAt(count * price, targetRow, 2);
     }
 
     @SuppressWarnings("unchecked")
@@ -238,6 +194,7 @@ public class Order extends javax.swing.JFrame {
                 "메뉴", "수량", "가격"
             }
         ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout subPanelLayout = new javax.swing.GroupLayout(subPanel);
@@ -490,8 +447,8 @@ public class Order extends javax.swing.JFrame {
         if (!status) {
             // 버튼 최초 클릭시
             Shin_Ramen = new Cart(RamenBtn.getText(), 1, Integer.parseInt(Setting_Price(RamenBtn.getText())));
-            MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
-            
+            OM.MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+
             //다음 주문내역을 위한 테이블 생성
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object[] reowData = {null, null, null};
@@ -501,7 +458,8 @@ public class Order extends javax.swing.JFrame {
             counts = Shin_Ramen.getCount();
             counts += 1;
             Shin_Ramen.setCount(counts);
-            CountTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+            OM.CountTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+
         }
 
     }//GEN-LAST:event_RamenBtnActionPerformed
@@ -519,7 +477,7 @@ public class Order extends javax.swing.JFrame {
         if (!status) {
             // 버튼 최초 클릭시
             RTA_Ramen = new Cart(RamenBtn1.getText(), 1, 1000);
-            MakeTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
+            OM.MakeTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object[] reowData = {null, null, null};
             model.addRow(reowData);
@@ -528,7 +486,7 @@ public class Order extends javax.swing.JFrame {
             counts = RTA_Ramen.getCount();
             counts += 1;
             RTA_Ramen.setCount(counts);
-            CountTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
+            OM.CountTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
         }
     }//GEN-LAST:event_RamenBtn1ActionPerformed
 
@@ -571,17 +529,15 @@ public class Order extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         //메뉴 제거
-        MakeRowData objRowData;
+        Order_Method.MakeRowData objRowData;
         Vector myVC = new Vector();
 
-        int iCntRow = 0;
-        iCntRow = jTable1.getSelectedRow();
-
+        int iCntRow = jTable1.getSelectedRow();
         DefaultTableModel jTableModel = (DefaultTableModel) jTable1.getModel();
 
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             if (jTable1.getValueAt(i, 0) != null) {
-                objRowData = new MakeRowData();
+                objRowData = new Order_Method.MakeRowData();
                 objRowData.Menu = jTable1.getValueAt(i, 0).toString();
                 objRowData.Count = Integer.parseInt(jTable1.getValueAt(i, 1).toString());
                 objRowData.Price = Integer.parseInt(jTable1.getValueAt(i, 2).toString());
@@ -595,7 +551,7 @@ public class Order extends javax.swing.JFrame {
         jTableModel.removeRow(iCntRow);
 
         for (int i = 0; i < myVC.size(); i++) {
-            objRowData = (MakeRowData) myVC.get(i);
+            objRowData = (Order_Method.MakeRowData) myVC.get(i);
             jTable1.setValueAt(objRowData.Menu, i, 0);
             jTable1.setValueAt(objRowData.Count, i, 1);
             jTable1.setValueAt(objRowData.Price, i, 2);
@@ -603,7 +559,7 @@ public class Order extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    
+
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -637,9 +593,7 @@ public class Order extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         Runtime.getRuntime().addShutdownHook(new HookThread());
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -666,7 +620,7 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnReset;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRemainTime;
     protected static javax.swing.JLabel lblRtIme;

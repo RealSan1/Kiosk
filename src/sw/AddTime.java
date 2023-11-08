@@ -47,13 +47,12 @@ public class AddTime extends javax.swing.JFrame {
             remain+=btn;
             SetTimePrt(remain,elapsed);
         }else{
-            MainCls();
+            //MainCls();
             remain+=btn;
             SetTimePrt(remain,0);
-            if(!startTimer){Timer_m(); startTimer=true;}
-            order.setVisible(true);
+            //if(!startTimer){Timer_m(); startTimer=true;}
+            //order.setVisible(true);
         }
-        dispose();
     }
     
     private static void SetTimePrt(int minute, int elapsed){
@@ -72,9 +71,7 @@ public class AddTime extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 remain--;
                 elapsed++;
-                if(remain==30){
-                    JOptionPane.showMessageDialog(null,Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
-                }else if(remain == 10){
+                if(remain == 10){
                     JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
                 }else if(remain == 5){
                     JOptionPane.showMessageDialog(null, Info.getUser_Name()+"님의 이용시간이 "+remain+"분 남았습니다.");
@@ -133,7 +130,8 @@ public class AddTime extends javax.swing.JFrame {
             }else{
                 order.dispose();
             }
-            MainCls();
+            //MainCls();
+            Main.order=null;
             Order.timer_run=false;
             Order.order=null;
             elapsed = 0;

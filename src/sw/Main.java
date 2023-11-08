@@ -12,6 +12,8 @@ public class Main extends javax.swing.JFrame {
     static String orcle_ID = "C##kiosk"; //DB ID
     static String orcle_PW = "1234"; // DB Password  
     static Main main;
+    static Order order;
+    
     
     /**
      * Creates new form Login
@@ -233,8 +235,10 @@ public class Main extends javax.swing.JFrame {
                     }
                     else {
                         dispose();
-                        new Order().setVisible(true);
-                        
+                        order = Order.getInstance();
+                        order.setVisible(true);
+                        AddTime.Timer_m();
+                        Order.timer_run = false;
 //                        Login.setVisible(false);
 //                        Order.setVisible(true);
 //                        User_name_Text.setText(Info.getUser_Name());
