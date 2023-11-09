@@ -11,6 +11,7 @@ import static sw.Main.*;
 
 public class Order extends javax.swing.JFrame {
 
+    ArrayList<Integer> prices = new ArrayList<Integer>(); //가격저장을 위한변수
     Order_Method OM = new Order_Method();
     int counts = 1;
     static Order order;
@@ -40,20 +41,20 @@ public class Order extends javax.swing.JFrame {
     }
 
     public Order() {
-        if(order == null){
+        if (order == null) {
             initComponents();
             order = this;
-            int remain = Integer.parseInt(Info.getUser_RemainTime());
-            int hour = remain/60;
-            int min = remain%60;
-            lblRtIme.setText(String.format("%02d:%02d",hour,min));
-            if(!timer_run){AddTime.Timer_m();}
-            lblUser.setText(Info.getUser_Name());
+//            int remain = Integer.parseInt(Info.getUser_RemainTime());
+//            int hour = remain/60;
+//            int min = remain%60;
+//            lblRtIme.setText(String.format("%02d:%02d",hour,min));
+//            if(!timer_run){AddTime.Timer_m();}
+//            lblUser.setText(Info.getUser_Name());
         }
     }
 
-    public static Order getInstance(){
-        if(order == null){
+    public static Order getInstance() {
+        if (order == null) {
             order = new Order();
         }
         return order;
@@ -282,7 +283,7 @@ public class Order extends javax.swing.JFrame {
                         .addComponent(btnAddTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -482,6 +483,8 @@ public class Order extends javax.swing.JFrame {
             // 버튼 최초 클릭시
             Shin_Ramen = new Cart(RamenBtn.getText(), 1, Integer.parseInt(Setting_Price(RamenBtn.getText())));
             OM.MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+            prices.add(Shin_Ramen.getPrice());
+            //MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
 
             //다음 주문내역을 위한 테이블 생성
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -489,11 +492,11 @@ public class Order extends javax.swing.JFrame {
             model.addRow(reowData);
         } else {
             // 수량 추가
-            counts = Shin_Ramen.getCount();
-            counts += 1;
-            Shin_Ramen.setCount(counts);
-            OM.CountTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
-
+            return;
+//            counts = Shin_Ramen.getCount();
+//            counts += 1;
+//            Shin_Ramen.setCount(counts);
+//            OM.CountTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
         }
 
     }//GEN-LAST:event_RamenBtnActionPerformed
@@ -508,19 +511,23 @@ public class Order extends javax.swing.JFrame {
                 break;
             }
         }
+        
         if (!status) {
             // 버튼 최초 클릭시
-            RTA_Ramen = new Cart(RamenBtn1.getText(), 1, 1000);
+            RTA_Ramen = new Cart(RamenBtn1.getText(), 1, 10000);
             OM.MakeTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
+            prices.add(RTA_Ramen.getPrice());
+            
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object[] reowData = {null, null, null};
             model.addRow(reowData);
         } else {
             // 수량 추가
-            counts = RTA_Ramen.getCount();
-            counts += 1;
-            RTA_Ramen.setCount(counts);
-            OM.CountTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
+            return;
+//            counts = RTA_Ramen.getCount();
+//            counts += 1;
+//            RTA_Ramen.setCount(counts);
+//            OM.CountTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
         }
     }//GEN-LAST:event_RamenBtn1ActionPerformed
 
@@ -583,6 +590,7 @@ public class Order extends javax.swing.JFrame {
 
         myVC.removeElementAt(iCntRow);
         jTableModel.removeRow(iCntRow);
+        prices.remove(iCntRow);
 
         for (int i = 0; i < myVC.size(); i++) {
             objRowData = (Order_Method.MakeRowData) myVC.get(i);
@@ -599,6 +607,7 @@ public class Order extends javax.swing.JFrame {
         model.setRowCount(0);
         Object[] reowData = {null, null, null};
         model.addRow(reowData);
+        prices.clear();
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -610,11 +619,53 @@ public class Order extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddTimeActionPerformed
 
     private void btnCountPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountPlusActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+
+        // 선택된 행이 없는 경우 또는 선택된 행의 인덱스가 유효하지 않은 경우, 아무 작업도 수행하지 않음
+        if (selectedRow == -1 || selectedRow >= jTable1.getRowCount()) {
+            return;
+        }
+        // 현재 선택된 행의 "Count" 값을 가져와서 1을 증가시킴
+        int currentValue = (int) jTable1.getValueAt(selectedRow, 1);
+        int updatedValue = currentValue + 1;
+        int price = prices.get(selectedRow);
+        int sum = updatedValue * price;
+       
+
+        // 테이블 모델을 업데이트하여 변경된 값을 테이블에 반영
+        jTable1.setValueAt(updatedValue, selectedRow, 1);
+        jTable1.setValueAt(sum, selectedRow, 2);
+
+        
+        //전체 가격 출력
+        OM.ShowPrice();
     }//GEN-LAST:event_btnCountPlusActionPerformed
 
     private void btnCountMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountMinusActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+
+        // 선택된 행이 없는 경우 또는 선택된 행의 인덱스가 유효하지 않은 경우, 아무 작업도 수행하지 않음
+        if (selectedRow == -1 || selectedRow >= jTable1.getRowCount()) {
+            return;
+        }
+        // 현재 선택된 행의 "Count" 값을 가져와서 1을 증가시킴
+        int currentValue = (int) jTable1.getValueAt(selectedRow, 1);
+        int updatedValue = currentValue -1;
+        int price = prices.get(selectedRow);
+        int sum = updatedValue * price;
+        
+        // 0이하로 내려가는걸 방지
+        if ( updatedValue == 0){
+            btnDeleteActionPerformed(evt);
+            return;
+        }
+
+        // 테이블 모델을 업데이트하여 변경된 값을 테이블에 반영
+        jTable1.setValueAt(updatedValue, selectedRow, 1);
+        jTable1.setValueAt(sum, selectedRow, 2);
+        
+        //전체 가격 출력
+        OM.ShowPrice();
     }//GEN-LAST:event_btnCountMinusActionPerformed
 
     public static void main(String args[]) {
@@ -672,6 +723,6 @@ public class Order extends javax.swing.JFrame {
     protected static javax.swing.JLabel lblUser;
     protected static javax.swing.JLabel lblUtime;
     private javax.swing.JPanel subPanel;
-    private javax.swing.JTextField txtPrice;
+    public javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
 }
