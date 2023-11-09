@@ -9,6 +9,17 @@ import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import static sw.Main.*;
 
+class HookThread extends Thread {
+        //만약 사용자가 프로그램 강제 종료 시 잔여시간 DB전송
+        //오류 발견(프로그램 정상 종료불가)
+        public void run() {
+            AddTime.DBtimeUpdate();
+            System.out.println("Hook Run Test");
+            //사용자 잔여시간 DB전송(코드작성)
+        }
+    }
+
+
 public class Order extends javax.swing.JFrame {
 
     ArrayList<Integer> prices = new ArrayList<Integer>(); //가격저장을 위한변수
@@ -43,6 +54,7 @@ public class Order extends javax.swing.JFrame {
     public Order() {
         if (order == null) {
             initComponents();
+            //Runtime.getRuntime().addShutdownHook(new HookThread());
             order = this;
 //            int remain = Integer.parseInt(Info.getUser_RemainTime());
 //            int hour = remain/60;
@@ -60,16 +72,7 @@ public class Order extends javax.swing.JFrame {
         return order;
     }
 
-    static class HookThread extends Thread {
-
-        //만약 사용자가 프로그램 강제 종료 시 잔여시간 DB전송
-        //수정필요
-        public void run() {
-            AddTime.DBtimeUpdate();
-            //사용자 잔여시간 DB전송(코드작성)
-            System.out.println("Hook Run Test");
-        }
-    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -686,11 +689,12 @@ public class Order extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
-        Runtime.getRuntime().addShutdownHook(new HookThread());
+        
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Order().setVisible(true);
+
             }
         });
     }
