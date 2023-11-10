@@ -92,15 +92,10 @@
                                       <Component id="lblPWC" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblPW" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                          <Component id="Input_PW_text" min="-2" pref="133" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                          <Component id="Input_PWC_text" min="-2" pref="133" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="Input_PW_text" min="-2" pref="133" max="-2" attributes="0"/>
+                                      <Component id="Input_PWC_text" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -460,7 +455,7 @@
                                   <Component id="radioSKT" min="-2" pref="66" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="lblCom1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblBack" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -518,7 +513,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblCom1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblBack" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
@@ -854,7 +849,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheckActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblCom1">
+        <Component class="javax.swing.JLabel" name="lblBack">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="18" style="1"/>
@@ -865,7 +860,7 @@
             <Property name="text" type="java.lang.String" value="&#x25c0;"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCom1MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBackMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
