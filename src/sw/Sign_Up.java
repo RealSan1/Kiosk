@@ -74,7 +74,7 @@ public class Sign_Up extends javax.swing.JFrame {
         txtCheck = new javax.swing.JTextField();
         lblCheck = new javax.swing.JLabel();
         btnCheck = new javax.swing.JButton();
-        lblCom1 = new javax.swing.JLabel();
+        lblBack = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -227,13 +227,10 @@ public class Sign_Up extends javax.swing.JFrame {
                                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblPWC)
                                     .addComponent(lblPW, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(15, 15, 15)
                                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(SignLayout.createSequentialGroup()
-                                        .addGap(15, 15, 15)
-                                        .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(SignLayout.createSequentialGroup()
-                                        .addGap(15, 15, 15)
-                                        .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(24, 24, 24))
             .addGroup(SignLayout.createSequentialGroup()
@@ -394,12 +391,12 @@ public class Sign_Up extends javax.swing.JFrame {
             }
         });
 
-        lblCom1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
-        lblCom1.setForeground(new java.awt.Color(255, 255, 255));
-        lblCom1.setText("◀");
-        lblCom1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblBack.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        lblBack.setForeground(new java.awt.Color(255, 255, 255));
+        lblBack.setText("◀");
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCom1MouseClicked(evt);
+                lblBackMouseClicked(evt);
             }
         });
 
@@ -420,7 +417,7 @@ public class Sign_Up extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(radioSKT, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(CheckLayout.createSequentialGroup()
-                                .addComponent(lblCom1)
+                                .addComponent(lblBack)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblTitle)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -464,7 +461,7 @@ public class Sign_Up extends javax.swing.JFrame {
                         .addComponent(lblTitle))
                     .addGroup(CheckLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblCom1)))
+                        .addComponent(lblBack)))
                 .addGap(42, 42, 42)
                 .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioLG)
@@ -589,8 +586,11 @@ public class Sign_Up extends javax.swing.JFrame {
                     status = true;
                 }
             }
-            if(status == true)
+            if(status == true){
                 JOptionPane.showMessageDialog(null, "사용 가능한 아이디 입니다.");
+                Input_ID_text.setEnabled(false);
+                Duplicate_button.setEnabled(false);
+            }    
             if(status == true && phonecheck == true)
                 Sign_button.setEnabled(true);
 
@@ -671,6 +671,7 @@ public class Sign_Up extends javax.swing.JFrame {
                 Check.setVisible(false);
                 Input_PhoneNum_text.setText(phoneNum);
                 Input_Name_text.setText(userName);
+                btn_check.setEnabled(false);
             }
             if(status == true && phonecheck == true)
                 Sign_button.setEnabled(true);
@@ -679,10 +680,10 @@ public class Sign_Up extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCheckActionPerformed
 
-    private void lblCom1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCom1MouseClicked
+    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
         Sign.setVisible(true);
         Check.setVisible(false);
-    }//GEN-LAST:event_lblCom1MouseClicked
+    }//GEN-LAST:event_lblBackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -738,10 +739,10 @@ public class Sign_Up extends javax.swing.JFrame {
     private javax.swing.JButton btnCheckRequest;
     private javax.swing.JButton btn_check;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBirth;
     private javax.swing.JLabel lblCheck;
     private javax.swing.JLabel lblCom;
-    private javax.swing.JLabel lblCom1;
     private javax.swing.JLabel lblHypen1;
     private javax.swing.JLabel lblHypen2;
     private javax.swing.JLabel lblID;
