@@ -47,12 +47,12 @@ public class Order extends javax.swing.JFrame {
         if (order == null) {
             initComponents();
             order = this;
-//            int remain = Integer.parseInt(Info.getUser_RemainTime());
-//            int hour = remain/60;
-//            int min = remain%60;
-//            lblRtIme.setText(String.format("%02d:%02d",hour,min));
-//            if(!timer_run){AddTime.Timer_m();}
-//            lblUser.setText(Info.getUser_Name());
+            int remain = Integer.parseInt(Info.getUser_RemainTime());
+            int hour = remain/60;
+            int min = remain%60;
+            lblRtIme.setText(String.format("%02d:%02d",hour,min));
+            if(!timer_run){AddTime.Timer_m();}
+            lblUser.setText(Info.getUser_Name());
         }
     }
 
@@ -759,7 +759,7 @@ public class Order extends javax.swing.JFrame {
                     }
                     if (!status) {
                         OM.MakeTable(btn.getText(), 1, buttonPrice);
-
+                        prices.add(buttonPrice);
                         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                         Object[] reowData = {null, null, null};
                         model.addRow(reowData);
