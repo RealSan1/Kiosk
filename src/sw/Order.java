@@ -707,7 +707,9 @@ public class Order extends javax.swing.JFrame {
     private void Find_MenuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Find_MenuKeyTyped
         //검색 기능
         String Menu_Name = null;
-        ArrayList<String> Menu_List = new ArrayList<String>(); //검색된 메뉴 저장
+        int Menu_Price = 0;
+        ArrayList<String> Menu_Name_List = new ArrayList<String>(); //검색된 메뉴 저장
+        ArrayList<Integer> Menu_Price_List = new ArrayList<Integer>(); //검색된 메뉴 저장
 
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) { // Enter 키 입력시
             Menu.setSelectedIndex(7); // Tab Focus(검색)
@@ -715,7 +717,7 @@ public class Order extends javax.swing.JFrame {
 
             try {
                 String Find_Menus = Find_Menu.getText() + "%";
-                String sql = "select Menu_name from Menu where Menu_Name like ?";
+                String sql = "select Menu_name,Menu_Price from Menu where Menu_Name like ?"; //메뉴 이름, 가격 가져오기
                 Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW);
                 PreparedStatement pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, Find_Menus);
@@ -723,22 +725,59 @@ public class Order extends javax.swing.JFrame {
 
                 while (rs.next()) { //DB 입력
                     Menu_Name = rs.getString("Menu_Name");
-                    Menu_List.add(Menu_Name);
+                    Menu_Price = rs.getInt("Menu_Price");
+                    Menu_Name_List.add(Menu_Name);
+                    Menu_Price_List.add(Menu_Price);
                 }
 
             } catch (SQLException ex) {
                 System.err.println("Find_Menu Error");
             }
-
+            
+            
             // 입력된 메뉴만큼 버튼 생성
-            for (int i = 0; i < Menu_List.size(); i++) {
-                JButton btn = new JButton(Menu_List.get(i));
+            HashMap<JButton, Integer> buttonPriceMap = new HashMap<>();
+            
+            for (int i = 0; i < Menu_Name_List.size(); i++) {
+                JButton btn = new JButton(Menu_Name_List.get(i));
                 btn.setPreferredSize(new Dimension(92, 57));
+
+                int price = Menu_Price_List.get(i);
+
+                btn.addActionListener((e) -> {
+                    boolean status = false;
+                    JButton targetButton = (JButton) e.getSource();
+                    int buttonPrice = buttonPriceMap.get(targetButton);
+                    
+                    int rowCount = jTable1.getRowCount();
+                    for (int j = 0; j < rowCount; j++) {
+                        Object value = jTable1.getValueAt(j, 0);
+                        if (value != null && value.toString().equalsIgnoreCase(btn.getText())) {
+                            status = true;
+                            break;
+                        }
+                    }
+                    if (!status) {
+                        OM.MakeTable(btn.getText(), 1, buttonPrice);
+
+                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                        Object[] reowData = {null, null, null};
+                        model.addRow(reowData);
+                        OM.ShowPrice();
+                    } else {
+                        return;
+                    }
+                    System.out.println(jTable1.getRowCount());
+                });
+
+                // 버튼과 가격을 맵에 추가
+                buttonPriceMap.put(btn, price);
 
                 Find.add(btn);
             }
 
             Find.setVisible(true);
+            
         }
     }//GEN-LAST:event_Find_MenuKeyTyped
 
