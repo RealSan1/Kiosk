@@ -728,7 +728,7 @@ public class Order extends javax.swing.JFrame {
             Menu.setSelectedIndex(7); // Tab Focus(검색)
             Find.removeAll();
             Find.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
-            
+
             try {
                 String Find_Menus = "%" + Find_Menu.getText() + "%";
                 String sql = "select Menu_name,Menu_Price from Menu where Menu_Name like ?"; //메뉴 이름, 가격 가져오기
@@ -768,6 +768,7 @@ public class Order extends javax.swing.JFrame {
                     JButton targetButton = (JButton) e.getSource();
                     int buttonPrice = buttonPriceMap.get(targetButton);
 
+                    
                     int rowCount = jTable1.getRowCount();
                     for (int j = 0; j < rowCount; j++) {
                         Object value = jTable1.getValueAt(j, 0);
