@@ -729,7 +729,6 @@ public class Order extends javax.swing.JFrame {
             Find.removeAll();
             Find.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
             
-            
             try {
                 String Find_Menus = "%" + Find_Menu.getText() + "%";
                 String sql = "select Menu_name,Menu_Price from Menu where Menu_Name like ?"; //메뉴 이름, 가격 가져오기
