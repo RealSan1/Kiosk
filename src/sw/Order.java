@@ -47,12 +47,12 @@ public class Order extends javax.swing.JFrame {
         if (order == null) {
             initComponents();
             order = this;
-//            int remain = Integer.parseInt(Info.getUser_RemainTime());
-//            int hour = remain/60;
-//            int min = remain%60;
-//            lblRtIme.setText(String.format("%02d:%02d",hour,min));
-//            if(!timer_run){AddTime.Timer_m();}
-//            lblUser.setText(Info.getUser_Name());
+            int remain = Integer.parseInt(Info.getUser_RemainTime());
+            int hour = remain/60;
+            int min = remain%60;
+            lblRtIme.setText(String.format("%02d:%02d",hour,min));
+            if(!timer_run){AddTime.Timer_m();}
+            lblUser.setText(Info.getUser_Name());
         }
     }
 
@@ -108,6 +108,7 @@ public class Order extends javax.swing.JFrame {
         Cafe = new javax.swing.JPanel();
         Find = new javax.swing.JPanel();
         Find_Menu = new javax.swing.JTextField();
+        lblSearch = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(970, 535));
@@ -454,12 +455,15 @@ public class Order extends javax.swing.JFrame {
         Menu.addTab("검색", null, Find, "");
 
         Find_Menu.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Find_Menu.setText("Enter");
         Find_Menu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 Find_MenuKeyTyped(evt);
             }
         });
+
+        lblSearch.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblSearch.setForeground(new java.awt.Color(255, 255, 255));
+        lblSearch.setText("검색 :");
 
         javax.swing.GroupLayout OrderLayout = new javax.swing.GroupLayout(Order);
         Order.setLayout(OrderLayout);
@@ -470,9 +474,12 @@ public class Order extends javax.swing.JFrame {
                 .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addGroup(OrderLayout.createSequentialGroup()
+                        .addComponent(lblSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         OrderLayout.setVerticalGroup(
             OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,7 +487,9 @@ public class Order extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(OrderLayout.createSequentialGroup()
-                        .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSearch))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -707,7 +716,9 @@ public class Order extends javax.swing.JFrame {
     private void Find_MenuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Find_MenuKeyTyped
         //검색 기능
         String Menu_Name = null;
-        ArrayList<String> Menu_List = new ArrayList<String>(); //검색된 메뉴 저장
+        int Menu_Price = 0;
+        ArrayList<String> Menu_Name_List = new ArrayList<String>(); //검색된 메뉴 저장
+        ArrayList<Integer> Menu_Price_List = new ArrayList<Integer>(); //검색된 메뉴 저장
 
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) { // Enter 키 입력시
             Menu.setSelectedIndex(7); // Tab Focus(검색)
@@ -715,7 +726,7 @@ public class Order extends javax.swing.JFrame {
 
             try {
                 String Find_Menus = Find_Menu.getText() + "%";
-                String sql = "select Menu_name from Menu where Menu_Name like ?";
+                String sql = "select Menu_name,Menu_Price from Menu where Menu_Name like ?"; //메뉴 이름, 가격 가져오기
                 Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW);
                 PreparedStatement pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, Find_Menus);
@@ -723,22 +734,59 @@ public class Order extends javax.swing.JFrame {
 
                 while (rs.next()) { //DB 입력
                     Menu_Name = rs.getString("Menu_Name");
-                    Menu_List.add(Menu_Name);
+                    Menu_Price = rs.getInt("Menu_Price");
+                    Menu_Name_List.add(Menu_Name);
+                    Menu_Price_List.add(Menu_Price);
                 }
 
             } catch (SQLException ex) {
                 System.err.println("Find_Menu Error");
             }
-
+            
+            
             // 입력된 메뉴만큼 버튼 생성
-            for (int i = 0; i < Menu_List.size(); i++) {
-                JButton btn = new JButton(Menu_List.get(i));
+            HashMap<JButton, Integer> buttonPriceMap = new HashMap<>();
+            
+            for (int i = 0; i < Menu_Name_List.size(); i++) {
+                JButton btn = new JButton(Menu_Name_List.get(i));
                 btn.setPreferredSize(new Dimension(92, 57));
+
+                int price = Menu_Price_List.get(i);
+
+                btn.addActionListener((e) -> {
+                    boolean status = false;
+                    JButton targetButton = (JButton) e.getSource();
+                    int buttonPrice = buttonPriceMap.get(targetButton);
+                    
+                    int rowCount = jTable1.getRowCount();
+                    for (int j = 0; j < rowCount; j++) {
+                        Object value = jTable1.getValueAt(j, 0);
+                        if (value != null && value.toString().equalsIgnoreCase(btn.getText())) {
+                            status = true;
+                            break;
+                        }
+                    }
+                    if (!status) {
+                        OM.MakeTable(btn.getText(), 1, buttonPrice);
+                        prices.add(buttonPrice);
+                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                        Object[] reowData = {null, null, null};
+                        model.addRow(reowData);
+                        OM.ShowPrice();
+                    } else {
+                        return;
+                    }
+                    System.out.println(jTable1.getRowCount());
+                });
+
+                // 버튼과 가격을 맵에 추가
+                buttonPriceMap.put(btn, price);
 
                 Find.add(btn);
             }
 
             Find.setVisible(true);
+            
         }
     }//GEN-LAST:event_Find_MenuKeyTyped
 
@@ -795,6 +843,7 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblRemainTime;
     protected static javax.swing.JLabel lblRtIme;
+    private javax.swing.JLabel lblSearch;
     private javax.swing.JLabel lblUsedTime;
     protected static javax.swing.JLabel lblUser;
     protected static javax.swing.JLabel lblUtime;
