@@ -66,6 +66,11 @@ public class Main extends javax.swing.JFrame {
                 Input_PW_TextFieldFocusGained(evt);
             }
         });
+        Input_PW_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Input_PW_TextFieldActionPerformed(evt);
+            }
+        });
 
         Input_ID_TextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         Input_ID_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -272,6 +277,7 @@ public class Main extends javax.swing.JFrame {
 
     private void Find_PW_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Find_PW_ButtonMouseClicked
         //비밀번호 찾기
+        new FindUser().setVisible(true);
     }//GEN-LAST:event_Find_PW_ButtonMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -285,6 +291,11 @@ public class Main extends javax.swing.JFrame {
     private void lblIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIDMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_lblIDMouseClicked
+
+    private void Input_PW_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Input_PW_TextFieldActionPerformed
+        // 비밀번호 입력 후 엔터치면 로그인
+        Login_ButtonActionPerformed(evt);
+    }//GEN-LAST:event_Input_PW_TextFieldActionPerformed
 
     /**
      * @param args the command line arguments
