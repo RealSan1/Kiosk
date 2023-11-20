@@ -59,14 +59,14 @@ public class Order extends javax.swing.JFrame {
     public Order() {
         if (order == null) {
             initComponents();
-            Runtime.getRuntime().addShutdownHook(new HookThread());
-            order = this;
-            int remain = Integer.parseInt(Info.getUser_RemainTime());
-            int hour = remain/60;
-            int min = remain%60;
-            lblRtIme.setText(String.format("%02d:%02d",hour,min));
-            if(!timer_run){AddTime.Timer_m();}
-            lblUser.setText(Info.getUser_Name());
+//            Runtime.getRuntime().addShutdownHook(new HookThread());
+//            order = this;
+//            int remain = Integer.parseInt(Info.getUser_RemainTime());
+//            int hour = remain/60;
+//            int min = remain%60;
+//            lblRtIme.setText(String.format("%02d:%02d",hour,min));
+//            if(!timer_run){AddTime.Timer_m();}
+//            lblUser.setText(Info.getUser_Name());
         }
     }
 
@@ -458,6 +458,11 @@ public class Order extends javax.swing.JFrame {
         Menu.addTab("검색", null, Find, "");
 
         Find_Menu.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        Find_Menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Find_MenuActionPerformed(evt);
+            }
+        });
         Find_Menu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 Find_MenuKeyTyped(evt);
@@ -757,9 +762,20 @@ public class Order extends javax.swing.JFrame {
                 JLabel lab = new JLabel(Menu_Name_List.get(i) + " " + Menu_Price_List.get(i));    //라벨 생성
                 btn.setPreferredSize(new Dimension(92, 57));
                 lab.setPreferredSize(new Dimension(80, 37));
+                
                 lab.setForeground(Color.white);  ///Label 디자인 영역
                 lab.setHorizontalAlignment(JLabel.CENTER);
                 lab.setFont(new java.awt.Font("맑은 고딕", 1, 12));
+                btn.setText("");
+                String name = lab.getText().replace(" ","");
+                int idx;
+                char cr;
+                for(idx=0; idx<name.length(); idx++){
+                    cr = name.charAt(idx);
+                    if((int)cr>=49&&(int)cr<=57)
+                        break;
+                }              
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+name.substring(0,idx)+".jpg")));
 
                 int price = Menu_Price_List.get(i);
                 buttonPriceMap.put(btn, price);
@@ -806,6 +822,10 @@ public class Order extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_Find_MenuKeyTyped
+
+    private void Find_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Find_MenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Find_MenuActionPerformed
 
     public static void main(String args[]) {
 
