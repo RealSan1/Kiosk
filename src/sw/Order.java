@@ -59,7 +59,13 @@ public class Order extends javax.swing.JFrame {
     public Order() {
         if (order == null) {
             initComponents();
-            title_name();
+            title_name(Food);
+            title_name(Ramen);
+            title_name(Snack);
+            title_name(Sncak1);
+            title_name(Can);
+            title_name(Topping);
+            title_name(Cafe);
 //            Runtime.getRuntime().addShutdownHook(new HookThread());
 //            order = this;
 //            int remain = Integer.parseInt(Info.getUser_RemainTime());
@@ -103,8 +109,6 @@ public class Order extends javax.swing.JFrame {
         Menu = new javax.swing.JTabbedPane();
         Food = new javax.swing.JPanel();
         Ramen = new javax.swing.JPanel();
-        RamenBtn = new javax.swing.JButton();
-        RamenBtn1 = new javax.swing.JButton();
         Snack = new javax.swing.JPanel();
         Sncak1 = new javax.swing.JPanel();
         Can = new javax.swing.JPanel();
@@ -313,6 +317,7 @@ public class Order extends javax.swing.JFrame {
         Menu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
 
         Food.setBackground(new java.awt.Color(80, 80, 80));
+        Food.setName("식사"); // NOI18N
 
         javax.swing.GroupLayout FoodLayout = new javax.swing.GroupLayout(Food);
         Food.setLayout(FoodLayout);
@@ -328,47 +333,23 @@ public class Order extends javax.swing.JFrame {
         Menu.addTab("식사", Food);
 
         Ramen.setBackground(new java.awt.Color(80, 80, 80));
-
-        RamenBtn.setText("신라면");
-        RamenBtn.setToolTipText("");
-        RamenBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RamenBtnActionPerformed(evt);
-            }
-        });
-
-        RamenBtn1.setText("너구리");
-        RamenBtn1.setToolTipText("");
-        RamenBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RamenBtn1ActionPerformed(evt);
-            }
-        });
+        Ramen.setName("라면"); // NOI18N
 
         javax.swing.GroupLayout RamenLayout = new javax.swing.GroupLayout(Ramen);
         Ramen.setLayout(RamenLayout);
         RamenLayout.setHorizontalGroup(
             RamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RamenLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(RamenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(RamenBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(358, Short.MAX_VALUE))
+            .addGap(0, 636, Short.MAX_VALUE)
         );
         RamenLayout.setVerticalGroup(
             RamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RamenLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(RamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RamenBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RamenBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(379, Short.MAX_VALUE))
+            .addGap(0, 496, Short.MAX_VALUE)
         );
 
         Menu.addTab("라면", Ramen);
 
         Snack.setBackground(new java.awt.Color(80, 80, 80));
+        Snack.setName("간식"); // NOI18N
 
         javax.swing.GroupLayout SnackLayout = new javax.swing.GroupLayout(Snack);
         Snack.setLayout(SnackLayout);
@@ -384,6 +365,7 @@ public class Order extends javax.swing.JFrame {
         Menu.addTab("간식", Snack);
 
         Sncak1.setBackground(new java.awt.Color(80, 80, 80));
+        Sncak1.setName("과자"); // NOI18N
 
         javax.swing.GroupLayout Sncak1Layout = new javax.swing.GroupLayout(Sncak1);
         Sncak1.setLayout(Sncak1Layout);
@@ -399,6 +381,7 @@ public class Order extends javax.swing.JFrame {
         Menu.addTab("과자", Sncak1);
 
         Can.setBackground(new java.awt.Color(80, 80, 80));
+        Can.setName("캔음료"); // NOI18N
 
         javax.swing.GroupLayout CanLayout = new javax.swing.GroupLayout(Can);
         Can.setLayout(CanLayout);
@@ -414,6 +397,7 @@ public class Order extends javax.swing.JFrame {
         Menu.addTab("캔음료", Can);
 
         Topping.setBackground(new java.awt.Color(80, 80, 80));
+        Topping.setName("토핑"); // NOI18N
 
         javax.swing.GroupLayout ToppingLayout = new javax.swing.GroupLayout(Topping);
         Topping.setLayout(ToppingLayout);
@@ -429,6 +413,7 @@ public class Order extends javax.swing.JFrame {
         Menu.addTab("토핑", Topping);
 
         Cafe.setBackground(new java.awt.Color(80, 80, 80));
+        Cafe.setName("카페음료"); // NOI18N
 
         javax.swing.GroupLayout CafeLayout = new javax.swing.GroupLayout(Cafe);
         Cafe.setLayout(CafeLayout);
@@ -444,6 +429,7 @@ public class Order extends javax.swing.JFrame {
         Menu.addTab("카페음료", Cafe);
 
         Find.setBackground(new java.awt.Color(80, 80, 80));
+        Find.setName("검색"); // NOI18N
 
         javax.swing.GroupLayout FindLayout = new javax.swing.GroupLayout(Find);
         Find.setLayout(FindLayout);
@@ -557,16 +543,16 @@ public class Order extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnOrderActionPerformed
 
-    public void title_name(){
+    public void title_name(JPanel getTitle){
         
         String Menu_Name = null;
         int Menu_Price = 0;
         ArrayList<String> Menu_Name_List = new ArrayList<String>(); //검색된 메뉴 저장
         ArrayList<Integer> Menu_Price_List = new ArrayList<Integer>(); //검색된 메뉴 저장
 
-        String title = Menu.getTitleAt(Menu.getSelectedIndex());
+        String title = getTitle.getName();
         
-            Food.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
+            getTitle.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 //            Ramen.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 //            Snack.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 //            Sncak1.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
@@ -651,14 +637,11 @@ public class Order extends javax.swing.JFrame {
                 buttonPanel.setBackground(c);
                 buttonPanel.add(btn, BorderLayout.CENTER);  // Center에 버튼 추가
                 buttonPanel.add(lab, BorderLayout.SOUTH);
+                        
 
-                Food.add(buttonPanel);
-//                Ramen.add(buttonPanel);
-//                Snack.add(buttonPanel);
-//                Sncak1.add(buttonPanel);
-//                Can.add(buttonPanel);
-//                Topping.add(buttonPanel);
-//                Cafe.add(buttonPanel);
+                getTitle.add(buttonPanel);
+
+
             }
     }
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -856,7 +839,7 @@ public class Order extends javax.swing.JFrame {
 
                 Find.add(buttonPanel);
             }
-
+            Find.setPreferredSize(new Dimension(636, 496));
             Find.setVisible(true);
 
         }
@@ -865,73 +848,6 @@ public class Order extends javax.swing.JFrame {
     private void Find_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Find_MenuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Find_MenuActionPerformed
-
-    private void RamenBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RamenBtn1ActionPerformed
-        System.out.println(RamenBtn1.getBounds());
-        boolean status = false;
-        int rowCount = jTable1.getRowCount();
-        for (int i = 0; i < rowCount; i++) {
-            Object value = jTable1.getValueAt(i, 0);
-            if (value != null && value.toString().equalsIgnoreCase(RamenBtn1.getText())) {
-                status = true;
-                break;
-            }
-        }
-
-        if (!status) {
-            // 버튼 최초 클릭시
-            RTA_Ramen = new Cart(RamenBtn1.getText(), 1, 10000);
-            OM.MakeTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
-            prices.add(RTA_Ramen.getPrice());
-
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            Object[] reowData = {null, null, null};
-            model.addRow(reowData);
-            OM.ShowPrice();
-        } else {
-            // 수량 추가
-            return;
-            //            counts = RTA_Ramen.getCount();
-            //            counts += 1;
-            //            RTA_Ramen.setCount(counts);
-            //            OM.CountTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
-        }
-    }//GEN-LAST:event_RamenBtn1ActionPerformed
-
-    private void RamenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RamenBtnActionPerformed
-                
-//        System.out.println(RamenBtn.getBounds());
-//                boolean status = false;
-//                String Price = null;
-//                int rowCount = jTable1.getRowCount();
-//                for (int i = 0; i < rowCount; i++) {
-//                        Object value = jTable1.getValueAt(i, 0);
-//                        if (value != null && value.toString().equalsIgnoreCase(RamenBtn.getText())) {
-//                                status = true;
-//                                break;
-//                            }
-//                    }
-//                if (!status) {
-//                        // 버튼 최초 클릭시
-//                        Shin_Ramen = new Cart(RamenBtn.getText(), 1, Integer.parseInt(Setting_Price(RamenBtn.getText())));
-//                        OM.MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
-//                        prices.add(Shin_Ramen.getPrice());
-//                        //MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
-//            
-//                        //다음 주문내역을 위한 테이블 생성
-//                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-//                        Object[] reowData = {null, null, null};
-//                        model.addRow(reowData);
-//                        OM.ShowPrice();
-//                    } else {
-//                        // 수량 추가
-//                        return;
-//                        counts = Shin_Ramen.getCount();
-//                        counts += 1;
-//                        Shin_Ramen.setCount(counts);
-//                        OM.CountTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
-//        }
-    }//GEN-LAST:event_RamenBtnActionPerformed
 
     public static void main(String args[]) {
 
@@ -969,8 +885,6 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JTabbedPane Menu;
     private javax.swing.JPanel Order;
     private javax.swing.JPanel Ramen;
-    private javax.swing.JButton RamenBtn;
-    private javax.swing.JButton RamenBtn1;
     private javax.swing.JPanel Snack;
     private javax.swing.JPanel Sncak1;
     private javax.swing.JPanel Topping;
