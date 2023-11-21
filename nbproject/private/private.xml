@@ -2,40 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/C:/Users/San/Desktop/Kiosk/src/sw/Order_Method.java</file>
-            <file>file:/C:/Users/San/Desktop/Kiosk/src/sw/Main.java</file>
-            <file>file:/C:/Users/San/Desktop/Kiosk/src/sw/AddTime.java</file>
-            <file>file:/C:/Users/San/Desktop/Kiosk/src/sw/Order.java</file>
-            <file>file:/C:/Users/San/Desktop/Kiosk/src/sw/Sign_Up.java</file>
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-        <group>
-            <file>file:/C:/Users/IMBLOP/Desktop/Kiosk/src/sw/Order.java</file>
-            <file>file:/C:/Users/IMBLOP/Desktop/Kiosk/src/sw/Main.java</file>
-            <file>file:/C:/Users/IMBLOP/Desktop/Kiosk/src/sw/User_Info.java</file>
-            <file>file:/C:/Users/IMBLOP/Desktop/Kiosk/src/sw/AddTime.java</file>
-            <file>file:/C:/Users/IMBLOP/Desktop/Kiosk/src/sw/FindUser.java</file>
-            <file>file:/C:/Users/IMBLOP/Desktop/Kiosk/src/sw/Sign_Up.java</file>
-        </group>
-<<<<<<< Updated upstream
-=======
-        <group/>
->>>>>>> cd1871c225f01f3236fd0f72c76c921e4c25a272
-=======
-        <group>
+            <file>file:/C:/Users/산/Desktop/Kiosk/src/sw/Order_Method.java</file>
+            <file>file:/C:/Users/산/Desktop/Kiosk/src/sw/FindUser.java</file>
             <file>file:/C:/Users/산/Desktop/Kiosk/src/sw/Order.java</file>
             <file>file:/C:/Users/산/Desktop/Kiosk/src/sw/Cart.java</file>
+            <file>file:/C:/Users/산/Desktop/Kiosk/src/sw/User_Info.java</file>
             <file>file:/C:/Users/산/Desktop/Kiosk/src/sw/Main.java</file>
->>>>>>> 713dfe035c3c399c5ca1bb0e90a7821ee7e965b4
         </group>
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     </open-files>
 </project-private>

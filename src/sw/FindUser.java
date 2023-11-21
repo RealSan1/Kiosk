@@ -109,6 +109,7 @@ public class FindUser extends javax.swing.JFrame {
         lblWarn1 = new javax.swing.JLabel();
         Input_PW_text = new javax.swing.JPasswordField();
         Input_PWC_text = new javax.swing.JPasswordField();
+        lblBack4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -147,7 +148,7 @@ public class FindUser extends javax.swing.JFrame {
                 .addGroup(ChooseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFindID, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFindPW, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         getContentPane().add(Choose, "card2");
@@ -286,10 +287,10 @@ public class FindUser extends javax.swing.JFrame {
                                 .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(CheckLayout.createSequentialGroup()
                                         .addComponent(lblBack2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(90, 90, 90)
                                         .addComponent(lblTitle))
                                     .addGroup(CheckLayout.createSequentialGroup()
-                                        .addGap(0, 58, Short.MAX_VALUE)
+                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(lblCom)
                                         .addGap(18, 18, 18)
                                         .addComponent(radioKT, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,7 +337,7 @@ public class FindUser extends javax.swing.JFrame {
             .addGroup(CheckLayout.createSequentialGroup()
                 .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CheckLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(25, 25, 25)
                         .addComponent(lblTitle))
                     .addGroup(CheckLayout.createSequentialGroup()
                         .addContainerGap()
@@ -385,11 +386,11 @@ public class FindUser extends javax.swing.JFrame {
                 .addGroup(FindIDLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 1, Short.MAX_VALUE)))
+                    .addGap(0, 8, Short.MAX_VALUE)))
         );
         FindIDLayout.setVerticalGroup(
             FindIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
+            .addGap(0, 426, Short.MAX_VALUE)
             .addGroup(FindIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(FindIDLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -443,7 +444,7 @@ public class FindUser extends javax.swing.JFrame {
                     .addGroup(InputIDLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblBack)
-                        .addGap(92, 92, 92)
+                        .addGap(90, 90, 90)
                         .addComponent(lblFindPW))
                     .addGroup(InputIDLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
@@ -458,7 +459,7 @@ public class FindUser extends javax.swing.JFrame {
             .addGroup(InputIDLayout.createSequentialGroup()
                 .addGroup(InputIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(InputIDLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(25, 25, 25)
                         .addComponent(lblFindPW))
                     .addGroup(InputIDLayout.createSequentialGroup()
                         .addContainerGap()
@@ -469,7 +470,7 @@ public class FindUser extends javax.swing.JFrame {
                 .addComponent(txtInputID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnInputID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         getContentPane().add(InputID, "card5");
@@ -607,7 +608,7 @@ public class FindUser extends javax.swing.JFrame {
                             .addGroup(Check1Layout.createSequentialGroup()
                                 .addGroup(Check1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(Check1Layout.createSequentialGroup()
-                                        .addGap(0, 58, Short.MAX_VALUE)
+                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(lblCom2))
                                     .addGroup(Check1Layout.createSequentialGroup()
                                         .addComponent(lblBack3)
@@ -663,7 +664,7 @@ public class FindUser extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(lblBack3))
                     .addGroup(Check1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addGap(25, 25, 25)
                         .addComponent(lblTitle1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblCom5)
@@ -709,14 +710,14 @@ public class FindUser extends javax.swing.JFrame {
                 .addGroup(FindPWLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(Check1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 1, Short.MAX_VALUE)))
+                    .addGap(0, 6, Short.MAX_VALUE)))
         );
         FindPWLayout.setVerticalGroup(
             FindPWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
+            .addGap(0, 426, Short.MAX_VALUE)
             .addGroup(FindPWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(FindPWLayout.createSequentialGroup()
-                    .addGap(0, 1, Short.MAX_VALUE)
+                    .addGap(0, 11, Short.MAX_VALUE)
                     .addComponent(Check1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
@@ -773,6 +774,15 @@ public class FindUser extends javax.swing.JFrame {
         Input_PWC_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         Input_PWC_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
+        lblBack4.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        lblBack4.setForeground(new java.awt.Color(255, 255, 255));
+        lblBack4.setText("◀");
+        lblBack4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBack4MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout ChangePWLayout = new javax.swing.GroupLayout(ChangePW);
         ChangePW.setLayout(ChangePWLayout);
         ChangePWLayout.setHorizontalGroup(
@@ -795,21 +805,28 @@ public class FindUser extends javax.swing.JFrame {
                         .addGap(68, 68, 68)
                         .addComponent(btnChangePW))
                     .addGroup(ChangePWLayout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addContainerGap()
+                        .addComponent(lblBack4)
+                        .addGap(90, 90, 90)
                         .addComponent(lblChangePW))
                     .addGroup(ChangePWLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addGroup(ChangePWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblWarn1)
                             .addComponent(lblWarn))))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         ChangePWLayout.setVerticalGroup(
             ChangePWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ChangePWLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblChangePW)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addGroup(ChangePWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ChangePWLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(lblChangePW))
+                    .addGroup(ChangePWLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblBack4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addGroup(ChangePWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPW))
@@ -1101,6 +1118,10 @@ public class FindUser extends javax.swing.JFrame {
         Choose.setVisible(true);
     }//GEN-LAST:event_lblBackMouseClicked
 
+    private void lblBack4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBack4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblBack4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1158,6 +1179,7 @@ public class FindUser extends javax.swing.JFrame {
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBack2;
     private javax.swing.JLabel lblBack3;
+    private javax.swing.JLabel lblBack4;
     private javax.swing.JLabel lblBirth;
     private javax.swing.JLabel lblBirth1;
     private javax.swing.JLabel lblChangePW;

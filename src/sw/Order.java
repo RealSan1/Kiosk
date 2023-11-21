@@ -59,15 +59,15 @@ public class Order extends javax.swing.JFrame {
     public Order() {
         if (order == null) {
             initComponents();
-            Runtime.getRuntime().addShutdownHook(new HookThread());
-            order = this;
+            title_name();
+//            Runtime.getRuntime().addShutdownHook(new HookThread());
+//            order = this;
 //            int remain = Integer.parseInt(Info.getUser_RemainTime());
 //            int hour = remain/60;
 //            int min = remain%60;
 //            lblRtIme.setText(String.format("%02d:%02d",hour,min));
 //            if(!timer_run){AddTime.Timer_m();}
 //            lblUser.setText(Info.getUser_Name());
-//
         }
     }
 
@@ -459,6 +459,11 @@ public class Order extends javax.swing.JFrame {
         Menu.addTab("검색", null, Find, "");
 
         Find_Menu.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        Find_Menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Find_MenuActionPerformed(evt);
+            }
+        });
         Find_Menu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 Find_MenuKeyTyped(evt);
@@ -514,73 +519,6 @@ public class Order extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RamenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RamenBtnActionPerformed
-        System.out.println(RamenBtn.getBounds());
-        boolean status = false;
-        String Price = null;
-        int rowCount = jTable1.getRowCount();
-        for (int i = 0; i < rowCount; i++) {
-            Object value = jTable1.getValueAt(i, 0);
-            if (value != null && value.toString().equalsIgnoreCase(RamenBtn.getText())) {
-                status = true;
-                break;
-            }
-        }
-        if (!status) {
-            // 버튼 최초 클릭시
-            Shin_Ramen = new Cart(RamenBtn.getText(), 1, Integer.parseInt(Setting_Price(RamenBtn.getText())));
-            OM.MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
-            prices.add(Shin_Ramen.getPrice());
-            //MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
-
-            //다음 주문내역을 위한 테이블 생성
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            Object[] reowData = {null, null, null};
-            model.addRow(reowData);
-            OM.ShowPrice();
-        } else {
-            // 수량 추가
-            return;
-//            counts = Shin_Ramen.getCount();
-//            counts += 1;
-//            Shin_Ramen.setCount(counts);
-//            OM.CountTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
-        }
-
-    }//GEN-LAST:event_RamenBtnActionPerformed
-
-    private void RamenBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RamenBtn1ActionPerformed
-        System.out.println(RamenBtn1.getBounds());
-        boolean status = false;
-        int rowCount = jTable1.getRowCount();
-        for (int i = 0; i < rowCount; i++) {
-            Object value = jTable1.getValueAt(i, 0);
-            if (value != null && value.toString().equalsIgnoreCase(RamenBtn1.getText())) {
-                status = true;
-                break;
-            }
-        }
-
-        if (!status) {
-            // 버튼 최초 클릭시
-            RTA_Ramen = new Cart(RamenBtn1.getText(), 1, 10000);
-            OM.MakeTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
-            prices.add(RTA_Ramen.getPrice());
-
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            Object[] reowData = {null, null, null};
-            model.addRow(reowData);
-            OM.ShowPrice();
-        } else {
-            // 수량 추가
-            return;
-//            counts = RTA_Ramen.getCount();
-//            counts += 1;
-//            RTA_Ramen.setCount(counts);
-//            OM.CountTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
-        }
-    }//GEN-LAST:event_RamenBtn1ActionPerformed
-
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         //DB접속
         ArrayList<String> Date = new ArrayList<String>();
@@ -610,6 +548,7 @@ public class Order extends javax.swing.JFrame {
                 pstmt.executeUpdate(); //입력값 DB 업데이트
             }
             JOptionPane.showMessageDialog(null, "주문이 완료되었습니다.");
+            btnResetActionPerformed(evt);
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("DB Error");
@@ -618,6 +557,110 @@ public class Order extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnOrderActionPerformed
 
+    public void title_name(){
+        
+        String Menu_Name = null;
+        int Menu_Price = 0;
+        ArrayList<String> Menu_Name_List = new ArrayList<String>(); //검색된 메뉴 저장
+        ArrayList<Integer> Menu_Price_List = new ArrayList<Integer>(); //검색된 메뉴 저장
+
+        String title = Menu.getTitleAt(Menu.getSelectedIndex());
+        
+            Food.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
+//            Ramen.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
+//            Snack.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
+//            Sncak1.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
+//            Can.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
+//            Cafe.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
+//            Topping.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
+
+            try {
+                String sql = "select Menu_name,Menu_Price from Menu where menu_category = ?"; //메뉴 이름, 가격 가져오기
+                Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW);
+                PreparedStatement pstmt = con.prepareStatement(sql);
+                pstmt.setString(1, title);
+                ResultSet rs = pstmt.executeQuery();
+
+                while (rs.next()) { //DB 입력
+                    Menu_Name = rs.getString("Menu_Name");
+                    Menu_Price = rs.getInt("Menu_Price");
+                    Menu_Name_List.add(Menu_Name);
+                    Menu_Price_List.add(Menu_Price);
+                }
+
+            } catch (SQLException ex) {
+                System.err.println("Menu Error");
+            }
+
+            // 입력된 메뉴만큼 버튼 생성
+            HashMap<JButton, Integer> buttonPriceMap = new HashMap<>();
+
+            for (int i = 0; i < Menu_Name_List.size(); i++) {
+                JButton btn = new JButton(Menu_Name_List.get(i));  //버튼 생성
+                JLabel lab = new JLabel(Menu_Name_List.get(i) + " " + Menu_Price_List.get(i));    //라벨 생성
+                btn.setPreferredSize(new Dimension(92, 57));
+                lab.setPreferredSize(new Dimension(80, 37));
+                
+                lab.setForeground(Color.white);  ///Label 디자인 영역
+                lab.setHorizontalAlignment(JLabel.CENTER);
+                lab.setFont(new java.awt.Font("맑은 고딕", 1, 12));
+                btn.setText("");
+                String name = lab.getText().replace(" ","");
+                int idx;
+                char cr;
+                for(idx=0; idx<name.length(); idx++){
+                    cr = name.charAt(idx);
+                    if((int)cr>=49&&(int)cr<=57)
+                        break;
+                }              
+                String setname = name.substring(0,idx);
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+name.substring(0,idx)+".jpg")));
+                int price = Menu_Price_List.get(i);
+                buttonPriceMap.put(btn, price);
+
+                btn.addActionListener((e) -> {
+                    boolean status = false;
+                    JButton targetButton = (JButton) e.getSource();
+                    int buttonPrice = buttonPriceMap.get(targetButton);
+
+                    
+                    int rowCount = jTable1.getRowCount();
+                    for (int j = 0; j < rowCount; j++) {
+                        Object value = jTable1.getValueAt(j, 0);
+                        if (value != null && value.toString().equalsIgnoreCase(setname)) {
+                            status = true;
+                            break;
+                        }
+                    }
+                    if (!status) {
+                        OM.MakeTable(setname, 1, buttonPrice);
+                        prices.add(buttonPrice);
+                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                        Object[] reowData = {null, null, null};
+                        model.addRow(reowData);
+                        OM.ShowPrice();
+                    } else {
+                        return;
+                    }
+                });
+
+                // 버튼과 가격을 맵에 추가
+                JPanel buttonPanel = new JPanel(new BorderLayout());  // BorderLayout을 사용하여 상하 정렬
+                buttonPanel.setPreferredSize(new Dimension(120, 110));
+                Color c = new Color(80, 80, 80); // 패널 색
+                buttonPanel.setBackground(c);
+                buttonPanel.add(btn, BorderLayout.CENTER);  // Center에 버튼 추가
+                buttonPanel.add(lab, BorderLayout.SOUTH);
+
+                Food.add(buttonPanel);
+//                Ramen.add(buttonPanel);
+//                Snack.add(buttonPanel);
+//                Sncak1.add(buttonPanel);
+//                Can.add(buttonPanel);
+//                Topping.add(buttonPanel);
+//                Cafe.add(buttonPanel);
+            }
+    }
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         //메뉴 제거
         Order_Method.MakeRowData objRowData;
@@ -662,6 +705,7 @@ public class Order extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         AddTime.DBtimeUpdate();
+        System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTimeActionPerformed
@@ -717,6 +761,7 @@ public class Order extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCountMinusActionPerformed
 
+    
     private void Find_MenuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Find_MenuKeyTyped
         //검색 기능
         String Menu_Name = null;
@@ -756,10 +801,21 @@ public class Order extends javax.swing.JFrame {
                 JLabel lab = new JLabel(Menu_Name_List.get(i) + " " + Menu_Price_List.get(i));    //라벨 생성
                 btn.setPreferredSize(new Dimension(92, 57));
                 lab.setPreferredSize(new Dimension(80, 37));
+                
                 lab.setForeground(Color.white);  ///Label 디자인 영역
                 lab.setHorizontalAlignment(JLabel.CENTER);
                 lab.setFont(new java.awt.Font("맑은 고딕", 1, 12));
-
+                btn.setText("");
+                String name = lab.getText().replace(" ","");
+                int idx;
+                char cr;
+                for(idx=0; idx<name.length(); idx++){
+                    cr = name.charAt(idx);
+                    if((int)cr>=49&&(int)cr<=57)
+                        break;
+                }              
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+name.substring(0,idx)+".jpg")));
+                String setname = name.substring(0,idx);
                 int price = Menu_Price_List.get(i);
                 buttonPriceMap.put(btn, price);
 
@@ -772,13 +828,13 @@ public class Order extends javax.swing.JFrame {
                     int rowCount = jTable1.getRowCount();
                     for (int j = 0; j < rowCount; j++) {
                         Object value = jTable1.getValueAt(j, 0);
-                        if (value != null && value.toString().equalsIgnoreCase(btn.getText())) {
+                        if (value != null && value.toString().equalsIgnoreCase(setname)) {
                             status = true;
                             break;
                         }
                     }
                     if (!status) {
-                        OM.MakeTable(btn.getText(), 1, buttonPrice);
+                        OM.MakeTable(setname, 1, buttonPrice);
                         prices.add(buttonPrice);
                         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                         Object[] reowData = {null, null, null};
@@ -805,6 +861,77 @@ public class Order extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_Find_MenuKeyTyped
+
+    private void Find_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Find_MenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Find_MenuActionPerformed
+
+    private void RamenBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RamenBtn1ActionPerformed
+        System.out.println(RamenBtn1.getBounds());
+        boolean status = false;
+        int rowCount = jTable1.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            Object value = jTable1.getValueAt(i, 0);
+            if (value != null && value.toString().equalsIgnoreCase(RamenBtn1.getText())) {
+                status = true;
+                break;
+            }
+        }
+
+        if (!status) {
+            // 버튼 최초 클릭시
+            RTA_Ramen = new Cart(RamenBtn1.getText(), 1, 10000);
+            OM.MakeTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
+            prices.add(RTA_Ramen.getPrice());
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            Object[] reowData = {null, null, null};
+            model.addRow(reowData);
+            OM.ShowPrice();
+        } else {
+            // 수량 추가
+            return;
+            //            counts = RTA_Ramen.getCount();
+            //            counts += 1;
+            //            RTA_Ramen.setCount(counts);
+            //            OM.CountTable(RTA_Ramen.getMenu(), RTA_Ramen.getCount(), RTA_Ramen.getPrice());
+        }
+    }//GEN-LAST:event_RamenBtn1ActionPerformed
+
+    private void RamenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RamenBtnActionPerformed
+                
+//        System.out.println(RamenBtn.getBounds());
+//                boolean status = false;
+//                String Price = null;
+//                int rowCount = jTable1.getRowCount();
+//                for (int i = 0; i < rowCount; i++) {
+//                        Object value = jTable1.getValueAt(i, 0);
+//                        if (value != null && value.toString().equalsIgnoreCase(RamenBtn.getText())) {
+//                                status = true;
+//                                break;
+//                            }
+//                    }
+//                if (!status) {
+//                        // 버튼 최초 클릭시
+//                        Shin_Ramen = new Cart(RamenBtn.getText(), 1, Integer.parseInt(Setting_Price(RamenBtn.getText())));
+//                        OM.MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+//                        prices.add(Shin_Ramen.getPrice());
+//                        //MakeTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+//            
+//                        //다음 주문내역을 위한 테이블 생성
+//                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+//                        Object[] reowData = {null, null, null};
+//                        model.addRow(reowData);
+//                        OM.ShowPrice();
+//                    } else {
+//                        // 수량 추가
+//                        return;
+//                        counts = Shin_Ramen.getCount();
+//                        counts += 1;
+//                        Shin_Ramen.setCount(counts);
+//                        OM.CountTable(Shin_Ramen.getMenu(), Shin_Ramen.getCount(), Shin_Ramen.getPrice());
+//        }
+    }//GEN-LAST:event_RamenBtnActionPerformed
 
     public static void main(String args[]) {
 
