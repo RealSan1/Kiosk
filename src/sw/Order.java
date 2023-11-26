@@ -66,14 +66,14 @@ public class Order extends javax.swing.JFrame {
             title_name(Can);
             title_name(Topping);
             title_name(Cafe);
-//            Runtime.getRuntime().addShutdownHook(new HookThread());
-//            order = this;
-//            int remain = Integer.parseInt(Info.getUser_RemainTime());
-//            int hour = remain/60;
-//            int min = remain%60;
-//            lblRtIme.setText(String.format("%02d:%02d",hour,min));
-//            if(!timer_run){AddTime.Timer_m();}
-//            lblUser.setText(Info.getUser_Name());
+            Runtime.getRuntime().addShutdownHook(new HookThread());
+            order = this;
+            int remain = Integer.parseInt(Info.getUser_RemainTime());
+            int hour = remain/60;
+            int min = remain%60;
+            lblRtIme.setText(String.format("%02d:%02d",hour,min));
+            if(!timer_run){AddTime.Timer_m();}
+            lblUser.setText(Info.getUser_Name());
         }
     }
 
@@ -782,8 +782,14 @@ public class Order extends javax.swing.JFrame {
             for (int i = 0; i < Menu_Name_List.size(); i++) {
                 JButton btn = new JButton(Menu_Name_List.get(i));  //버튼 생성
                 JLabel lab = new JLabel(Menu_Name_List.get(i) + " " + Menu_Price_List.get(i));    //라벨 생성
+                JButton Pbtn = new JButton();
+                JButton Mbtn = new JButton();
                 btn.setPreferredSize(new Dimension(92, 57));
                 lab.setPreferredSize(new Dimension(80, 37));
+                Pbtn.setPreferredSize(new Dimension(20,20));
+                Mbtn.setPreferredSize(new Dimension(20,20));
+                Pbtn.setText("+");
+                Mbtn.setText("-");                
                 
                 lab.setForeground(Color.white);  ///Label 디자인 영역
                 lab.setHorizontalAlignment(JLabel.CENTER);
