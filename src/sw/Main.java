@@ -215,6 +215,11 @@ public class Main extends javax.swing.JFrame {
         String User_Name = null;
         String User_RemainTime = null;
         String User_UseTime = null;
+        if(Input_ID_TextField.getText().equals("admin")&&Input_PW_TextField.getText().equals("admin")){
+            new Admin().setVisible(true);
+            Main.setVisible(false);
+        }
+            System.out.println("hello");
             try {
             String sql = "select * from users"; //sql명령문
             Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
