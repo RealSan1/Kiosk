@@ -54,6 +54,7 @@ public class Admin extends javax.swing.JFrame {
                 cnt = rs.getRow();
             }
         }catch(Exception e){
+            System.out.println("getDBdataerr");
             System.out.println("SQLException : "+e.getMessage());
         }
         tabTimeDB.setModel(model);
@@ -76,6 +77,7 @@ public class Admin extends javax.swing.JFrame {
             SQL = "update users set user_remainTime = ? where user_id = ? and user_name = ?";
             cnt = 3;
         }
+        System.out.println("setDBOK");
         try{
             DB_open();
             pstmt = conn.prepareStatement(SQL);
@@ -89,15 +91,23 @@ public class Admin extends javax.swing.JFrame {
                 pstmt.setString(3,name);
             }
             pstmt.executeUpdate();    
-            if(cnt == 1) getDBdata("Select * from users where user_name = '"+name+"'");
-            if(cnt == 2) getDBdata("Select * from users where user_id = '"+id+"'");
-            if(cnt == 3) getDBdata("Select * from users where user_id = '"+id+"' and user_name = '"+name+"'");
+//            if(cnt == 1) getDBdata("Select * from users where user_name = '"+name+"'");
+//            if(cnt == 2) getDBdata("Select * from users where user_id = '"+id+"'");
+//            if(cnt == 3) getDBdata("Select * from users where user_id = '"+id+"' and user_name = '"+name+"'");
+            getDBdata("Select * from users");
             System.out.println(SQL);
         }catch(Exception e){
             System.out.println("setDBerr");
             System.out.println("SQLException : "+e.getMessage());
         }
     }
+    
+    private void SelectedTab(){
+        int row = tabTimeDB.getSelectedRow();
+        Object value = tabTimeDB.getValueAt(row,0);
+        txtNameMenu.setText((String) value);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,6 +134,8 @@ public class Admin extends javax.swing.JFrame {
         lblBack = new javax.swing.JLabel();
         lblTimeMan1 = new javax.swing.JLabel();
         btnPriceChange = new javax.swing.JButton();
+        txtPriceChange = new javax.swing.JTextField();
+        lblName2 = new javax.swing.JLabel();
         Time = new javax.swing.JPanel();
         btnAllSearch = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
@@ -209,6 +221,11 @@ public class Admin extends javax.swing.JFrame {
                 "메뉴이름", "가격", "재고"
             }
         ));
+        tabMenuDB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabMenuDBMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabMenuDB);
 
         btnAllSearchMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
@@ -260,6 +277,10 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
+        lblName2.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        lblName2.setForeground(new java.awt.Color(255, 255, 255));
+        lblName2.setText("가격수정");
+
         javax.swing.GroupLayout InventoryLayout = new javax.swing.GroupLayout(Inventory);
         Inventory.setLayout(InventoryLayout);
         InventoryLayout.setHorizontalGroup(
@@ -278,18 +299,23 @@ public class Admin extends javax.swing.JFrame {
                         .addGap(61, 61, 61))
                     .addGroup(InventoryLayout.createSequentialGroup()
                         .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(InventoryLayout.createSequentialGroup()
-                                .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSearchFood, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(InventoryLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InventoryLayout.createSequentialGroup()
                                 .addComponent(btnAllSearchMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(58, 58, 58)
                                 .addComponent(btnSoldOut, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(55, 55, 55)
-                                .addComponent(btnPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InventoryLayout.createSequentialGroup()
+                                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(InventoryLayout.createSequentialGroup()
+                                        .addComponent(txtNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnSearchFood, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap())))
         );
         InventoryLayout.setVerticalGroup(
@@ -299,22 +325,26 @@ public class Admin extends javax.swing.JFrame {
                     .addGroup(InventoryLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(lblBack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InventoryLayout.createSequentialGroup()
-                        .addContainerGap(20, Short.MAX_VALUE)
+                        .addContainerGap(18, Short.MAX_VALUE)
                         .addComponent(lblTimeMan1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearchFood, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAllSearchMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSoldOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)))
-                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchFood, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAllSearchMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(btnSoldOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPriceChange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
 
@@ -360,6 +390,11 @@ public class Admin extends javax.swing.JFrame {
                 "ID", "이름", "남은시간"
             }
         ));
+        tabTimeDB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabTimeDBMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tabTimeDB);
 
         lblID.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
@@ -490,16 +525,21 @@ public class Admin extends javax.swing.JFrame {
             if(0==ckDBdata(name, id)){
                 JOptionPane.showMessageDialog(null, "조회되지 않는 유저입니다 올바르게 입력해주세요.");
             }else{
-                cnt = ckDBdata(name,id);
-                if(time == 0){
+                if(time <= -1){
                     JOptionPane.showMessageDialog(null, "시간을 제대로 넣어주세요");
-                }else if(cnt>=2){
-                    int option = JOptionPane.showConfirmDialog(this, "동일한 이름을 가진 유저가 "+cnt+"명 있습니다.\n전부 시간을 수정하시겠습니까?","알림창",JOptionPane.YES_NO_CANCEL_OPTION);
-                    if(option==JOptionPane.YES_OPTION)
-                        setDBdata(name, id, time);
                 }else{
                     setDBdata(name, id, time);
                 }
+//                cnt = ckDBdata(name,id);
+//                if(time == 0){
+//                    JOptionPane.showMessageDialog(null, "시간을 제대로 넣어주세요");
+//                }else if(cnt>=2){
+//                    int option = JOptionPane.showConfirmDialog(this, "동일한 이름을 가진 유저가 "+cnt+"명 있습니다.\n전부 시간을 수정하시겠습니까?","알림창",JOptionPane.YES_NO_CANCEL_OPTION);
+//                    if(option==JOptionPane.YES_OPTION)
+//                        setDBdata(name, id, time);
+//                }else{
+//                    setDBdata(name, id, time);
+//                }
             }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null,"올바른 숫자를 입력하세요");
@@ -508,6 +548,7 @@ public class Admin extends javax.swing.JFrame {
     private int getDBdataFood(String SQL){
         String Menu_Name = null; 
         String Menu_STOCK = null;
+        String Menu_Price = null;
         int cnt = 0;
         DefaultTableModel model1 = (DefaultTableModel)tabMenuDB.getModel();
         model1.setRowCount(0);
@@ -517,7 +558,8 @@ public class Admin extends javax.swing.JFrame {
             while(rs.next()){
                 Menu_Name = rs.getString("Menu_Name");
                 Menu_STOCK = rs.getString("Menu_STOCK");
-                model1.addRow(new Object[]{Menu_Name, Menu_STOCK});
+                Menu_Price = rs.getString("Menu_Price");
+                model1.addRow(new Object[]{Menu_Name, Menu_Price, Menu_STOCK});
                 cnt = rs.getRow();
             }
         }catch(Exception e){
@@ -526,15 +568,38 @@ public class Admin extends javax.swing.JFrame {
         tabMenuDB.setModel(model1);
         return cnt;
     }
-    private void setDBdataFood(String FoodName){
+    
+    private void setDBdataFood(String FoodName, String stock){
         String SQL = "update menu set menu_stock = ? where menu_name = ?";
+        int row = tabMenuDB.getSelectedRow();
+        try{
+            DB_open();
+            System.out.println(row);
+            pstmt = conn.prepareStatement(SQL);
+            if(stock.equals("no") || stock.equals("No")){
+                pstmt.setString(1, "yes");
+            }else{
+                pstmt.setString(1, "no");
+            }
+            
+            pstmt.setString(2,FoodName);
+            pstmt.executeUpdate();    
+            getDBdataFood("Select * from menu");
+        }catch(Exception e){
+            System.out.println("setDBerr");
+            System.out.println("SQLException : "+e.getMessage());
+        }
+    }
+    
+    private void setDBdataPrice(String FoodName, String Price){
+        String SQL = "update menu set menu_price = ? where menu_name = ?";
         try{
             DB_open();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, "No");
+            pstmt.setString(1, Price);
             pstmt.setString(2,FoodName);
             pstmt.executeUpdate();    
-            getDBdataFood("Select * from menu where menu_name = '"+FoodName+"'");
+            getDBdataFood("Select * from menu");
         }catch(Exception e){
             System.out.println("setDBerr");
             System.out.println("SQLException : "+e.getMessage());
@@ -545,11 +610,11 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAllSearchMenuActionPerformed
 
     private void btnSearchFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFoodActionPerformed
-        String FoodName = txtNameMenu.getText();
+        String FoodName = "%"+txtNameMenu.getText()+"%";
         if(FoodName.equals("")){
             JOptionPane.showMessageDialog(null,"음식명을 올바르게 입력해주세요");
         }else{
-            if(getDBdataFood("Select * from menu where Menu_name = '"+FoodName+"'")==0)
+            if(getDBdataFood("Select * from menu where Menu_name like '"+FoodName+"'")==0)
                 JOptionPane.showMessageDialog(null,"검색한 음식은 없습니다.");
         }
     }//GEN-LAST:event_btnSearchFoodActionPerformed
@@ -559,10 +624,14 @@ public class Admin extends javax.swing.JFrame {
         if(FoodName.equals("")){
             JOptionPane.showMessageDialog(null,"음식명을 올바르게 입력해주세요");
         }else{
-            if(getDBdataFood("Select * from menu where Menu_name = '"+FoodName+"'")==0)
+            int row = tabMenuDB.getSelectedRow();
+            Object stock = tabMenuDB.getValueAt(row, 2);
+            System.out.println((String)tabMenuDB.getValueAt(row,0));
+            if(!FoodName.equals((String)tabMenuDB.getValueAt(row,0))){
                 JOptionPane.showMessageDialog(null,"검색한 음식은 없습니다.");
-            else
-                setDBdataFood(FoodName);
+            }else{
+                setDBdataFood(FoodName, (String)stock);
+            }
         }
     }//GEN-LAST:event_btnSoldOutActionPerformed
 
@@ -591,8 +660,31 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTime1ActionPerformed
 
     private void btnPriceChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPriceChangeActionPerformed
-        // TODO add your handling code here:
+        String price = txtPriceChange.getText();
+        String FoodName = txtNameMenu.getText();
+        setDBdataPrice(FoodName, price);
     }//GEN-LAST:event_btnPriceChangeActionPerformed
+
+    private void tabMenuDBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabMenuDBMouseClicked
+        int row = tabMenuDB.getSelectedRow();
+        System.out.println(row);
+        Object value = tabMenuDB.getValueAt(row,0);
+        txtNameMenu.setText((String) value);
+        value = tabMenuDB.getValueAt(row,1);
+        txtPriceChange.setText((String) value);
+        
+    }//GEN-LAST:event_tabMenuDBMouseClicked
+
+    private void tabTimeDBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabTimeDBMouseClicked
+        int row = tabTimeDB.getSelectedRow();
+        System.out.println(row);
+        Object value = tabTimeDB.getValueAt(row,0);
+        txtID.setText((String) value);
+        value = tabTimeDB.getValueAt(row,1);
+        txtName.setText((String) value);
+        value = tabTimeDB.getValueAt(row, 2);
+        txtTime1.setText((String) value);
+    }//GEN-LAST:event_tabTimeDBMouseClicked
     
     /**
      * @param args the command line arguments
@@ -652,6 +744,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblName1;
+    private javax.swing.JLabel lblName2;
     private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblTimeMan1;
     private javax.swing.JLabel lblTimeMan2;
@@ -660,6 +753,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNameMenu;
+    private javax.swing.JTextField txtPriceChange;
     private javax.swing.JTextField txtTime1;
     // End of variables declaration//GEN-END:variables
 }
