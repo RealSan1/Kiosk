@@ -203,7 +203,7 @@ public class Admin extends javax.swing.JFrame {
                 .addGroup(MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTime1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(15, 15, 15))
         );
@@ -233,6 +233,13 @@ public class Admin extends javax.swing.JFrame {
         btnAllSearchMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAllSearchMenuActionPerformed(evt);
+            }
+        });
+
+        txtNameMenu.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtNameMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameMenuActionPerformed(evt);
             }
         });
 
@@ -274,6 +281,13 @@ public class Admin extends javax.swing.JFrame {
         btnPriceChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPriceChangeActionPerformed(evt);
+            }
+        });
+
+        txtPriceChange.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPriceChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPriceChangeActionPerformed(evt);
             }
         });
 
@@ -325,11 +339,11 @@ public class Admin extends javax.swing.JFrame {
                     .addGroup(InventoryLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(lblBack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InventoryLayout.createSequentialGroup()
-                        .addContainerGap(18, Short.MAX_VALUE)
+                        .addContainerGap(24, Short.MAX_VALUE)
                         .addComponent(lblTimeMan1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,7 +352,7 @@ public class Admin extends javax.swing.JFrame {
                         .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
+                        .addGap(22, 22, 22)
                         .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnAllSearchMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSoldOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -367,9 +381,30 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
+        txtName.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+
+        txtID.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDActionPerformed(evt);
+            }
+        });
+
         lblName.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setText("이름");
+
+        txtTime1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTime1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTime1ActionPerformed(evt);
+            }
+        });
 
         lblTime.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         lblTime.setForeground(new java.awt.Color(255, 255, 255));
@@ -685,6 +720,26 @@ public class Admin extends javax.swing.JFrame {
         value = tabTimeDB.getValueAt(row, 2);
         txtTime1.setText((String) value);
     }//GEN-LAST:event_tabTimeDBMouseClicked
+
+    private void txtNameMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameMenuActionPerformed
+        btnSearchFoodActionPerformed(evt);
+    }//GEN-LAST:event_txtNameMenuActionPerformed
+
+    private void txtPriceChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceChangeActionPerformed
+        btnPriceChangeActionPerformed(evt);
+    }//GEN-LAST:event_txtPriceChangeActionPerformed
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        btnSearchActionPerformed(evt);
+    }//GEN-LAST:event_txtIDActionPerformed
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        btnSearchActionPerformed(evt);
+    }//GEN-LAST:event_txtNameActionPerformed
+
+    private void txtTime1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTime1ActionPerformed
+        btnTimeActionPerformed(evt);
+    }//GEN-LAST:event_txtTime1ActionPerformed
     
     /**
      * @param args the command line arguments

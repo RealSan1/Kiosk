@@ -218,49 +218,50 @@ public class Main extends javax.swing.JFrame {
         if(Input_ID_TextField.getText().equals("admin")&&Input_PW_TextField.getText().equals("admin")){
             new Admin().setVisible(true);
             Main.setVisible(false);
-        }
-            System.out.println("hello");
-            try {
-            String sql = "select * from users"; //sql명령문
-            Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            // DB 접근과정
-            
-            while(rs.next()){ //DB 입력
-                User_ID = rs.getString("User_ID");
-                User_PW = rs.getString("User_PW");
-                User_Name = rs.getString("User_Name");
-                User_RemainTime = rs.getString("User_RemainTime");
-                User_UseTime = rs.getString("User_UseTime");
-                if (User_ID.equals(Input_ID_TextField.getText()) && User_PW.equals(Input_PW_TextField.getText())){
-                    connection = true; // ID랑 PW같다면 로그인
-                    break;
-                 }
-                }
-                if (connection){  //로그인 완료 시                    
-                    Info = new User_Info(User_ID, User_PW, User_Name, User_RemainTime, User_UseTime); //생성자
-                    if (Info.getUser_RemainTime().equals("0")) {  // 만약 보유시간이 0이면 충전화면 출력
-                        new AddTime().setVisible(true);
+            dispose();
+        }else{ 
+                try {
+                String sql = "select * from users"; //sql명령문
+                Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                // DB 접근과정
+
+                while(rs.next()){ //DB 입력
+                    User_ID = rs.getString("User_ID");
+                    User_PW = rs.getString("User_PW");
+                    User_Name = rs.getString("User_Name");
+                    User_RemainTime = rs.getString("User_RemainTime");
+                    User_UseTime = rs.getString("User_UseTime");
+                    if (User_ID.equals(Input_ID_TextField.getText()) && User_PW.equals(Input_PW_TextField.getText())){
+                        connection = true; // ID랑 PW같다면 로그인
+                        break;
+                     }
                     }
-                    else {
-                        dispose();
-                        order = Order.getInstance();
-                        order.setVisible(true);
-                        AddTime.Timer_m();
-                        Order.timer_run = false;
-//                        Login.setVisible(false);
-//                        Order.setVisible(true);
-//                        User_name_Text.setText(Info.getUser_Name());
-//                        User_RemainTime_Text.setText(Info.getUser_RemainTime());
-                    }   
-                } else{
-                    JOptionPane.showMessageDialog(null, "아이디 또는 패스워드가 일치하지 않습니다.");
-                }
-            
-         } catch (SQLException ex) {
-            System.err.println("Login Error");
-        }
+                    if (connection){  //로그인 완료 시                    
+                        Info = new User_Info(User_ID, User_PW, User_Name, User_RemainTime, User_UseTime); //생성자
+                        if (Info.getUser_RemainTime().equals("0")) {  // 만약 보유시간이 0이면 충전화면 출력
+                            new AddTime().setVisible(true);
+                        }
+                        else {
+                            dispose();
+                            order = Order.getInstance();
+                            order.setVisible(true);
+                            AddTime.Timer_m();
+                            Order.timer_run = false;
+    //                        Login.setVisible(false);
+    //                        Order.setVisible(true);
+    //                        User_name_Text.setText(Info.getUser_Name());
+    //                        User_RemainTime_Text.setText(Info.getUser_RemainTime());
+                        }   
+                    } else{
+                        JOptionPane.showMessageDialog(null, "아이디 또는 패스워드가 일치하지 않습니다.");
+                    }
+
+             } catch (SQLException ex) {
+                System.err.println("Login Error");
+            }
+        }    
              
     }//GEN-LAST:event_Login_ButtonActionPerformed
 
