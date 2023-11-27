@@ -561,7 +561,7 @@ public class Order extends javax.swing.JFrame {
 //            Topping.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 
             try {
-                String sql = "select Menu_name,Menu_Price from Menu where menu_category = ?"; //메뉴 이름, 가격 가져오기
+                String sql = "select Menu_name,Menu_Price from Menu where menu_stock = 'yes' and menu_category = ?"; //메뉴 이름, 가격 가져오기
                 Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW);
                 PreparedStatement pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, title);
@@ -759,7 +759,7 @@ public class Order extends javax.swing.JFrame {
 
             try {
                 String Find_Menus = "%" + Find_Menu.getText() + "%";
-                String sql = "select Menu_name,Menu_Price from Menu where Menu_Name like ?"; //메뉴 이름, 가격 가져오기
+                String sql = "select Menu_name,Menu_Price from Menu where menu_stock = 'yes' and Menu_Name like ?"; //메뉴 이름, 가격 가져오기
                 Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW);
                 PreparedStatement pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, Find_Menus);
