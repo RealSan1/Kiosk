@@ -547,8 +547,10 @@ public class Order extends javax.swing.JFrame {
         
         String Menu_Name = null;
         int Menu_Price = 0;
+        String Menu_stock = null;
         ArrayList<String> Menu_Name_List = new ArrayList<String>(); //검색된 메뉴 저장
         ArrayList<Integer> Menu_Price_List = new ArrayList<Integer>(); //검색된 메뉴 저장
+        ArrayList<String> Menu_Stock_List = new ArrayList<String>(); //검색된 메뉴 저장
 
         String title = getTitle.getName();
         
@@ -561,7 +563,7 @@ public class Order extends javax.swing.JFrame {
 //            Topping.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 
             try {
-                String sql = "select Menu_name,Menu_Price from Menu where menu_stock = 'yes' and menu_category = ?"; //메뉴 이름, 가격 가져오기
+                String sql = "select Menu_name,Menu_Price, menu_stock from Menu where menu_category = ?"; //메뉴 이름, 가격 가져오기
                 Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW);
                 PreparedStatement pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, title);
@@ -572,6 +574,8 @@ public class Order extends javax.swing.JFrame {
                     Menu_Price = rs.getInt("Menu_Price");
                     Menu_Name_List.add(Menu_Name);
                     Menu_Price_List.add(Menu_Price);
+                    Menu_stock = rs.getString("Menu_stock");
+                    Menu_Stock_List.add(Menu_stock);
                 }
 
             } catch (SQLException ex) {
@@ -592,6 +596,8 @@ public class Order extends javax.swing.JFrame {
                 lab.setFont(new java.awt.Font("맑은 고딕", 1, 12));
                 btn.setText("");
                 String name = lab.getText().replace(" ","");
+                if(Menu_Stock_List.get(i).equals("no"))
+                    btn.setEnabled(false);
                 int idx;
                 char cr;
                 for(idx=0; idx<name.length(); idx++){
@@ -600,7 +606,10 @@ public class Order extends javax.swing.JFrame {
                         break;
                 }              
                 String setname = name.substring(0,idx);
-                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+name.substring(0,idx)+".jpg")));
+                if(Menu_Stock_List.get(i).equals("yes"))
+                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+name.substring(0,idx)+".jpg")));
+                else
+                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/품절.jpg")));
                 int price = Menu_Price_List.get(i);
                 buttonPriceMap.put(btn, price);
 
@@ -637,9 +646,14 @@ public class Order extends javax.swing.JFrame {
                 buttonPanel.setBackground(c);
                 buttonPanel.add(btn, BorderLayout.CENTER);  // Center에 버튼 추가
                 buttonPanel.add(lab, BorderLayout.SOUTH);
+                
+                if(Menu_stock.equals("no"))
+                    buttonPanel.setEnabled(false);
                         
-
+                
                 getTitle.add(buttonPanel);
+                
+                    
 
 
             }
@@ -749,8 +763,10 @@ public class Order extends javax.swing.JFrame {
         //검색 기능
         String Menu_Name = null;
         int Menu_Price = 0;
+        String Menu_Stock = null;
         ArrayList<String> Menu_Name_List = new ArrayList<String>(); //검색된 메뉴 저장
         ArrayList<Integer> Menu_Price_List = new ArrayList<Integer>(); //검색된 메뉴 저장
+        ArrayList<String> Menu_Stock_List = new ArrayList<String>(); //검색된 메뉴 저장
 
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) { // Enter 키 입력시
             Menu.setSelectedIndex(7); // Tab Focus(검색)
@@ -759,7 +775,7 @@ public class Order extends javax.swing.JFrame {
 
             try {
                 String Find_Menus = "%" + Find_Menu.getText() + "%";
-                String sql = "select Menu_name,Menu_Price from Menu where menu_stock = 'yes' and Menu_Name like ?"; //메뉴 이름, 가격 가져오기
+                String sql = "select Menu_name,Menu_Price,Menu_Stock from Menu where Menu_Name like ?"; //메뉴 이름, 가격 가져오기
                 Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW);
                 PreparedStatement pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, Find_Menus);
@@ -770,6 +786,8 @@ public class Order extends javax.swing.JFrame {
                     Menu_Price = rs.getInt("Menu_Price");
                     Menu_Name_List.add(Menu_Name);
                     Menu_Price_List.add(Menu_Price);
+                    Menu_Stock = rs.getString("Menu_stock");
+                    Menu_Stock_List.add(Menu_Stock);
                 }
 
             } catch (SQLException ex) {
@@ -802,8 +820,13 @@ public class Order extends javax.swing.JFrame {
                     cr = name.charAt(idx);
                     if((int)cr>=49&&(int)cr<=57)
                         break;
-                }              
-                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+name.substring(0,idx)+".jpg")));
+                }             
+                if(Menu_Stock_List.get(i).equals("no"))
+                    btn.setEnabled(false);
+                if(Menu_Stock_List.get(i).equals("yes"))
+                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+name.substring(0,idx)+".jpg")));
+                else
+                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/품절.jpg")));
                 String setname = name.substring(0,idx);
                 int price = Menu_Price_List.get(i);
                 buttonPriceMap.put(btn, price);
