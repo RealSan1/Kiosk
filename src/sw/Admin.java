@@ -123,6 +123,8 @@ public class Admin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnInventory1 = new javax.swing.JButton();
         btnTime1 = new javax.swing.JButton();
+        btnInventory3 = new javax.swing.JButton();
+        btnInventory4 = new javax.swing.JButton();
         Inventory = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabMenuDB = new javax.swing.JTable();
@@ -135,7 +137,9 @@ public class Admin extends javax.swing.JFrame {
         lblTimeMan1 = new javax.swing.JLabel();
         btnPriceChange = new javax.swing.JButton();
         txtPriceChange = new javax.swing.JTextField();
-        lblName2 = new javax.swing.JLabel();
+        lblPriceChange = new javax.swing.JLabel();
+        lblStockChange = new javax.swing.JLabel();
+        txtStockChange = new javax.swing.JTextField();
         Time = new javax.swing.JPanel();
         btnAllSearch = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
@@ -150,6 +154,24 @@ public class Admin extends javax.swing.JFrame {
         lblID = new javax.swing.JLabel();
         lblBack1 = new javax.swing.JLabel();
         lblTimeMan2 = new javax.swing.JLabel();
+        AddDelMenu = new javax.swing.JPanel();
+        txtNameMenu1 = new javax.swing.JTextField();
+        lblName2 = new javax.swing.JLabel();
+        lblBack2 = new javax.swing.JLabel();
+        lblTimeMan3 = new javax.swing.JLabel();
+        txtPriceChange1 = new javax.swing.JTextField();
+        lblPriceChange1 = new javax.swing.JLabel();
+        lblStockChange1 = new javax.swing.JLabel();
+        lblStockChange2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        txtPriceChange2 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabMenuDB1 = new javax.swing.JTable();
+        btnSearchFood1 = new javax.swing.JButton();
+        btnAllSearchMenu1 = new javax.swing.JButton();
+        btnSearchFood2 = new javax.swing.JButton();
+        btnSearchFood3 = new javax.swing.JButton();
+        btnSearchFood4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(35, 35, 35));
@@ -166,7 +188,7 @@ public class Admin extends javax.swing.JFrame {
         });
 
         btnInventory1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
-        btnInventory1.setText("상품 관리");
+        btnInventory1.setText("가격 / 재고 수정");
         btnInventory1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInventory1ActionPerformed(evt);
@@ -181,31 +203,55 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
+        btnInventory3.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        btnInventory3.setText("주문 내역 확인");
+        btnInventory3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventory3ActionPerformed(evt);
+            }
+        });
+
+        btnInventory4.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        btnInventory4.setText("메뉴 추가 / 삭제");
+        btnInventory4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventory4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MainLayout = new javax.swing.GroupLayout(Main);
         Main.setLayout(MainLayout);
         MainLayout.setHorizontalGroup(
             MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addGroup(MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTime1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                .addGroup(MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnInventory3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInventory4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(107, 107, 107))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18))
-            .addGroup(MainLayout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(btnInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
-                .addComponent(btnTime1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         MainLayout.setVerticalGroup(
             MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainLayout.createSequentialGroup()
-                .addGap(143, 143, 143)
+                .addGap(70, 70, 70)
+                .addGroup(MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnInventory1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                    .addComponent(btnInventory4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(105, 105, 105)
                 .addGroup(MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInventory1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTime1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(15, 15, 15))
+                    .addComponent(btnInventory3, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .addComponent(btnTime1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         getContentPane().add(Main, "card4");
@@ -218,7 +264,7 @@ public class Admin extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "메뉴이름", "가격", "재고"
+                "메뉴 이름", "가격", "재고"
             }
         ));
         tabMenuDB.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -229,7 +275,7 @@ public class Admin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabMenuDB);
 
         btnAllSearchMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        btnAllSearchMenu.setText("전체검색");
+        btnAllSearchMenu.setText("전체 검색");
         btnAllSearchMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAllSearchMenuActionPerformed(evt);
@@ -243,9 +289,9 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        lblName1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        lblName1.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         lblName1.setForeground(new java.awt.Color(255, 255, 255));
-        lblName1.setText("음식이름");
+        lblName1.setText("메뉴 이름");
 
         btnSearchFood.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         btnSearchFood.setText("검색");
@@ -256,7 +302,7 @@ public class Admin extends javax.swing.JFrame {
         });
 
         btnSoldOut.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        btnSoldOut.setText("품절");
+        btnSoldOut.setText("재고 수정");
         btnSoldOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoldOutActionPerformed(evt);
@@ -274,7 +320,7 @@ public class Admin extends javax.swing.JFrame {
 
         lblTimeMan1.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
         lblTimeMan1.setForeground(new java.awt.Color(255, 255, 255));
-        lblTimeMan1.setText("상품 관리");
+        lblTimeMan1.setText("가격 / 재고 수정");
 
         btnPriceChange.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         btnPriceChange.setText("가격 수정");
@@ -291,9 +337,20 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        lblName2.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
-        lblName2.setForeground(new java.awt.Color(255, 255, 255));
-        lblName2.setText("가격수정");
+        lblPriceChange.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        lblPriceChange.setForeground(new java.awt.Color(255, 255, 255));
+        lblPriceChange.setText("가격 수정");
+
+        lblStockChange.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        lblStockChange.setForeground(new java.awt.Color(255, 255, 255));
+        lblStockChange.setText("재고 수정");
+
+        txtStockChange.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtStockChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockChangeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout InventoryLayout = new javax.swing.GroupLayout(Inventory);
         Inventory.setLayout(InventoryLayout);
@@ -302,72 +359,74 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(InventoryLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(lblBack)
-                .addGap(290, 290, 290)
-                .addComponent(lblTimeMan1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InventoryLayout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InventoryLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61))
-                    .addGroup(InventoryLayout.createSequentialGroup()
-                        .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InventoryLayout.createSequentialGroup()
-                                .addComponent(btnAllSearchMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(58, 58, 58)
-                                .addComponent(btnSoldOut, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(55, 55, 55)
-                                .addComponent(btnPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InventoryLayout.createSequentialGroup()
-                                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(InventoryLayout.createSequentialGroup()
+                            .addComponent(lblTimeMan1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(116, 116, 116)
+                            .addComponent(btnAllSearchMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(InventoryLayout.createSequentialGroup()
+                            .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblStockChange, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(InventoryLayout.createSequentialGroup()
                                     .addComponent(txtPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(InventoryLayout.createSequentialGroup()
-                                        .addComponent(txtNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnSearchFood, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap())))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(InventoryLayout.createSequentialGroup()
+                                    .addComponent(txtNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnSearchFood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(InventoryLayout.createSequentialGroup()
+                                    .addComponent(txtStockChange, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnSoldOut, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         InventoryLayout.setVerticalGroup(
             InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InventoryLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(InventoryLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lblBack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InventoryLayout.createSequentialGroup()
-                        .addContainerGap(24, Short.MAX_VALUE)
-                        .addComponent(lblTimeMan1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(InventoryLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(btnAllSearchMenu))
+                            .addComponent(lblTimeMan1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearchFood, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(txtNameMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearchFood))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAllSearchMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSoldOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                            .addComponent(lblPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPriceChange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPriceChange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(5, 5, 5)
+                        .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblStockChange, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtStockChange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSoldOut))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(InventoryLayout.createSequentialGroup()
+                        .addComponent(lblBack)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         getContentPane().add(Inventory, "card5");
 
         Time.setBackground(new java.awt.Color(35, 35, 35));
 
-        btnAllSearch.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        btnAllSearch.setText("전체 회원 검색");
+        btnAllSearch.setText("전체 검색");
         btnAllSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAllSearchActionPerformed(evt);
@@ -410,7 +469,7 @@ public class Admin extends javax.swing.JFrame {
         lblTime.setForeground(new java.awt.Color(255, 255, 255));
         lblTime.setText("변경 시간");
 
-        btnTime.setText("시간 설정");
+        btnTime.setText("시간 변경");
         btnTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimeActionPerformed(evt);
@@ -422,7 +481,7 @@ public class Admin extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "이름", "남은시간"
+                "ID", "이름", "남은 시간"
             }
         ));
         tabTimeDB.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -464,12 +523,13 @@ public class Admin extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TimeLayout.createSequentialGroup()
                                 .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAllSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(45, 45, 45)))
                         .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTimeMan2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(TimeLayout.createSequentialGroup()
+                                .addComponent(lblTimeMan2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAllSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(TimeLayout.createSequentialGroup()
                                 .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(TimeLayout.createSequentialGroup()
@@ -480,26 +540,31 @@ public class Admin extends javax.swing.JFrame {
                                         .addComponent(lblTime)
                                         .addGap(18, 18, 18)
                                         .addComponent(txtTime1)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                 .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(TimeLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(93, 93, 93))
+                .addGap(84, 84, 84))
         );
         TimeLayout.setVerticalGroup(
             TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TimeLayout.createSequentialGroup()
                 .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TimeLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblBack1))
-                    .addGroup(TimeLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(lblTimeMan2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
+                        .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TimeLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblBack1))
+                            .addGroup(TimeLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(lblTimeMan2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(41, 41, 41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TimeLayout.createSequentialGroup()
+                        .addComponent(btnAllSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -510,14 +575,196 @@ public class Admin extends javax.swing.JFrame {
                 .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTime1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAllSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
         getContentPane().add(Time, "card4");
+
+        AddDelMenu.setBackground(new java.awt.Color(35, 35, 35));
+
+        txtNameMenu1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtNameMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameMenu1ActionPerformed(evt);
+            }
+        });
+
+        lblName2.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        lblName2.setForeground(new java.awt.Color(255, 255, 255));
+        lblName2.setText("메뉴 이름");
+
+        lblBack2.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        lblBack2.setForeground(new java.awt.Color(255, 255, 255));
+        lblBack2.setText("◀");
+        lblBack2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBack2MouseClicked(evt);
+            }
+        });
+
+        lblTimeMan3.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
+        lblTimeMan3.setForeground(new java.awt.Color(255, 255, 255));
+        lblTimeMan3.setText("메뉴 추가 / 삭제");
+
+        txtPriceChange1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPriceChange1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPriceChange1ActionPerformed(evt);
+            }
+        });
+
+        lblPriceChange1.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        lblPriceChange1.setForeground(new java.awt.Color(255, 255, 255));
+        lblPriceChange1.setText("가격");
+
+        lblStockChange1.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        lblStockChange1.setForeground(new java.awt.Color(255, 255, 255));
+        lblStockChange1.setText("카테고리");
+
+        lblStockChange2.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        lblStockChange2.setForeground(new java.awt.Color(255, 255, 255));
+        lblStockChange2.setText("재고");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        txtPriceChange2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPriceChange2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPriceChange2ActionPerformed(evt);
+            }
+        });
+
+        tabMenuDB1.setBackground(new java.awt.Color(204, 204, 204));
+        tabMenuDB1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "메뉴 이름", "가격", "카테고리", "재고"
+            }
+        ));
+        tabMenuDB1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabMenuDB1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabMenuDB1);
+
+        btnSearchFood1.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnSearchFood1.setText("검색");
+        btnSearchFood1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchFood1ActionPerformed(evt);
+            }
+        });
+
+        btnAllSearchMenu1.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnAllSearchMenu1.setText("전체 검색");
+        btnAllSearchMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAllSearchMenu1ActionPerformed(evt);
+            }
+        });
+
+        btnSearchFood2.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnSearchFood2.setText("사진 파일");
+        btnSearchFood2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchFood2ActionPerformed(evt);
+            }
+        });
+
+        btnSearchFood3.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnSearchFood3.setText("메뉴 삭제");
+        btnSearchFood3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchFood3ActionPerformed(evt);
+            }
+        });
+
+        btnSearchFood4.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnSearchFood4.setText("메뉴 추가");
+        btnSearchFood4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchFood4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AddDelMenuLayout = new javax.swing.GroupLayout(AddDelMenu);
+        AddDelMenu.setLayout(AddDelMenuLayout);
+        AddDelMenuLayout.setHorizontalGroup(
+            AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddDelMenuLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(lblBack2)
+                .addGap(36, 36, 36)
+                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(AddDelMenuLayout.createSequentialGroup()
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddDelMenuLayout.createSequentialGroup()
+                                .addComponent(lblTimeMan3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(116, 116, 116))
+                            .addGroup(AddDelMenuLayout.createSequentialGroup()
+                                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPriceChange1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblStockChange1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblStockChange2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPriceChange1)
+                                    .addComponent(txtNameMenu1)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtPriceChange2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAllSearchMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(btnSearchFood1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSearchFood4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSearchFood3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSearchFood2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(76, 76, 76))
+        );
+        AddDelMenuLayout.setVerticalGroup(
+            AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddDelMenuLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AddDelMenuLayout.createSequentialGroup()
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTimeMan3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAllSearchMenu1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNameMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearchFood1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPriceChange1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPriceChange1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearchFood4))
+                        .addGap(5, 5, 5)
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblStockChange1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearchFood3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblStockChange2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPriceChange2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearchFood2)))
+                    .addComponent(lblBack2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(AddDelMenu, "card5");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -740,6 +987,58 @@ public class Admin extends javax.swing.JFrame {
     private void txtTime1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTime1ActionPerformed
         btnTimeActionPerformed(evt);
     }//GEN-LAST:event_txtTime1ActionPerformed
+
+    private void txtStockChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockChangeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStockChangeActionPerformed
+
+    private void btnInventory3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventory3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInventory3ActionPerformed
+
+    private void btnInventory4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventory4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInventory4ActionPerformed
+
+    private void txtNameMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameMenu1ActionPerformed
+
+    private void lblBack2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBack2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblBack2MouseClicked
+
+    private void txtPriceChange1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceChange1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPriceChange1ActionPerformed
+
+    private void txtPriceChange2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceChange2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPriceChange2ActionPerformed
+
+    private void tabMenuDB1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabMenuDB1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabMenuDB1MouseClicked
+
+    private void btnSearchFood1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFood1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchFood1ActionPerformed
+
+    private void btnAllSearchMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllSearchMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAllSearchMenu1ActionPerformed
+
+    private void btnSearchFood2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFood2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchFood2ActionPerformed
+
+    private void btnSearchFood3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFood3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchFood3ActionPerformed
+
+    private void btnSearchFood4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFood4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchFood4ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -777,38 +1076,60 @@ public class Admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AddDelMenu;
     private javax.swing.JPanel Inventory;
     private javax.swing.JPanel Main;
     private javax.swing.JPanel Time;
     private javax.swing.JButton btnAllSearch;
     private javax.swing.JButton btnAllSearchMenu;
+    private javax.swing.JButton btnAllSearchMenu1;
     private javax.swing.JButton btnInventory1;
+    private javax.swing.JButton btnInventory3;
+    private javax.swing.JButton btnInventory4;
     private javax.swing.JButton btnPriceChange;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearchFood;
+    private javax.swing.JButton btnSearchFood1;
+    private javax.swing.JButton btnSearchFood2;
+    private javax.swing.JButton btnSearchFood3;
+    private javax.swing.JButton btnSearchFood4;
     private javax.swing.JButton btnSoldOut;
     private javax.swing.JButton btnTime;
     private javax.swing.JButton btnTime1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblBack1;
+    private javax.swing.JLabel lblBack2;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblName1;
     private javax.swing.JLabel lblName2;
+    private javax.swing.JLabel lblPriceChange;
+    private javax.swing.JLabel lblPriceChange1;
+    private javax.swing.JLabel lblStockChange;
+    private javax.swing.JLabel lblStockChange1;
+    private javax.swing.JLabel lblStockChange2;
     private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblTimeMan1;
     private javax.swing.JLabel lblTimeMan2;
+    private javax.swing.JLabel lblTimeMan3;
     private javax.swing.JTable tabMenuDB;
+    private javax.swing.JTable tabMenuDB1;
     private javax.swing.JTable tabTimeDB;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNameMenu;
+    private javax.swing.JTextField txtNameMenu1;
     private javax.swing.JTextField txtPriceChange;
+    private javax.swing.JTextField txtPriceChange1;
+    private javax.swing.JTextField txtPriceChange2;
+    private javax.swing.JTextField txtStockChange;
     private javax.swing.JTextField txtTime1;
     // End of variables declaration//GEN-END:variables
 }
