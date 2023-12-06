@@ -168,13 +168,13 @@
                       <Component id="jScrollPane1" alignment="1" min="-2" pref="608" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblTimeMan1" min="-2" pref="175" max="-2" attributes="0"/>
+                              <Component id="lblPriceStockChange" min="-2" pref="175" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                               <Component id="btnAllSearchMenu" min="-2" pref="98" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblName1" min="-2" pref="87" max="-2" attributes="0"/>
+                                  <Component id="lblNameMenu" min="-2" pref="87" max="-2" attributes="0"/>
                                   <Component id="lblPriceChange" min="-2" pref="87" max="-2" attributes="0"/>
                                   <Component id="lblStockChange" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
                               </Group>
@@ -214,11 +214,11 @@
                                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   <Component id="btnAllSearchMenu" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="lblTimeMan1" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="lblPriceStockChange" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblName1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="lblNameMenu" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="txtNameMenu" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnSearchFood" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -293,7 +293,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNameMenuActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblName1">
+        <Component class="javax.swing.JLabel" name="lblNameMenu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
@@ -340,7 +340,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBackMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblTimeMan1">
+        <Component class="javax.swing.JLabel" name="lblPriceStockChange">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="20" style="1"/>
@@ -667,32 +667,32 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="lblTimeMan3" min="-2" pref="175" max="-2" attributes="0"/>
+                                  <Component id="lblAddDelMenu" min="-2" pref="175" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="lblName2" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
-                                      <Component id="lblPriceChange1" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
-                                      <Component id="lblStockChange1" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
-                                      <Component id="lblStockChange2" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <Component id="lblMenuName" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <Component id="lblPrice" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <Component id="lblCategory" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <Component id="lblStock" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtPriceChange1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtNameMenu1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtPrice" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtMenuName" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtPriceChange2" alignment="0" min="-2" pref="399" max="-2" attributes="0"/>
+                                      <Component id="txtStock" alignment="0" min="-2" pref="399" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace pref="21" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnAllSearchMenu1" pref="98" max="32767" attributes="0"/>
-                              <Component id="btnSearchFood1" max="32767" attributes="0"/>
-                              <Component id="btnSearchFood4" alignment="1" max="32767" attributes="0"/>
-                              <Component id="btnSearchFood3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnSearchFood2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnSearchAllMenu" pref="98" max="32767" attributes="0"/>
+                              <Component id="btnSearchMenu" max="32767" attributes="0"/>
+                              <Component id="btnAddMenu" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnDelMenu" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnJPGFile" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -707,32 +707,32 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblTimeMan3" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="btnAllSearchMenu1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAddDelMenu" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="btnSearchAllMenu" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblName2" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="txtNameMenu1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnSearchFood1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMenuName" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="txtMenuName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSearchMenu" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblPriceChange1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="txtPriceChange1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnSearchFood4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPrice" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="txtPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnAddMenu" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblStockChange1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="lblCategory" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnSearchFood3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnDelMenu" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblStockChange2" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="txtPriceChange2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnSearchFood2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblStock" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="txtStock" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnJPGFile" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="lblBack2" min="-2" max="-2" attributes="0"/>
@@ -745,15 +745,15 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txtNameMenu1">
+        <Component class="javax.swing.JTextField" name="txtMenuName">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNameMenu1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMenuNameActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblName2">
+        <Component class="javax.swing.JLabel" name="lblMenuName">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
@@ -778,7 +778,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBack2MouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblTimeMan3">
+        <Component class="javax.swing.JLabel" name="lblAddDelMenu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="20" style="1"/>
@@ -789,15 +789,15 @@
             <Property name="text" type="java.lang.String" value="&#xba54;&#xb274; &#xcd94;&#xac00; / &#xc0ad;&#xc81c;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPriceChange1">
+        <Component class="javax.swing.JTextField" name="txtPrice">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPriceChange1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPriceActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblPriceChange1">
+        <Component class="javax.swing.JLabel" name="lblPrice">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
@@ -808,7 +808,7 @@
             <Property name="text" type="java.lang.String" value="&#xac00;&#xaca9;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblStockChange1">
+        <Component class="javax.swing.JLabel" name="lblCategory">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
@@ -819,7 +819,7 @@
             <Property name="text" type="java.lang.String" value="&#xce74;&#xd14c;&#xace0;&#xb9ac;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblStockChange2">
+        <Component class="javax.swing.JLabel" name="lblStock">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
@@ -845,12 +845,12 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPriceChange2">
+        <Component class="javax.swing.JTextField" name="txtStock">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPriceChange2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtStockActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -880,7 +880,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnSearchFood1">
+        <Component class="javax.swing.JButton" name="btnSearchMenu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
@@ -888,10 +888,10 @@
             <Property name="text" type="java.lang.String" value="&#xac80;&#xc0c9;"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchFood1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchMenuActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnAllSearchMenu1">
+        <Component class="javax.swing.JButton" name="btnSearchAllMenu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
@@ -899,10 +899,10 @@
             <Property name="text" type="java.lang.String" value="&#xc804;&#xccb4; &#xac80;&#xc0c9;"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAllSearchMenu1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchAllMenuActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSearchFood2">
+        <Component class="javax.swing.JButton" name="btnJPGFile">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
@@ -910,10 +910,10 @@
             <Property name="text" type="java.lang.String" value="&#xc0ac;&#xc9c4; &#xd30c;&#xc77c;"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchFood2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnJPGFileActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSearchFood3">
+        <Component class="javax.swing.JButton" name="btnDelMenu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
@@ -921,10 +921,10 @@
             <Property name="text" type="java.lang.String" value="&#xba54;&#xb274; &#xc0ad;&#xc81c;"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchFood3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDelMenuActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSearchFood4">
+        <Component class="javax.swing.JButton" name="btnAddMenu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
@@ -932,7 +932,7 @@
             <Property name="text" type="java.lang.String" value="&#xba54;&#xb274; &#xcd94;&#xac00;"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchFood4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddMenuActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
