@@ -32,8 +32,6 @@ public class Order extends javax.swing.JFrame {
     int counts = 1;
     static Order order;
     static boolean timer_run;
-    Cart Shin_Ramen;
-    Cart RTA_Ramen;
 
     public String Setting_Price(String Menu_name) {
         // 메뉴가격, 재고를 DB에서 갖고오는 메소드

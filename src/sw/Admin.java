@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package sw;
 import java.io.IOException;
 import java.sql.*;
@@ -140,20 +136,6 @@ public class Admin extends javax.swing.JFrame {
         lblPriceChange = new javax.swing.JLabel();
         lblStockChange = new javax.swing.JLabel();
         txtStockChange = new javax.swing.JTextField();
-        Time = new javax.swing.JPanel();
-        btnAllSearch = new javax.swing.JButton();
-        btnSearch = new javax.swing.JButton();
-        txtName = new javax.swing.JTextField();
-        txtID = new javax.swing.JTextField();
-        lblName = new javax.swing.JLabel();
-        txtTime1 = new javax.swing.JTextField();
-        lblTime = new javax.swing.JLabel();
-        btnTime = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tabTimeDB = new javax.swing.JTable();
-        lblID = new javax.swing.JLabel();
-        lblBack1 = new javax.swing.JLabel();
-        lblTimeMan2 = new javax.swing.JLabel();
         AddDelMenu = new javax.swing.JPanel();
         txtMenuName = new javax.swing.JTextField();
         lblMenuName = new javax.swing.JLabel();
@@ -172,6 +154,20 @@ public class Admin extends javax.swing.JFrame {
         btnJPGFile = new javax.swing.JButton();
         btnDelMenu = new javax.swing.JButton();
         btnAddMenu = new javax.swing.JButton();
+        Time = new javax.swing.JPanel();
+        btnAllSearch = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        txtName = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+        txtTime1 = new javax.swing.JTextField();
+        lblTime = new javax.swing.JLabel();
+        btnTime = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabTimeDB = new javax.swing.JTable();
+        lblID = new javax.swing.JLabel();
+        lblBack1 = new javax.swing.JLabel();
+        lblTimeMan2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(35, 35, 35));
@@ -424,6 +420,190 @@ public class Admin extends javax.swing.JFrame {
 
         getContentPane().add(Inventory, "card5");
 
+        AddDelMenu.setBackground(new java.awt.Color(35, 35, 35));
+
+        txtMenuName.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtMenuName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMenuNameActionPerformed(evt);
+            }
+        });
+
+        lblMenuName.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        lblMenuName.setForeground(new java.awt.Color(255, 255, 255));
+        lblMenuName.setText("메뉴 이름");
+
+        lblBack2.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        lblBack2.setForeground(new java.awt.Color(255, 255, 255));
+        lblBack2.setText("◀");
+        lblBack2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBack2MouseClicked(evt);
+            }
+        });
+
+        lblAddDelMenu.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
+        lblAddDelMenu.setForeground(new java.awt.Color(255, 255, 255));
+        lblAddDelMenu.setText("메뉴 추가 / 삭제");
+
+        txtPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPriceActionPerformed(evt);
+            }
+        });
+
+        lblPrice.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        lblPrice.setForeground(new java.awt.Color(255, 255, 255));
+        lblPrice.setText("가격");
+
+        lblCategory.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        lblCategory.setForeground(new java.awt.Color(255, 255, 255));
+        lblCategory.setText("카테고리");
+
+        lblStock.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        lblStock.setForeground(new java.awt.Color(255, 255, 255));
+        lblStock.setText("재고");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        txtStock.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockActionPerformed(evt);
+            }
+        });
+
+        tabMenuDB1.setBackground(new java.awt.Color(204, 204, 204));
+        tabMenuDB1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "메뉴 이름", "가격", "카테고리", "재고"
+            }
+        ));
+        tabMenuDB1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabMenuDB1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabMenuDB1);
+
+        btnSearchMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnSearchMenu.setText("검색");
+        btnSearchMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchMenuActionPerformed(evt);
+            }
+        });
+
+        btnSearchAllMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnSearchAllMenu.setText("전체 검색");
+        btnSearchAllMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchAllMenuActionPerformed(evt);
+            }
+        });
+
+        btnJPGFile.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnJPGFile.setText("사진 파일");
+        btnJPGFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJPGFileActionPerformed(evt);
+            }
+        });
+
+        btnDelMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnDelMenu.setText("메뉴 삭제");
+        btnDelMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelMenuActionPerformed(evt);
+            }
+        });
+
+        btnAddMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnAddMenu.setText("메뉴 추가");
+        btnAddMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddMenuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AddDelMenuLayout = new javax.swing.GroupLayout(AddDelMenu);
+        AddDelMenu.setLayout(AddDelMenuLayout);
+        AddDelMenuLayout.setHorizontalGroup(
+            AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddDelMenuLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(lblBack2)
+                .addGap(36, 36, 36)
+                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(AddDelMenuLayout.createSequentialGroup()
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddDelMenuLayout.createSequentialGroup()
+                                .addComponent(lblAddDelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(116, 116, 116))
+                            .addGroup(AddDelMenuLayout.createSequentialGroup()
+                                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblStock, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPrice)
+                                    .addComponent(txtMenuName)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSearchAllMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(btnSearchMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAddMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnJPGFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(76, 76, 76))
+        );
+        AddDelMenuLayout.setVerticalGroup(
+            AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddDelMenuLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AddDelMenuLayout.createSequentialGroup()
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAddDelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearchAllMenu))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSearchMenu)
+                            .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAddMenu))
+                        .addGap(5, 5, 5)
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDelMenu))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblStock, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnJPGFile)))
+                    .addComponent(lblBack2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(AddDelMenu, "card5");
+
         Time.setBackground(new java.awt.Color(35, 35, 35));
 
         btnAllSearch.setText("전체 검색");
@@ -582,189 +762,6 @@ public class Admin extends javax.swing.JFrame {
         );
 
         getContentPane().add(Time, "card4");
-
-        AddDelMenu.setBackground(new java.awt.Color(35, 35, 35));
-
-        txtMenuName.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtMenuName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMenuNameActionPerformed(evt);
-            }
-        });
-
-        lblMenuName.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
-        lblMenuName.setForeground(new java.awt.Color(255, 255, 255));
-        lblMenuName.setText("메뉴 이름");
-
-        lblBack2.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
-        lblBack2.setForeground(new java.awt.Color(255, 255, 255));
-        lblBack2.setText("◀");
-        lblBack2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBack2MouseClicked(evt);
-            }
-        });
-
-        lblAddDelMenu.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
-        lblAddDelMenu.setForeground(new java.awt.Color(255, 255, 255));
-        lblAddDelMenu.setText("메뉴 추가 / 삭제");
-
-        txtPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtPrice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPriceActionPerformed(evt);
-            }
-        });
-
-        lblPrice.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
-        lblPrice.setForeground(new java.awt.Color(255, 255, 255));
-        lblPrice.setText("가격");
-
-        lblCategory.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
-        lblCategory.setForeground(new java.awt.Color(255, 255, 255));
-        lblCategory.setText("카테고리");
-
-        lblStock.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
-        lblStock.setForeground(new java.awt.Color(255, 255, 255));
-        lblStock.setText("재고");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txtStock.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtStock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStockActionPerformed(evt);
-            }
-        });
-
-        tabMenuDB1.setBackground(new java.awt.Color(204, 204, 204));
-        tabMenuDB1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null}
-            },
-            new String [] {
-                "메뉴 이름", "가격", "카테고리", "재고"
-            }
-        ));
-        tabMenuDB1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabMenuDB1MouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tabMenuDB1);
-
-        btnSearchMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        btnSearchMenu.setText("검색");
-        btnSearchMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchMenuActionPerformed(evt);
-            }
-        });
-
-        btnSearchAllMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        btnSearchAllMenu.setText("전체 검색");
-        btnSearchAllMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchAllMenuActionPerformed(evt);
-            }
-        });
-
-        btnJPGFile.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        btnJPGFile.setText("사진 파일");
-        btnJPGFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnJPGFileActionPerformed(evt);
-            }
-        });
-
-        btnDelMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        btnDelMenu.setText("메뉴 삭제");
-        btnDelMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelMenuActionPerformed(evt);
-            }
-        });
-
-        btnAddMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        btnAddMenu.setText("메뉴 추가");
-        btnAddMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddMenuActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout AddDelMenuLayout = new javax.swing.GroupLayout(AddDelMenu);
-        AddDelMenu.setLayout(AddDelMenuLayout);
-        AddDelMenuLayout.setHorizontalGroup(
-            AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AddDelMenuLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblBack2)
-                .addGap(36, 36, 36)
-                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(AddDelMenuLayout.createSequentialGroup()
-                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddDelMenuLayout.createSequentialGroup()
-                                .addComponent(lblAddDelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(116, 116, 116))
-                            .addGroup(AddDelMenuLayout.createSequentialGroup()
-                                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblStock, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPrice)
-                                    .addComponent(txtMenuName)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnSearchAllMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                            .addComponent(btnSearchMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAddMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnJPGFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(76, 76, 76))
-        );
-        AddDelMenuLayout.setVerticalGroup(
-            AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AddDelMenuLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AddDelMenuLayout.createSequentialGroup()
-                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblAddDelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearchAllMenu))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearchMenu))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddMenu))
-                        .addGap(5, 5, 5)
-                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDelMenu))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblStock, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnJPGFile)))
-                    .addComponent(lblBack2))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(AddDelMenu, "card5");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -993,7 +990,8 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtStockChangeActionPerformed
 
     private void btnInventory3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventory3ActionPerformed
-        // TODO add your handling code here:
+        new Sales_history().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnInventory3ActionPerformed
 
     private void btnInventory4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventory4ActionPerformed
