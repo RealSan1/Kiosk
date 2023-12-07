@@ -66,12 +66,12 @@ public class Order extends javax.swing.JFrame {
             title_name(Cafe);
             Runtime.getRuntime().addShutdownHook(new HookThread());
             order = this;
-            int remain = Integer.parseInt(Info.getUser_RemainTime());
-            int hour = remain/60;
-            int min = remain%60;
-            lblRtIme.setText(String.format("%02d:%02d",hour,min));
-            if(!timer_run){AddTime.Timer_m();}
-            lblUser.setText(Info.getUser_Name());
+//            int remain = Integer.parseInt(Info.getUser_RemainTime());
+//            int hour = remain/60;
+//            int min = remain%60;
+//            lblRtIme.setText(String.format("%02d:%02d",hour,min));
+//            if(!timer_run){AddTime.Timer_m();}
+//            lblUser.setText(Info.getUser_Name());
         }
     }
 
@@ -594,7 +594,7 @@ public class Order extends javax.swing.JFrame {
                 lab.setFont(new java.awt.Font("맑은 고딕", 1, 12));
                 btn.setText("");
                 String name = lab.getText().replace(" ","");
-                if(Menu_Stock_List.get(i).equals("no"))
+                if(Integer.parseInt(Menu_Stock_List.get(i))<=0)
                     btn.setEnabled(false);
                 int idx;
                 char cr;
@@ -602,12 +602,21 @@ public class Order extends javax.swing.JFrame {
                     cr = name.charAt(idx);
                     if((int)cr>=49&&(int)cr<=57)
                         break;
-                }              
+                }                        
                 String setname = name.substring(0,idx);
-                if(Menu_Stock_List.get(i).equals("yes"))
-                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+name.substring(0,idx)+".jpg")));
-                else
+                
+                if(Integer.parseInt(Menu_Stock_List.get(i))>=1){
+                    String imagePath = "/image/"+name.substring(0, idx)+".jpg";
+                    java.net.URL imageURL = getClass().getResource(imagePath);
+                    if(imageURL != null){
+                        btn.setIcon(new javax.swing.ImageIcon(imageURL));
+                    }else{
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+"No_image"+".jpg")));
+                    }
+                }else{
                     btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/품절.jpg")));
+                }
+                
                 int price = Menu_Price_List.get(i);
                 buttonPriceMap.put(btn, price);
 
@@ -819,12 +828,17 @@ public class Order extends javax.swing.JFrame {
                     if((int)cr>=49&&(int)cr<=57)
                         break;
                 }             
-                if(Menu_Stock_List.get(i).equals("no"))
-                    btn.setEnabled(false);
-                if(Menu_Stock_List.get(i).equals("yes"))
-                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+name.substring(0,idx)+".jpg")));
-                else
+                if(Integer.parseInt(Menu_Stock_List.get(i))>=1){
+                    String imagePath = "/image/"+name.substring(0, idx)+".jpg";
+                    java.net.URL imageURL = getClass().getResource(imagePath);
+                    if(imageURL != null){
+                        btn.setIcon(new javax.swing.ImageIcon(imageURL));
+                    }else{
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+"No_image"+".jpg")));
+                    }
+                }else{
                     btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/품절.jpg")));
+                }
                 String setname = name.substring(0,idx);
                 int price = Menu_Price_List.get(i);
                 buttonPriceMap.put(btn, price);
