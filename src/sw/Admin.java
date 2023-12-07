@@ -1079,7 +1079,7 @@ public class Admin extends javax.swing.JFrame {
         int result = jFileChooser1.showOpenDialog(null);
         if (result == jFileChooser1.APPROVE_OPTION) {
             File selectedFile = jFileChooser1.getSelectedFile();
-
+            
             // 상대 경로를 사용하기 위해 현재 작업 디렉토리를 얻습니다.
             String currentWorkingDirectory = System.getProperty("user.dir");
 
