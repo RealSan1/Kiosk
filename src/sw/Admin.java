@@ -1,4 +1,5 @@
 package sw;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,59 +10,62 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.metal.MetalBorders;
 import javax.swing.table.DefaultTableModel;
 import static sw.Main.*;
+
 /**
  *
  * @author NSH
  */
 public class Admin extends javax.swing.JFrame {
-    
+
     static Connection conn;
     static Statement stmt;
     static PreparedStatement pstmt;
     static ResultSet rs;
+
     /**
      * Creates new form Admin
      */
     public Admin() {
         initComponents();
     }
-    private void DB_open(){
-        try{
+
+    private void DB_open() {
+        try {
             conn = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW);
             stmt = conn.createStatement();
             System.out.println("Con DB");
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("dbOpenErr");
             System.out.println("SQLException : " + e.getMessage());
         }
     }
-    
-    private int getDBdata(String SQL){
-        String User_ID = null; 
+
+    private int getDBdata(String SQL) {
+        String User_ID = null;
         String User_Name = null;
         String User_RemainTime = null;
         int cnt = 0;
-        DefaultTableModel model = (DefaultTableModel)tabTimeDB.getModel();
+        DefaultTableModel model = (DefaultTableModel) tabTimeDB.getModel();
         model.setRowCount(0);
-        try{
+        try {
             DB_open();
             rs = stmt.executeQuery(SQL);
-            while(rs.next()){
+            while (rs.next()) {
                 User_Name = rs.getString("user_name");
                 User_ID = rs.getString("user_id");
                 User_RemainTime = rs.getString("user_remainTime");
-                model.addRow(new Object[]{User_ID,User_Name,User_RemainTime});
+                model.addRow(new Object[]{User_ID, User_Name, User_RemainTime});
                 cnt = rs.getRow();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("getDBdataerr");
-            System.out.println("SQLException : "+e.getMessage());
+            System.out.println("SQLException : " + e.getMessage());
         }
         tabTimeDB.setModel(model);
         return cnt;
     }
-    
-    private void setDBdata(String name, String id, int time){
+
+    private void setDBdata(String name, String id, int time) {
         int cnt = 0;
         String SQL = "";
         if (!name.isEmpty() && id.isEmpty()) {
@@ -78,36 +82,38 @@ public class Admin extends javax.swing.JFrame {
             cnt = 3;
         }
         System.out.println("setDBOK");
-        try{
+        try {
             DB_open();
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, time);
-            if(cnt == 1)
+            if (cnt == 1) {
                 pstmt.setString(2, name);
-            if(cnt == 2)
-                pstmt.setString(2,id);
-            if(cnt == 3){
-                pstmt.setString(2, id);
-                pstmt.setString(3,name);
             }
-            pstmt.executeUpdate();    
+            if (cnt == 2) {
+                pstmt.setString(2, id);
+            }
+            if (cnt == 3) {
+                pstmt.setString(2, id);
+                pstmt.setString(3, name);
+            }
+            pstmt.executeUpdate();
 //            if(cnt == 1) getDBdata("Select * from users where user_name = '"+name+"'");
 //            if(cnt == 2) getDBdata("Select * from users where user_id = '"+id+"'");
 //            if(cnt == 3) getDBdata("Select * from users where user_id = '"+id+"' and user_name = '"+name+"'");
             getDBdata("Select * from users");
             System.out.println(SQL);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("setDBerr");
-            System.out.println("SQLException : "+e.getMessage());
+            System.out.println("SQLException : " + e.getMessage());
         }
     }
-    
-    private void SelectedTab(){
+
+    private void SelectedTab() {
         int row = tabTimeDB.getSelectedRow();
-        Object value = tabTimeDB.getValueAt(row,0);
+        Object value = tabTimeDB.getValueAt(row, 0);
         txtNameMenu.setText((String) value);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -780,39 +786,39 @@ public class Admin extends javax.swing.JFrame {
         String name = txtName.getText();
         String id = txtID.getText();
         ckDBdata(name, id);
-        
+
     }//GEN-LAST:event_btnSearchActionPerformed
-    private int ckDBdata(String name, String id){
+    private int ckDBdata(String name, String id) {
         int ck = 0;
-        if(name.equals("") && id.equals("")){
+        if (name.equals("") && id.equals("")) {
             JOptionPane.showMessageDialog(null, "id혹은 이름을 입력해주세요.");
-        }else if(name.equals("") || id.equals("")){
-            if(!name.equals("")){
-                ck = getDBdata("Select * from users where User_Name = '"+name+"'");
+        } else if (name.equals("") || id.equals("")) {
+            if (!name.equals("")) {
+                ck = getDBdata("Select * from users where User_Name = '" + name + "'");
                 return ck;
-            }else if(!id.equals("")){
-                ck = getDBdata("select * from users where User_ID = '"+id+"'");
+            } else if (!id.equals("")) {
+                ck = getDBdata("select * from users where User_ID = '" + id + "'");
                 return ck;
             }
-        }else{
-            ck = getDBdata("select * from users where User_Name= '"+name+"' and user_id = '"+id+"'");
+        } else {
+            ck = getDBdata("select * from users where User_Name= '" + name + "' and user_id = '" + id + "'");
             return ck;
         }
         return -1;
     }
     private void btnTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimeActionPerformed
-        try{
+        try {
             int time = Integer.parseInt(txtTime1.getText());
             String name = txtName.getText();
             String id = txtID.getText();
             System.out.println(time);
             int cnt = 0;
-            if(0==ckDBdata(name, id)){
+            if (0 == ckDBdata(name, id)) {
                 JOptionPane.showMessageDialog(null, "조회되지 않는 유저입니다 올바르게 입력해주세요.");
-            }else{
-                if(time <= -1){
+            } else {
+                if (time <= -1) {
                     JOptionPane.showMessageDialog(null, "시간을 제대로 넣어주세요");
-                }else{
+                } else {
                     setDBdata(name, id, time);
                 }
 //                cnt = ckDBdata(name,id);
@@ -826,106 +832,107 @@ public class Admin extends javax.swing.JFrame {
 //                    setDBdata(name, id, time);
 //                }
             }
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null,"올바른 숫자를 입력하세요");
-        }        
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "올바른 숫자를 입력하세요");
+        }
     }//GEN-LAST:event_btnTimeActionPerformed
-    private int getDBdataFood(String SQL, String frame){
-        String Menu_Name = null; 
+    private int getDBdataFood(String SQL, String frame) {
+        String Menu_Name = null;
         String Menu_STOCK = null;
         String Menu_Price = null;
-        String Menu_Category = null;    
+        String Menu_Category = null;
         DefaultTableModel model1 = null;
         DefaultTableModel model2 = null;
         int cnt = 0;
-        try{
+        try {
             DB_open();
             rs = stmt.executeQuery(SQL);
-            if("MenuInventory".equals(frame)){
-                model1 = (DefaultTableModel)tabMenuDB.getModel();
+            if ("MenuInventory".equals(frame)) {
+                model1 = (DefaultTableModel) tabMenuDB.getModel();
                 model1.setRowCount(0);
-                while(rs.next()){
+                while (rs.next()) {
                     Menu_Name = rs.getString("Menu_Name");
                     Menu_STOCK = rs.getString("Menu_STOCK");
                     Menu_Price = rs.getString("Menu_Price");
                     model1.addRow(new Object[]{Menu_Name, Menu_Price, Menu_STOCK});
                     cnt = rs.getRow();
                 }
-            }else if("AddMenu".equals(frame)){
-                model2 = (DefaultTableModel)tabMenuDB1.getModel();
+            } else if ("AddMenu".equals(frame)) {
+                model2 = (DefaultTableModel) tabMenuDB1.getModel();
                 model2.setRowCount(0);
-                while(rs.next()){
+                while (rs.next()) {
                     Menu_Name = rs.getString("Menu_Name");
                     Menu_STOCK = rs.getString("Menu_STOCK");
                     Menu_Price = rs.getString("Menu_Price");
                     Menu_Category = rs.getString("Menu_Category");
-                    model2.addRow(new Object[]{Menu_Name, Menu_Price, Menu_Category,Menu_STOCK});
+                    model2.addRow(new Object[]{Menu_Name, Menu_Price, Menu_Category, Menu_STOCK});
                     cnt = rs.getRow();
                 }
             }
-        }catch(Exception e){
-            System.out.println("SQLException : "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("SQLException : " + e.getMessage());
         }
         return cnt;
     }
-    
-    private void setDBdataFood(String FoodName, String stock){
+
+    private void setDBdataFood(String FoodName, String stock) {
         String SQL = "update menu set menu_stock = ? where menu_name = ?";
         int row = tabMenuDB.getSelectedRow();
-        try{
+        try {
             DB_open();
             System.out.println(row);
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1,stock);            
-            pstmt.setString(2,FoodName);
-            pstmt.executeUpdate();    
-            System.out.println("update stock value = "+stock);
-            System.out.println("update name value = "+FoodName);
-            getDBdataFood("Select * from menu","MenuInventory");
-        }catch(Exception e){
+            pstmt.setString(1, stock);
+            pstmt.setString(2, FoodName);
+            pstmt.executeUpdate();
+            System.out.println("update stock value = " + stock);
+            System.out.println("update name value = " + FoodName);
+            getDBdataFood("Select * from menu", "MenuInventory");
+        } catch (Exception e) {
             System.out.println("setDBerr");
-            System.out.println("SQLException : "+e.getMessage());
+            System.out.println("SQLException : " + e.getMessage());
         }
     }
-    
-    private void setDBdataPrice(String FoodName, String Price){
+
+    private void setDBdataPrice(String FoodName, String Price) {
         String SQL = "update menu set menu_price = ? where menu_name = ?";
-        try{
+        try {
             DB_open();
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, Price);
-            pstmt.setString(2,FoodName);
-            pstmt.executeUpdate();    
-            getDBdataFood("Select * from menu","MenuInventory");
-        }catch(Exception e){
+            pstmt.setString(2, FoodName);
+            pstmt.executeUpdate();
+            getDBdataFood("Select * from menu", "MenuInventory");
+        } catch (Exception e) {
             System.out.println("setDBerr");
-            System.out.println("SQLException : "+e.getMessage());
+            System.out.println("SQLException : " + e.getMessage());
         }
     }
     private void btnAllSearchMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllSearchMenuActionPerformed
-        getDBdataFood("Select * from menu","MenuInventory");
+        getDBdataFood("Select * from menu", "MenuInventory");
     }//GEN-LAST:event_btnAllSearchMenuActionPerformed
 
     private void btnSearchFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFoodActionPerformed
-        String FoodName = "%"+txtNameMenu.getText()+"%";
-        if(FoodName.equals("")){
-            JOptionPane.showMessageDialog(null,"음식명을 올바르게 입력해주세요");
-        }else{
-            if(getDBdataFood("Select * from menu where Menu_name like '"+FoodName+"'","MenuInventory")==0)
-                JOptionPane.showMessageDialog(null,"검색한 음식은 없습니다.");
+        String FoodName = "%" + txtNameMenu.getText() + "%";
+        if (FoodName.equals("")) {
+            JOptionPane.showMessageDialog(null, "음식명을 올바르게 입력해주세요");
+        } else {
+            if (getDBdataFood("Select * from menu where Menu_name like '" + FoodName + "'", "MenuInventory") == 0) {
+                JOptionPane.showMessageDialog(null, "검색한 음식은 없습니다.");
+            }
         }
     }//GEN-LAST:event_btnSearchFoodActionPerformed
 
     private void btnSoldOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoldOutActionPerformed
         String FoodName = txtNameMenu.getText();
         String stock = txtStockChange.getText();
-        if(FoodName.equals("")){
-            JOptionPane.showMessageDialog(null,"음식명을 올바르게 입력해주세요");
-        }else{
+        if (FoodName.equals("")) {
+            JOptionPane.showMessageDialog(null, "음식명을 올바르게 입력해주세요");
+        } else {
             int row = tabMenuDB.getSelectedRow();
-            if(!FoodName.equals((String)tabMenuDB.getValueAt(row,0))){
-                JOptionPane.showMessageDialog(null,"검색한 음식은 없습니다.");
-            }else{
+            if (!FoodName.equals((String) tabMenuDB.getValueAt(row, 0))) {
+                JOptionPane.showMessageDialog(null, "검색한 음식은 없습니다.");
+            } else {
                 setDBdataFood(FoodName, stock);
             }
         }
@@ -964,20 +971,20 @@ public class Admin extends javax.swing.JFrame {
     private void tabMenuDBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabMenuDBMouseClicked
         int row = tabMenuDB.getSelectedRow();
         System.out.println(row);
-        Object value = tabMenuDB.getValueAt(row,0);
+        Object value = tabMenuDB.getValueAt(row, 0);
         txtNameMenu.setText((String) value);
-        value = tabMenuDB.getValueAt(row,1);
+        value = tabMenuDB.getValueAt(row, 1);
         txtPriceChange.setText((String) value);
-        value = tabMenuDB.getValueAt(row,2);
-        txtStockChange.setText((String)value);
+        value = tabMenuDB.getValueAt(row, 2);
+        txtStockChange.setText((String) value);
     }//GEN-LAST:event_tabMenuDBMouseClicked
 
     private void tabTimeDBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabTimeDBMouseClicked
         int row = tabTimeDB.getSelectedRow();
         System.out.println(row);
-        Object value = tabTimeDB.getValueAt(row,0);
+        Object value = tabTimeDB.getValueAt(row, 0);
         txtID.setText((String) value);
-        value = tabTimeDB.getValueAt(row,1);
+        value = tabTimeDB.getValueAt(row, 1);
         txtName.setText((String) value);
         value = tabTimeDB.getValueAt(row, 2);
         txtTime1.setText((String) value);
@@ -1004,7 +1011,7 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTime1ActionPerformed
 
     private void txtStockChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockChangeActionPerformed
-        
+
     }//GEN-LAST:event_txtStockChangeActionPerformed
 
     private void btnInventory3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventory3ActionPerformed
@@ -1037,94 +1044,106 @@ public class Admin extends javax.swing.JFrame {
     private void tabMenuDB1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabMenuDB1MouseClicked
         int row = tabMenuDB1.getSelectedRow();
         System.out.println(row);
-        Object value = tabMenuDB1.getValueAt(row,0);
+        Object value = tabMenuDB1.getValueAt(row, 0);
         txtMenuName.setText((String) value);
-        value = tabMenuDB1.getValueAt(row,1);
+        value = tabMenuDB1.getValueAt(row, 1);
         txtPrice.setText((String) value);
-        value = tabMenuDB1.getValueAt(row,2);
+        value = tabMenuDB1.getValueAt(row, 2);
         int itemCount = jComboBox1.getItemCount();
-        for(int i = 0; i<itemCount; i++){
-            if(jComboBox1.getItemAt(i).equals(value)){
+        for (int i = 0; i < itemCount; i++) {
+            if (jComboBox1.getItemAt(i).equals(value)) {
                 jComboBox1.setSelectedIndex(i);
                 break;
             }
         }
-        value = tabMenuDB1.getValueAt(row,3);
-        txtStock.setText((String)value);  
+        value = tabMenuDB1.getValueAt(row, 3);
+        txtStock.setText((String) value);
     }//GEN-LAST:event_tabMenuDB1MouseClicked
 
     private void btnSearchMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMenuActionPerformed
-        String FoodName = "%"+txtMenuName.getText()+"%";
-        if(FoodName.equals("")){
-            JOptionPane.showMessageDialog(null,"음식명을 올바르게 입력해주세요");
-        }else{
-            if(getDBdataFood("Select * from menu where Menu_name like '"+FoodName+"'","AddMenu")==0)
-                JOptionPane.showMessageDialog(null,"검색한 음식은 없습니다.");
+        String FoodName = "%" + txtMenuName.getText() + "%";
+        if (FoodName.equals("")) {
+            JOptionPane.showMessageDialog(null, "음식명을 올바르게 입력해주세요");
+        } else {
+            if (getDBdataFood("Select * from menu where Menu_name like '" + FoodName + "'", "AddMenu") == 0) {
+                JOptionPane.showMessageDialog(null, "검색한 음식은 없습니다.");
+            }
         }
     }//GEN-LAST:event_btnSearchMenuActionPerformed
 
     private void btnSearchAllMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchAllMenuActionPerformed
-        getDBdataFood("Select * from menu","AddMenu");
+        getDBdataFood("Select * from menu", "AddMenu");
     }//GEN-LAST:event_btnSearchAllMenuActionPerformed
 
     private void btnJPGFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJPGFileActionPerformed
         int result = jFileChooser1.showOpenDialog(null);
-        if(result == jFileChooser1.APPROVE_OPTION){
+        if (result == jFileChooser1.APPROVE_OPTION) {
             File selectedFile = jFileChooser1.getSelectedFile();
-            String destinationDirectory = "C:\\Users\\NSH\\Documents\\git_project\\Kiosk\\Kiosk\\src\\image";//내 코드 image폴더에 넣어야함 Kiosk
-            try{
-                Path destinationPath = new File(destinationDirectory, selectedFile.getName()).toPath();
+
+            // 상대 경로를 사용하기 위해 현재 작업 디렉토리를 얻습니다.
+            String currentWorkingDirectory = System.getProperty("user.dir");
+
+            // 상대 경로로 지정할 하위 디렉토리를 지정합니다.
+            String destinationDirectory = "\\src\\image"; // "Kiosk" 프로젝트 폴더에서 시작
+
+            try {
+                // 상대 경로로 전체 경로를 생성합니다.
+                Path destinationPath = new File(currentWorkingDirectory, destinationDirectory).toPath().resolve(selectedFile.getName());
+
+                // 파일 복사
                 Files.copy(selectedFile.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
-                JOptionPane.showMessageDialog(null,"사진이 성공적으로 복사되었습니다.");
+
+                JOptionPane.showMessageDialog(null, "사진이 성공적으로 복사되었습니다.");
                 System.out.println("File Copy Success.");
-            }catch(IOException e){
-                System.err.println("File Copy Error "+e.getMessage());
+            } catch (IOException e) {
+                System.err.println("File Copy Error " + e.getMessage());
             }
         }
     }//GEN-LAST:event_btnJPGFileActionPerformed
-    private void delMenu(String menuName){
-        if(menuName.equals("")){
+    private void delMenu(String menuName) {
+        if (menuName.equals("")) {
             JOptionPane.showMessageDialog(null, "제대로 입력해주세요");
             return;
         }
         String SQL = "delete from menu where menu_name=?";
         int ckDel = JOptionPane.showConfirmDialog(null, "정말로 삭제하시겠습니까?", "삭제 확인", JOptionPane.YES_NO_OPTION);
-        if(ckDel == JOptionPane.YES_OPTION){
-            try{
-            DB_open();
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1,menuName);
-            pstmt.executeUpdate();    
-            getDBdataFood("Select * from menu","AddMenu");
-            }catch(Exception e){
+        if (ckDel == JOptionPane.YES_OPTION) {
+            try {
+                DB_open();
+                pstmt = conn.prepareStatement(SQL);
+                pstmt.setString(1, menuName);
+                pstmt.executeUpdate();
+                getDBdataFood("Select * from menu", "AddMenu");
+            } catch (Exception e) {
                 System.out.println("setDBerr");
-                System.out.println("SQLException : "+e.getMessage());
+                System.out.println("SQLException : " + e.getMessage());
             }
-        }else{
+        } else {
         }
     }
-    private void AddMenu(String menuName, String price, String category, String stock){
-        if(menuName.equals("") || price.equals("") || category.equals("") || stock.equals("")){
+
+    private void AddMenu(String menuName, String price, String category, String stock) {
+        if (menuName.equals("") || price.equals("") || category.equals("") || stock.equals("")) {
             JOptionPane.showMessageDialog(null, "제대로 입력해주세요");
-            return ;
+            return;
         }
         String SQL = "insert into menu values(?,?,?,?)";
         int ckDel = JOptionPane.showConfirmDialog(null, "정말로 추가하시겠습니까?", "추가 확인", JOptionPane.YES_NO_OPTION);
-        if(ckDel == JOptionPane.YES_OPTION){
-            try{
-            DB_open();
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1,menuName);
-            pstmt.setString(2,price);
-            pstmt.setString(3, category);
-            pstmt.setString(4, stock);
-            pstmt.executeUpdate();    
-            getDBdataFood("Select * from menu","AddMenu");
-            }catch(Exception e){
+        if (ckDel == JOptionPane.YES_OPTION) {
+            try {
+                DB_open();
+                pstmt = conn.prepareStatement(SQL);
+                pstmt.setString(1, menuName);
+                pstmt.setString(2, price);
+                pstmt.setString(3, category);
+                pstmt.setString(4, stock);
+                pstmt.executeUpdate();
+                getDBdataFood("Select * from menu", "AddMenu");
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "이미 있는 메뉴입니다.");
-                System.out.println("SQLException : "+e.getMessage());
+                System.out.println("SQLException : " + e.getMessage());
             }
-        }else{
+        } else {
         }
     }
     private void btnDelMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelMenuActionPerformed
@@ -1135,12 +1154,12 @@ public class Admin extends javax.swing.JFrame {
     private void btnAddMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMenuActionPerformed
         String menuName = txtMenuName.getText();
         String price = txtPrice.getText();
-        String category = (String)jComboBox1.getSelectedItem();
+        String category = (String) jComboBox1.getSelectedItem();
         String stock = txtStock.getText();
-        System.out.println(menuName+"  "+price+"  "+category+"  "+stock);
-        AddMenu(menuName,price,category,stock);
+        System.out.println(menuName + "  " + price + "  " + category + "  " + stock);
+        AddMenu(menuName, price, category, stock);
     }//GEN-LAST:event_btnAddMenuActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
