@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import static sw.Main.*;
 
@@ -56,7 +57,9 @@ public class Order extends javax.swing.JFrame {
 
     public Order() {
         if (order == null) {
+            
             initComponents();
+            ((DefaultTableCellRenderer)jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER); //head 가운데 정렬
             title_name(Food);
             title_name(Ramen);
             title_name(Snack);

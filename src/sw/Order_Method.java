@@ -22,6 +22,7 @@ public class Order_Method {
         Order.order.jTable1.setValueAt(menu, iCntRow, 0);
         Order.order.jTable1.setValueAt(count, iCntRow, 1);
         Order.order.jTable1.setValueAt(price, iCntRow, 2);
+        Order.order.jTable1.getTableHeader().setReorderingAllowed(false); // head 고정
     }
     
      public void CountTable(String Menu, int count, int price) {
