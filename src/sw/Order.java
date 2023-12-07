@@ -115,6 +115,7 @@ public class Order extends javax.swing.JFrame {
         Find = new javax.swing.JPanel();
         Find_Menu = new javax.swing.JTextField();
         lblSearch = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(970, 535));
@@ -458,6 +459,13 @@ public class Order extends javax.swing.JFrame {
         lblSearch.setForeground(new java.awt.Color(255, 255, 255));
         lblSearch.setText("검색 :");
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout OrderLayout = new javax.swing.GroupLayout(Order);
         Order.setLayout(OrderLayout);
         OrderLayout.setHorizontalGroup(
@@ -470,7 +478,9 @@ public class Order extends javax.swing.JFrame {
                     .addGroup(OrderLayout.createSequentialGroup()
                         .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addComponent(jButton1))
                     .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -482,7 +492,8 @@ public class Order extends javax.swing.JFrame {
                     .addGroup(OrderLayout.createSequentialGroup()
                         .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -522,6 +533,7 @@ public class Order extends javax.swing.JFrame {
 
         try {
             String sql = "insert into Cart(USER_ID, MENU_NAME, COUNT, PRICE)" + "values (?,?,?,?)"; // DML 명령어
+            String sql2 = "update menu set menu_stock=menu_stock-? where menu_name = ?";
             Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
             PreparedStatement pstmt = con.prepareStatement(sql);
             for (int i = 0; i < GetSize; i++) {
@@ -531,23 +543,37 @@ public class Order extends javax.swing.JFrame {
                 pstmt.setString(4, Date.get(2 + i * 3));
                 pstmt.executeUpdate(); //입력값 DB 업데이트
             }
+            pstmt = con.prepareStatement(sql2);
+            for(int i = 0; i<GetSize; i++){
+                pstmt.setString(1,Date.get(1+i*3));
+                pstmt.setString(2,Date.get(i*3));
+                pstmt.executeUpdate();
+            }
             JOptionPane.showMessageDialog(null, "주문이 완료되었습니다.");
+            title_name(Food);
+            title_name(Ramen);
+            title_name(Snack);
+            title_name(Sncak1);
+            title_name(Can);
+            title_name(Topping);
+            title_name(Cafe);
             btnResetActionPerformed(evt);
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("DB Error");
+            JOptionPane.showMessageDialog(null,"문제가 있습니다");
         }
 
     }//GEN-LAST:event_btnOrderActionPerformed
 
     public void title_name(JPanel getTitle){
-        
+        getTitle.removeAll();
         String Menu_Name = null;
         int Menu_Price = 0;
-        String Menu_stock = null;
+        int Menu_stock = 0;
         ArrayList<String> Menu_Name_List = new ArrayList<String>(); //검색된 메뉴 저장
         ArrayList<Integer> Menu_Price_List = new ArrayList<Integer>(); //검색된 메뉴 저장
-        ArrayList<String> Menu_Stock_List = new ArrayList<String>(); //검색된 메뉴 저장
+        ArrayList<Integer> Menu_Stock_List = new ArrayList<Integer>(); //검색된 메뉴 저장
 
         String title = getTitle.getName();
         
@@ -571,7 +597,7 @@ public class Order extends javax.swing.JFrame {
                     Menu_Price = rs.getInt("Menu_Price");
                     Menu_Name_List.add(Menu_Name);
                     Menu_Price_List.add(Menu_Price);
-                    Menu_stock = rs.getString("Menu_stock");
+                    Menu_stock = rs.getInt("Menu_stock");
                     Menu_Stock_List.add(Menu_stock);
                 }
 
@@ -593,7 +619,7 @@ public class Order extends javax.swing.JFrame {
                 lab.setFont(new java.awt.Font("맑은 고딕", 1, 12));
                 btn.setText("");
                 String name = lab.getText().replace(" ","");
-                if(Integer.parseInt(Menu_Stock_List.get(i))<=0)
+                if(Menu_Stock_List.get(i)<=0)
                     btn.setEnabled(false);
                 int idx;
                 char cr;
@@ -601,10 +627,9 @@ public class Order extends javax.swing.JFrame {
                     cr = name.charAt(idx);
                     if((int)cr>=49&&(int)cr<=57)
                         break;
-                }                        
+                }   
                 String setname = name.substring(0,idx);
-                
-                if(Integer.parseInt(Menu_Stock_List.get(i))>=1){
+                if(Menu_Stock_List.get(i)>=1){
                     String imagePath = "/image/"+name.substring(0, idx)+".jpg";
                     java.net.URL imageURL = getClass().getResource(imagePath);
                     if(imageURL != null){
@@ -653,8 +678,6 @@ public class Order extends javax.swing.JFrame {
                 buttonPanel.add(btn, BorderLayout.CENTER);  // Center에 버튼 추가
                 buttonPanel.add(lab, BorderLayout.SOUTH);
                 
-                if(Menu_stock.equals("no"))
-                    buttonPanel.setEnabled(false);
                         
                 
                 getTitle.add(buttonPanel);
@@ -776,6 +799,7 @@ public class Order extends javax.swing.JFrame {
 
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) { // Enter 키 입력시
             Menu.setSelectedIndex(7); // Tab Focus(검색)            
+            Menu.setSelectedIndex(7); // Tab Focus(검색)
             SwingUtilities.updateComponentTreeUI(Find);
             Find.removeAll();
             Find.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
@@ -828,6 +852,8 @@ public class Order extends javax.swing.JFrame {
                     if((int)cr>=49&&(int)cr<=57)
                         break;
                 }             
+                String setname = name.substring(0,idx);
+                
                 if(Integer.parseInt(Menu_Stock_List.get(i))>=1){
                     String imagePath = "/image/"+name.substring(0, idx)+".jpg";
                     java.net.URL imageURL = getClass().getResource(imagePath);
@@ -839,7 +865,6 @@ public class Order extends javax.swing.JFrame {
                 }else{
                     btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/품절.jpg")));
                 }
-                String setname = name.substring(0,idx);
                 int price = Menu_Price_List.get(i);
                 buttonPriceMap.put(btn, price);
 
@@ -890,6 +915,10 @@ public class Order extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Find_MenuActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -936,6 +965,7 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnReset;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
     private javax.swing.JLabel lblName;
