@@ -6,6 +6,8 @@
     </Component>
     <Component class="javax.swing.JProgressBar" name="jProgressBar1">
     </Component>
+    <Component class="javax.swing.JFileChooser" name="jFileChooser1">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -490,10 +492,12 @@
                               <Component id="btnDelMenu" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblStock" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="txtStock" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnJPGFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblStock" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="btnJPGFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="txtStock" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="lblBack2" min="-2" max="-2" attributes="0"/>
@@ -594,11 +598,14 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="7">
+                <StringItem index="0" value="&#xc2dd;&#xc0ac;"/>
+                <StringItem index="1" value="&#xb77c;&#xba74;"/>
+                <StringItem index="2" value="&#xac04;&#xc2dd;"/>
+                <StringItem index="3" value="&#xacfc;&#xc790;"/>
+                <StringItem index="4" value="&#xce94;&#xc74c;&#xb8cc;"/>
+                <StringItem index="5" value="&#xd1a0;&#xd551;"/>
+                <StringItem index="6" value="&#xce74;&#xd398;&#xc74c;&#xb8cc;"/>
               </StringArray>
             </Property>
           </Properties>
