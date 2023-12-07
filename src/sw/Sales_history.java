@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static sw.Main.*;
 
@@ -26,9 +27,9 @@ public class Sales_history extends javax.swing.JFrame {
             public void run() {
 
                 System.out.println("Refresh");
-                System.out.println(current);
-                if (temp != current) //주문이 들어오면
+                if (temp != current && temp != 0) //주문이 들어오면
                 {
+                    JOptionPane.showMessageDialog(null, "새로운 주문이 입력되었습니다.");
                     int Cul = current - temp;
                     String Id = null;
                     String Menu_name = null;
@@ -50,7 +51,7 @@ public class Sales_history extends javax.swing.JFrame {
                             Menu_name_list.add(Menu_name);
                             Count_list.add(count);
                         }
-                        for(int i=0; i<Menu_name_list.size(); i++){
+                        for(int i=0; i<Menu_name_list.size(); i++){ //새로운 주문들어오면 테이블에 추가
                             MakeTable(Id_list.get(i), Menu_name_list.get(i), Count_list.get(i));
                             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                             Object[] reowData = {null, null, null};
