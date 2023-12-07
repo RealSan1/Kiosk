@@ -1,5 +1,9 @@
 package sw;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.metal.MetalBorders;
@@ -115,6 +119,7 @@ public class Admin extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jFileChooser1 = new javax.swing.JFileChooser();
         Main = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         btnInventory1 = new javax.swing.JButton();
@@ -465,7 +470,7 @@ public class Admin extends javax.swing.JFrame {
         lblStock.setForeground(new java.awt.Color(255, 255, 255));
         lblStock.setText("재고");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "식사", "라면", "간식", "과자", "캔음료", "토핑", "카페음료" }));
 
         txtStock.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtStock.addActionListener(new java.awt.event.ActionListener() {
@@ -592,10 +597,11 @@ public class Admin extends javax.swing.JFrame {
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDelMenu))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblStock, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnJPGFile)))
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblStock, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnJPGFile))
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblBack2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -824,27 +830,42 @@ public class Admin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"올바른 숫자를 입력하세요");
         }        
     }//GEN-LAST:event_btnTimeActionPerformed
-    private int getDBdataFood(String SQL){
+    private int getDBdataFood(String SQL, String frame){
         String Menu_Name = null; 
         String Menu_STOCK = null;
         String Menu_Price = null;
+        String Menu_Category = null;    
+        DefaultTableModel model1 = null;
+        DefaultTableModel model2 = null;
         int cnt = 0;
-        DefaultTableModel model1 = (DefaultTableModel)tabMenuDB.getModel();
-        model1.setRowCount(0);
         try{
             DB_open();
             rs = stmt.executeQuery(SQL);
-            while(rs.next()){
-                Menu_Name = rs.getString("Menu_Name");
-                Menu_STOCK = rs.getString("Menu_STOCK");
-                Menu_Price = rs.getString("Menu_Price");
-                model1.addRow(new Object[]{Menu_Name, Menu_Price, Menu_STOCK});
-                cnt = rs.getRow();
+            if("MenuInventory".equals(frame)){
+                model1 = (DefaultTableModel)tabMenuDB.getModel();
+                model1.setRowCount(0);
+                while(rs.next()){
+                    Menu_Name = rs.getString("Menu_Name");
+                    Menu_STOCK = rs.getString("Menu_STOCK");
+                    Menu_Price = rs.getString("Menu_Price");
+                    model1.addRow(new Object[]{Menu_Name, Menu_Price, Menu_STOCK});
+                    cnt = rs.getRow();
+                }
+            }else if("AddMenu".equals(frame)){
+                model2 = (DefaultTableModel)tabMenuDB1.getModel();
+                model2.setRowCount(0);
+                while(rs.next()){
+                    Menu_Name = rs.getString("Menu_Name");
+                    Menu_STOCK = rs.getString("Menu_STOCK");
+                    Menu_Price = rs.getString("Menu_Price");
+                    Menu_Category = rs.getString("Menu_Category");
+                    model2.addRow(new Object[]{Menu_Name, Menu_Price, Menu_Category,Menu_STOCK});
+                    cnt = rs.getRow();
+                }
             }
         }catch(Exception e){
             System.out.println("SQLException : "+e.getMessage());
         }
-        tabMenuDB.setModel(model1);
         return cnt;
     }
     
@@ -855,15 +876,12 @@ public class Admin extends javax.swing.JFrame {
             DB_open();
             System.out.println(row);
             pstmt = conn.prepareStatement(SQL);
-            if(stock.equals("no") || stock.equals("No")){
-                pstmt.setString(1, "yes");
-            }else{
-                pstmt.setString(1, "no");
-            }
-            
+            pstmt.setString(1,stock);            
             pstmt.setString(2,FoodName);
             pstmt.executeUpdate();    
-            getDBdataFood("Select * from menu");
+            System.out.println("update stock value = "+stock);
+            System.out.println("update name value = "+FoodName);
+            getDBdataFood("Select * from menu","MenuInventory");
         }catch(Exception e){
             System.out.println("setDBerr");
             System.out.println("SQLException : "+e.getMessage());
@@ -878,14 +896,14 @@ public class Admin extends javax.swing.JFrame {
             pstmt.setString(1, Price);
             pstmt.setString(2,FoodName);
             pstmt.executeUpdate();    
-            getDBdataFood("Select * from menu");
+            getDBdataFood("Select * from menu","MenuInventory");
         }catch(Exception e){
             System.out.println("setDBerr");
             System.out.println("SQLException : "+e.getMessage());
         }
     }
     private void btnAllSearchMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllSearchMenuActionPerformed
-        getDBdataFood("Select * from menu");
+        getDBdataFood("Select * from menu","MenuInventory");
     }//GEN-LAST:event_btnAllSearchMenuActionPerformed
 
     private void btnSearchFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFoodActionPerformed
@@ -893,23 +911,22 @@ public class Admin extends javax.swing.JFrame {
         if(FoodName.equals("")){
             JOptionPane.showMessageDialog(null,"음식명을 올바르게 입력해주세요");
         }else{
-            if(getDBdataFood("Select * from menu where Menu_name like '"+FoodName+"'")==0)
+            if(getDBdataFood("Select * from menu where Menu_name like '"+FoodName+"'","MenuInventory")==0)
                 JOptionPane.showMessageDialog(null,"검색한 음식은 없습니다.");
         }
     }//GEN-LAST:event_btnSearchFoodActionPerformed
 
     private void btnSoldOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoldOutActionPerformed
         String FoodName = txtNameMenu.getText();
+        String stock = txtStockChange.getText();
         if(FoodName.equals("")){
             JOptionPane.showMessageDialog(null,"음식명을 올바르게 입력해주세요");
         }else{
             int row = tabMenuDB.getSelectedRow();
-            Object stock = tabMenuDB.getValueAt(row, 2);
-            System.out.println((String)tabMenuDB.getValueAt(row,0));
             if(!FoodName.equals((String)tabMenuDB.getValueAt(row,0))){
                 JOptionPane.showMessageDialog(null,"검색한 음식은 없습니다.");
             }else{
-                setDBdataFood(FoodName, (String)stock);
+                setDBdataFood(FoodName, stock);
             }
         }
     }//GEN-LAST:event_btnSoldOutActionPerformed
@@ -951,7 +968,8 @@ public class Admin extends javax.swing.JFrame {
         txtNameMenu.setText((String) value);
         value = tabMenuDB.getValueAt(row,1);
         txtPriceChange.setText((String) value);
-        
+        value = tabMenuDB.getValueAt(row,2);
+        txtStockChange.setText((String)value);
     }//GEN-LAST:event_tabMenuDBMouseClicked
 
     private void tabTimeDBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabTimeDBMouseClicked
@@ -986,7 +1004,7 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTime1ActionPerformed
 
     private void txtStockChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockChangeActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtStockChangeActionPerformed
 
     private void btnInventory3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventory3ActionPerformed
@@ -995,7 +1013,8 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInventory3ActionPerformed
 
     private void btnInventory4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventory4ActionPerformed
-        // TODO add your handling code here:
+        AddDelMenu.setVisible(true);
+        Main.setVisible(false);
     }//GEN-LAST:event_btnInventory4ActionPerformed
 
     private void txtMenuNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMenuNameActionPerformed
@@ -1003,7 +1022,8 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMenuNameActionPerformed
 
     private void lblBack2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBack2MouseClicked
-        // TODO add your handling code here:
+        Main.setVisible(true);
+        AddDelMenu.setVisible(false);
     }//GEN-LAST:event_lblBack2MouseClicked
 
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
@@ -1015,27 +1035,110 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtStockActionPerformed
 
     private void tabMenuDB1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabMenuDB1MouseClicked
-        // TODO add your handling code here:
+        int row = tabMenuDB1.getSelectedRow();
+        System.out.println(row);
+        Object value = tabMenuDB1.getValueAt(row,0);
+        txtMenuName.setText((String) value);
+        value = tabMenuDB1.getValueAt(row,1);
+        txtPrice.setText((String) value);
+        value = tabMenuDB1.getValueAt(row,2);
+        int itemCount = jComboBox1.getItemCount();
+        for(int i = 0; i<itemCount; i++){
+            if(jComboBox1.getItemAt(i).equals(value)){
+                jComboBox1.setSelectedIndex(i);
+                break;
+            }
+        }
+        value = tabMenuDB1.getValueAt(row,3);
+        txtStock.setText((String)value);  
     }//GEN-LAST:event_tabMenuDB1MouseClicked
 
     private void btnSearchMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchMenuActionPerformed
-        // TODO add your handling code here:
+        String FoodName = "%"+txtMenuName.getText()+"%";
+        if(FoodName.equals("")){
+            JOptionPane.showMessageDialog(null,"음식명을 올바르게 입력해주세요");
+        }else{
+            if(getDBdataFood("Select * from menu where Menu_name like '"+FoodName+"'","AddMenu")==0)
+                JOptionPane.showMessageDialog(null,"검색한 음식은 없습니다.");
+        }
     }//GEN-LAST:event_btnSearchMenuActionPerformed
 
     private void btnSearchAllMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchAllMenuActionPerformed
-        // TODO add your handling code here:
+        getDBdataFood("Select * from menu","AddMenu");
     }//GEN-LAST:event_btnSearchAllMenuActionPerformed
 
     private void btnJPGFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJPGFileActionPerformed
-        // TODO add your handling code here:
+        int result = jFileChooser1.showOpenDialog(null);
+        if(result == jFileChooser1.APPROVE_OPTION){
+            File selectedFile = jFileChooser1.getSelectedFile();
+            String destinationDirectory = "C:\\Users\\NSH\\Documents\\git_project\\Kiosk\\Kiosk\\src\\image";//내 코드 image폴더에 넣어야함 Kiosk
+            try{
+                Path destinationPath = new File(destinationDirectory, selectedFile.getName()).toPath();
+                Files.copy(selectedFile.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
+                JOptionPane.showMessageDialog(null,"사진이 성공적으로 복사되었습니다.");
+                System.out.println("File Copy Success.");
+            }catch(IOException e){
+                System.err.println("File Copy Error "+e.getMessage());
+            }
+        }
     }//GEN-LAST:event_btnJPGFileActionPerformed
-
+    private void delMenu(String menuName){
+        if(menuName.equals("")){
+            JOptionPane.showMessageDialog(null, "제대로 입력해주세요");
+            return;
+        }
+        String SQL = "delete from menu where menu_name=?";
+        int ckDel = JOptionPane.showConfirmDialog(null, "정말로 삭제하시겠습니까?", "삭제 확인", JOptionPane.YES_NO_OPTION);
+        if(ckDel == JOptionPane.YES_OPTION){
+            try{
+            DB_open();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1,menuName);
+            pstmt.executeUpdate();    
+            getDBdataFood("Select * from menu","AddMenu");
+            }catch(Exception e){
+                System.out.println("setDBerr");
+                System.out.println("SQLException : "+e.getMessage());
+            }
+        }else{
+        }
+    }
+    private void AddMenu(String menuName, String price, String category, String stock){
+        if(menuName.equals("") || price.equals("") || category.equals("") || stock.equals("")){
+            JOptionPane.showMessageDialog(null, "제대로 입력해주세요");
+            return ;
+        }
+        String SQL = "insert into menu values(?,?,?,?)";
+        int ckDel = JOptionPane.showConfirmDialog(null, "정말로 추가하시겠습니까?", "추가 확인", JOptionPane.YES_NO_OPTION);
+        if(ckDel == JOptionPane.YES_OPTION){
+            try{
+            DB_open();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1,menuName);
+            pstmt.setString(2,price);
+            pstmt.setString(3, category);
+            pstmt.setString(4, stock);
+            pstmt.executeUpdate();    
+            getDBdataFood("Select * from menu","AddMenu");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "이미 있는 메뉴입니다.");
+                System.out.println("SQLException : "+e.getMessage());
+            }
+        }else{
+        }
+    }
     private void btnDelMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelMenuActionPerformed
-        // TODO add your handling code here:
+        String menuName = txtMenuName.getText();
+        delMenu(menuName);
     }//GEN-LAST:event_btnDelMenuActionPerformed
 
     private void btnAddMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMenuActionPerformed
-        // TODO add your handling code here:
+        String menuName = txtMenuName.getText();
+        String price = txtPrice.getText();
+        String category = (String)jComboBox1.getSelectedItem();
+        String stock = txtStock.getText();
+        System.out.println(menuName+"  "+price+"  "+category+"  "+stock);
+        AddMenu(menuName,price,category,stock);
     }//GEN-LAST:event_btnAddMenuActionPerformed
     
     /**
@@ -1097,6 +1200,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
