@@ -538,7 +538,6 @@ public class Order extends javax.swing.JFrame {
             System.out.println("DB Error");
         }
 
-
     }//GEN-LAST:event_btnOrderActionPerformed
 
     public void title_name(JPanel getTitle){
@@ -776,7 +775,8 @@ public class Order extends javax.swing.JFrame {
         ArrayList<String> Menu_Stock_List = new ArrayList<String>(); //검색된 메뉴 저장
 
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) { // Enter 키 입력시
-            Menu.setSelectedIndex(7); // Tab Focus(검색)
+            Menu.setSelectedIndex(7); // Tab Focus(검색)            
+            SwingUtilities.updateComponentTreeUI(Find);
             Find.removeAll();
             Find.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 
