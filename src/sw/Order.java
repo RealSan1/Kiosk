@@ -597,7 +597,7 @@ public class Order extends javax.swing.JFrame {
             char cr;
             for (idx = 0; idx < name.length(); idx++) {
                 cr = name.charAt(idx);
-                if ((int) cr >= 49 && (int) cr <= 57) {
+                if ((int) cr >= 48 && (int) cr <= 57) {
                     break;
                 }
             }
@@ -816,7 +816,7 @@ public class Order extends javax.swing.JFrame {
                 char cr;
                 for (idx = 0; idx < name.length(); idx++) {
                     cr = name.charAt(idx);
-                    if ((int) cr >= 49 && (int) cr <= 57) {
+                    if ((int) cr >= 48 && (int) cr <= 57) {
                         break;
                     }
                 }
