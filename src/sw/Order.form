@@ -2,7 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[970, 535]"/>
     </Property>
@@ -62,8 +62,6 @@
                           <Component id="lblSearch" min="-2" pref="37" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="Find_Menu" min="-2" pref="96" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="subPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -80,7 +78,6 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Find_Menu" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblSearch" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="subPanel" min="-2" max="-2" attributes="0"/>
@@ -673,14 +670,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#xac80;&#xc0c9; :"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jButton1"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -115,9 +115,8 @@ public class Order extends javax.swing.JFrame {
         Find = new javax.swing.JPanel();
         Find_Menu = new javax.swing.JTextField();
         lblSearch = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(970, 535));
 
         Order.setBackground(new java.awt.Color(35, 35, 35));
@@ -459,13 +458,6 @@ public class Order extends javax.swing.JFrame {
         lblSearch.setForeground(new java.awt.Color(255, 255, 255));
         lblSearch.setText("검색 :");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout OrderLayout = new javax.swing.GroupLayout(Order);
         Order.setLayout(OrderLayout);
         OrderLayout.setHorizontalGroup(
@@ -478,9 +470,7 @@ public class Order extends javax.swing.JFrame {
                     .addGroup(OrderLayout.createSequentialGroup()
                         .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(jButton1))
+                        .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -492,8 +482,7 @@ public class Order extends javax.swing.JFrame {
                     .addGroup(OrderLayout.createSequentialGroup()
                         .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
+                            .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -544,9 +533,9 @@ public class Order extends javax.swing.JFrame {
                 pstmt.executeUpdate(); //입력값 DB 업데이트
             }
             pstmt = con.prepareStatement(sql2);
-            for(int i = 0; i<GetSize; i++){
-                pstmt.setString(1,Date.get(1+i*3));
-                pstmt.setString(2,Date.get(i*3));
+            for (int i = 0; i < GetSize; i++) {
+                pstmt.setString(1, Date.get(1 + i * 3));
+                pstmt.setString(2, Date.get(i * 3));
                 pstmt.executeUpdate();
             }
             JOptionPane.showMessageDialog(null, "주문이 완료되었습니다.");
@@ -561,23 +550,25 @@ public class Order extends javax.swing.JFrame {
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("DB Error");
-            JOptionPane.showMessageDialog(null,"문제가 있습니다");
+            JOptionPane.showMessageDialog(null, "문제가 있습니다");
         }
 
     }//GEN-LAST:event_btnOrderActionPerformed
 
-    public void title_name(JPanel getTitle){
+    public void title_name(JPanel getTitle) {
+        SwingUtilities.updateComponentTreeUI(getTitle);
         getTitle.removeAll();
         String Menu_Name = null;
         int Menu_Price = 0;
         int Menu_stock = 0;
+        int price;
         ArrayList<String> Menu_Name_List = new ArrayList<String>(); //검색된 메뉴 저장
         ArrayList<Integer> Menu_Price_List = new ArrayList<Integer>(); //검색된 메뉴 저장
         ArrayList<Integer> Menu_Stock_List = new ArrayList<Integer>(); //검색된 메뉴 저장
 
         String title = getTitle.getName();
-        
-            getTitle.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
+
+        getTitle.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 //            Ramen.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 //            Snack.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 //            Sncak1.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
@@ -585,107 +576,103 @@ public class Order extends javax.swing.JFrame {
 //            Cafe.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 //            Topping.setLayout(new FlowLayout(FlowLayout.LEFT, 55, 45)); //버튼간 위치 조절
 
-            try {
-                String sql = "select Menu_name,Menu_Price, menu_stock from Menu where menu_category = ?"; //메뉴 이름, 가격 가져오기
-                Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW);
-                PreparedStatement pstmt = con.prepareStatement(sql);
-                pstmt.setString(1, title);
-                ResultSet rs = pstmt.executeQuery();
+        try {
+            String sql = "select Menu_name,Menu_Price, menu_stock from Menu where menu_category = ?"; //메뉴 이름, 가격 가져오기
+            Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW);
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, title);
+            ResultSet rs = pstmt.executeQuery();
 
-                while (rs.next()) { //DB 입력
-                    Menu_Name = rs.getString("Menu_Name");
-                    Menu_Price = rs.getInt("Menu_Price");
-                    Menu_Name_List.add(Menu_Name);
-                    Menu_Price_List.add(Menu_Price);
-                    Menu_stock = rs.getInt("Menu_stock");
-                    Menu_Stock_List.add(Menu_stock);
-                }
-
-            } catch (SQLException ex) {
-                System.err.println("Menu Error");
+            while (rs.next()) { //DB 입력
+                Menu_Name = rs.getString("Menu_Name");
+                Menu_Price = rs.getInt("Menu_Price");
+                Menu_Name_List.add(Menu_Name);
+                Menu_Price_List.add(Menu_Price);
+                Menu_stock = rs.getInt("Menu_stock");
+                Menu_Stock_List.add(Menu_stock);
             }
 
-            // 입력된 메뉴만큼 버튼 생성
-            HashMap<JButton, Integer> buttonPriceMap = new HashMap<>();
+        } catch (SQLException ex) {
+            System.err.println("Menu Error");
+        }
 
-            for (int i = 0; i < Menu_Name_List.size(); i++) {
-                JButton btn = new JButton(Menu_Name_List.get(i));  //버튼 생성
-                JLabel lab = new JLabel(Menu_Name_List.get(i) + " " + Menu_Price_List.get(i));    //라벨 생성
-                btn.setPreferredSize(new Dimension(92, 57));
-                lab.setPreferredSize(new Dimension(80, 37));
-                
-                lab.setForeground(Color.white);  ///Label 디자인 영역
-                lab.setHorizontalAlignment(JLabel.CENTER);
-                lab.setFont(new java.awt.Font("맑은 고딕", 1, 12));
-                btn.setText("");
-                String name = lab.getText().replace(" ","");
-                if(Menu_Stock_List.get(i)<=0)
-                    btn.setEnabled(false);
-                int idx;
-                char cr;
-                for(idx=0; idx<name.length(); idx++){
-                    cr = name.charAt(idx);
-                    if((int)cr>=49&&(int)cr<=57)
+        // 입력된 메뉴만큼 버튼 생성
+        HashMap<JButton, Integer> buttonPriceMap = new HashMap<>();
+
+        for (int i = 0; i < Menu_Name_List.size(); i++) {
+            JButton btn = new JButton(Menu_Name_List.get(i));  //버튼 생성
+            JLabel lab = new JLabel(Menu_Name_List.get(i) + " " + Menu_Price_List.get(i));    //라벨 생성
+            btn.setPreferredSize(new Dimension(92, 57));
+            lab.setPreferredSize(new Dimension(80, 37));
+
+            lab.setForeground(Color.white);  ///Label 디자인 영역
+            lab.setHorizontalAlignment(JLabel.CENTER);
+            lab.setFont(new java.awt.Font("맑은 고딕", 1, 12));
+            btn.setText("");
+            String name = lab.getText().replace(" ", "");
+            if (Menu_Stock_List.get(i) <= 0) {
+                btn.setEnabled(false);
+            }
+            int idx;
+            char cr;
+            for (idx = 0; idx < name.length(); idx++) {
+                cr = name.charAt(idx);
+                if ((int) cr >= 49 && (int) cr <= 57) {
+                    break;
+                }
+            }
+            String setname = name.substring(0, idx);
+            if (Menu_Stock_List.get(i) >= 1) {
+                String imagePath = "/image/" + name.substring(0, idx) + ".jpg";
+                java.net.URL imageURL = getClass().getResource(imagePath);
+                if (imageURL != null) {
+                    btn.setIcon(new javax.swing.ImageIcon(imageURL));
+                } else {
+                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/" + "No_image" + ".jpg")));
+                }
+            } else {
+                btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/품절.jpg")));
+                lab.setForeground(Color.red);
+            }
+            price = Menu_Price_List.get(i);
+            buttonPriceMap.put(btn, price);
+
+            btn.addActionListener((e) -> {
+                boolean status = false;
+                JButton targetButton = (JButton) e.getSource();
+                int buttonPrice = buttonPriceMap.get(targetButton);
+
+                int rowCount = jTable1.getRowCount();
+                for (int j = 0; j < rowCount; j++) {
+                    Object value = jTable1.getValueAt(j, 0);
+                    if (value != null && value.toString().equalsIgnoreCase(setname)) {
+                        status = true;
                         break;
-                }   
-                String setname = name.substring(0,idx);
-                if(Menu_Stock_List.get(i)>=1){
-                    String imagePath = "/image/"+name.substring(0, idx)+".jpg";
-                    java.net.URL imageURL = getClass().getResource(imagePath);
-                    if(imageURL != null){
-                        btn.setIcon(new javax.swing.ImageIcon(imageURL));
-                    }else{
-                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+"No_image"+".jpg")));
                     }
-                }else{
-                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/품절.jpg")));
                 }
-                
-                int price = Menu_Price_List.get(i);
-                buttonPriceMap.put(btn, price);
+                if (!status) {
+                    OM.MakeTable(setname, 1, buttonPrice);
+                    prices.add(buttonPrice);
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    Object[] reowData = {null, null, null};
+                    model.addRow(reowData);
+                    OM.ShowPrice();
+                } else {
+                    return;
+                }
+            });
 
-                btn.addActionListener((e) -> {
-                    boolean status = false;
-                    JButton targetButton = (JButton) e.getSource();
-                    int buttonPrice = buttonPriceMap.get(targetButton);
+            // 버튼과 가격을 맵에 추가
+            JPanel buttonPanel = new JPanel(new BorderLayout());  // BorderLayout을 사용하여 상하 정렬
+            buttonPanel.setPreferredSize(new Dimension(120, 110));
+            Color c = new Color(80, 80, 80); // 패널 색
+            buttonPanel.setBackground(c);
+            buttonPanel.add(btn, BorderLayout.CENTER);  // Center에 버튼 추가
+            buttonPanel.add(lab, BorderLayout.SOUTH);
 
-                    
-                    int rowCount = jTable1.getRowCount();
-                    for (int j = 0; j < rowCount; j++) {
-                        Object value = jTable1.getValueAt(j, 0);
-                        if (value != null && value.toString().equalsIgnoreCase(setname)) {
-                            status = true;
-                            break;
-                        }
-                    }
-                    if (!status) {
-                        OM.MakeTable(setname, 1, buttonPrice);
-                        prices.add(buttonPrice);
-                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                        Object[] reowData = {null, null, null};
-                        model.addRow(reowData);
-                        OM.ShowPrice();
-                    } else {
-                        return;
-                    }
-                });
+            getTitle.add(buttonPanel);
 
-                // 버튼과 가격을 맵에 추가
-                JPanel buttonPanel = new JPanel(new BorderLayout());  // BorderLayout을 사용하여 상하 정렬
-                buttonPanel.setPreferredSize(new Dimension(120, 110));
-                Color c = new Color(80, 80, 80); // 패널 색
-                buttonPanel.setBackground(c);
-                buttonPanel.add(btn, BorderLayout.CENTER);  // Center에 버튼 추가
-                buttonPanel.add(lab, BorderLayout.SOUTH);
-                
-                        
-                
-                getTitle.add(buttonPanel);
-                
-                    
-
-
-            }
+        }
     }
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         //메뉴 제거
@@ -787,7 +774,7 @@ public class Order extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCountMinusActionPerformed
 
-    
+
     private void Find_MenuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Find_MenuKeyTyped
         //검색 기능
         String Menu_Name = null;
@@ -835,35 +822,40 @@ public class Order extends javax.swing.JFrame {
                 JButton Mbtn = new JButton();
                 btn.setPreferredSize(new Dimension(92, 57));
                 lab.setPreferredSize(new Dimension(80, 37));
-                Pbtn.setPreferredSize(new Dimension(20,20));
-                Mbtn.setPreferredSize(new Dimension(20,20));
+                Pbtn.setPreferredSize(new Dimension(20, 20));
+                Mbtn.setPreferredSize(new Dimension(20, 20));
                 Pbtn.setText("+");
-                Mbtn.setText("-");                
-                
+                Mbtn.setText("-");
+
                 lab.setForeground(Color.white);  ///Label 디자인 영역
                 lab.setHorizontalAlignment(JLabel.CENTER);
                 lab.setFont(new java.awt.Font("맑은 고딕", 1, 12));
                 btn.setText("");
-                String name = lab.getText().replace(" ","");
+                String name = lab.getText().replace(" ", "");
                 int idx;
                 char cr;
-                for(idx=0; idx<name.length(); idx++){
+                for (idx = 0; idx < name.length(); idx++) {
                     cr = name.charAt(idx);
-                    if((int)cr>=49&&(int)cr<=57)
+                    if ((int) cr >= 49 && (int) cr <= 57) {
                         break;
-                }             
-                String setname = name.substring(0,idx);
-                
-                if(Integer.parseInt(Menu_Stock_List.get(i))>=1){
-                    String imagePath = "/image/"+name.substring(0, idx)+".jpg";
-                    java.net.URL imageURL = getClass().getResource(imagePath);
-                    if(imageURL != null){
-                        btn.setIcon(new javax.swing.ImageIcon(imageURL));
-                    }else{
-                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/"+"No_image"+".jpg")));
                     }
-                }else{
+                }
+                String setname = name.substring(0, idx);
+
+                if (Integer.parseInt(Menu_Stock_List.get(i)) <= 0) {
+                    btn.setEnabled(false);
+            }
+                if (Integer.parseInt(Menu_Stock_List.get(i)) >= 1) {
+                    String imagePath = "/image/" + name.substring(0, idx) + ".jpg";
+                    java.net.URL imageURL = getClass().getResource(imagePath);
+                    if (imageURL != null) {
+                        btn.setIcon(new javax.swing.ImageIcon(imageURL));
+                    } else {
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/" + "No_image" + ".jpg")));
+                    }
+                } else {
                     btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/품절.jpg")));
+                    lab.setForeground(Color.red);
                 }
                 int price = Menu_Price_List.get(i);
                 buttonPriceMap.put(btn, price);
@@ -873,7 +865,6 @@ public class Order extends javax.swing.JFrame {
                     JButton targetButton = (JButton) e.getSource();
                     int buttonPrice = buttonPriceMap.get(targetButton);
 
-                    
                     int rowCount = jTable1.getRowCount();
                     for (int j = 0; j < rowCount; j++) {
                         Object value = jTable1.getValueAt(j, 0);
@@ -914,10 +905,6 @@ public class Order extends javax.swing.JFrame {
     private void Find_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Find_MenuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Find_MenuActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
 
@@ -965,7 +952,6 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnReset;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable1;
     private javax.swing.JLabel lblName;
