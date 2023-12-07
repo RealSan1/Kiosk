@@ -4,13 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import static sw.Main.*;
@@ -34,26 +31,6 @@ public class Order extends javax.swing.JFrame {
     static Order order;
     static boolean timer_run;
 
-    public String Setting_Price(String Menu_name) {
-        // 메뉴가격, 재고를 DB에서 갖고오는 메소드
-        String Price = null;
-        String Inventory = null;
-        try {
-            String sql = "select Menu_Price,Menu_Inventory from menu where Menu_Name = '" + Menu_name + "'  ";   // DML 명령어
-            Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                Price = rs.getString("Menu_Price");
-                Inventory = rs.getString("Menu_Inventory");
-            }
-            return Price;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            System.out.println("DB Error");
-        }
-        return "1000";
-    }
 
     public Order() {
         if (order == null) {

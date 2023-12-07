@@ -1,5 +1,6 @@
 package sw;
 
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 public class Order_Method {
@@ -52,6 +53,7 @@ public class Order_Method {
             table_price = Integer.parseInt(Order.order.jTable1.getValueAt(i, 2).toString());
             table_sum += table_price;
         }
-        Order.order.txtPrice.setText(Integer.toString(table_sum));
+        Order.order.txtPrice.setHorizontalAlignment(SwingConstants.RIGHT);
+        Order.order.txtPrice.setText(Integer.toString(table_sum) + "₩");
     }
 }
