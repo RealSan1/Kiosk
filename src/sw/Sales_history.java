@@ -18,10 +18,11 @@ public class Sales_history extends javax.swing.JFrame {
 
     int current = 0;
     int temp = 0;
+    ArrayList<String> Menu_name_temp = new ArrayList<>();
 
     public Sales_history() {
         initComponents();
-        ((DefaultTableCellRenderer)jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER); //head 가운데 정렬
+        ((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER); //head 가운데 정렬
 
         //스레드 부분
         Timer time = new Timer();
@@ -41,6 +42,7 @@ public class Sales_history extends javax.swing.JFrame {
                     ArrayList<String> Menu_name_list = new ArrayList<>();
                     ArrayList<String> Count_list = new ArrayList<>();
                     ArrayList<String> Time_list = new ArrayList<>();
+
                     try {
 
                         String sql = "select User_id, menu_name, count, time from cart order by time desc fetch first " + Cul + "rows only";   // DML 명령어
@@ -54,9 +56,12 @@ public class Sales_history extends javax.swing.JFrame {
                             Time = rs.getString("time");
                             Id_list.add(Id);
                             Menu_name_list.add(Menu_name);
+                            Menu_name_temp.add(Menu_name);
                             Count_list.add(count);
                             Time_list.add(Time);
+
                         }
+                        Alert();
                         for (int i = 0; i < Menu_name_list.size(); i++) { //새로운 주문들어오면 테이블에 추가
                             MakeTable(Id_list.get(i), Menu_name_list.get(i), Count_list.get(i), Time_list.get(i));
                             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -86,26 +91,21 @@ public class Sales_history extends javax.swing.JFrame {
         }
         DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성
         dtcr.setHorizontalAlignment(SwingConstants.CENTER); // 렌더러의 가로정렬을 CENTER로
-     
-        TableColumnModel tcm = jTable1.getColumnModel() ; // 정렬할 테이블의 컬럼모델을 가져옴
-     
-       
-//      tcm.getColumn(0).setCellRenderer(dtcr);  내용 가운데정렬
+
+        TableColumnModel tcm = jTable1.getColumnModel(); // 정렬할 테이블의 컬럼모델을 가져옴
+
+        //가운데 정렬
+//      tcm.getColumn(0).setCellRenderer(dtcr);  
 //      tcm.getColumn(1).setCellRenderer(dtcr);  
 //      tcm.getColumn(2).setCellRenderer(dtcr);  
 //      tcm.getColumn(3).setCellRenderer(dtcr);  
-      
-
-
         jTable1.setValueAt(id, iCntRow, 0);
         jTable1.setValueAt(Menu, iCntRow, 1);
         jTable1.setValueAt(Count, iCntRow, 2);
         jTable1.setValueAt(time, iCntRow, 3);
-        
+
         jTable1.getTableHeader().setReorderingAllowed(false);
-        
-        
-        
+
     }
 
     public void GetSales() {
@@ -124,6 +124,36 @@ public class Sales_history extends javax.swing.JFrame {
 
     }
 
+    public void Alert() {
+        String Menu_name = null;
+        ArrayList<String> Menu_name_list = new ArrayList<>();
+        try {
+            String sql = "select Menu_name from menu where Menu_stock <= 5";   // DML 명령어
+            Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Menu_name = rs.getString("Menu_name");
+                Menu_name_list.add(Menu_name);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("DB Error");
+        }
+        List<String> commonElements = findCommonElements(Menu_name_list, Menu_name_temp);
+        for(int i=0; i<commonElements.size(); i++){
+            JOptionPane.showMessageDialog(null, commonElements.get(i) +" 5개 이하 남았습니다.");
+        }
+        Menu_name_temp.clear();
+        
+        
+    }
+    public static List<String> findCommonElements(List<String> list1, List<String> list2) {
+        List<String> commonElements = new ArrayList<>(list1);
+        commonElements.retainAll(list2);
+
+        return commonElements;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -261,13 +291,13 @@ public class Sales_history extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String Id = null;
-                    String Menu_name = null;
-                    String count = null;
-                    String Time = null;
-                    ArrayList<String> Id_list = new ArrayList<>();
-                    ArrayList<String> Menu_name_list = new ArrayList<>();
-                    ArrayList<String> Count_list = new ArrayList<>();
-                    ArrayList<String> Time_list = new ArrayList<>();
+        String Menu_name = null;
+        String count = null;
+        String Time = null;
+        ArrayList<String> Id_list = new ArrayList<>();
+        ArrayList<String> Menu_name_list = new ArrayList<>();
+        ArrayList<String> Count_list = new ArrayList<>();
+        ArrayList<String> Time_list = new ArrayList<>();
         try {
 
             String sql = "select User_id, menu_name, count, time from cart order by time desc";   // DML 명령어
@@ -276,13 +306,13 @@ public class Sales_history extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Id = rs.getString("User_id");
-                            Menu_name = rs.getString("menu_name");
-                            count = rs.getString("count");
-                            Time = rs.getString("time");
-                            Id_list.add(Id);
-                            Menu_name_list.add(Menu_name);
-                            Count_list.add(count);
-                            Time_list.add(Time);
+                Menu_name = rs.getString("menu_name");
+                count = rs.getString("count");
+                Time = rs.getString("time");
+                Id_list.add(Id);
+                Menu_name_list.add(Menu_name);
+                Count_list.add(count);
+                Time_list.add(Time);
             }
             for (int i = 0; i < Menu_name_list.size(); i++) { //새로운 주문들어오면 테이블에 추가
                 MakeTable(Id_list.get(i), Menu_name_list.get(i), Count_list.get(i), Time_list.get(i));
