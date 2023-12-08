@@ -127,6 +127,9 @@ public class Sales_history extends javax.swing.JFrame {
     public void Alert() {
         String Menu_name = null;
         ArrayList<String> Menu_name_list = new ArrayList<>();
+        String Menu_count = null;
+        ArrayList<String> Menu_count_list = new ArrayList<>();
+        String name = "";
         try {
             String sql = "select Menu_name from menu where Menu_stock <= 5";   // DML 명령어
             Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
@@ -141,19 +144,44 @@ public class Sales_history extends javax.swing.JFrame {
             System.out.println("DB Error");
         }
         List<String> commonElements = findCommonElements(Menu_name_list, Menu_name_temp);
-        for(int i=0; i<commonElements.size(); i++){
-            JOptionPane.showMessageDialog(null, commonElements.get(i) +" 5개 이하 남았습니다.");
+        for (int i = 0; i < commonElements.size(); i++) {
+            name += "'"+commonElements.get(i)+"'";
+            if (i < commonElements.size() - 1) {
+                name += ","; // 마지막 요소가 아닌 경우에만 쉼표 추가
+            }
         }
+        Menu_name_list.clear();
         Menu_name_temp.clear();
         
+        try {
+            String sql = "select Menu_name, Menu_stock from menu where Menu_name in ("+name+")";   // DML 명령어
+            Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Menu_name = rs.getString("Menu_name");
+                Menu_name_list.add(Menu_name);
+                Menu_count = rs.getString("Menu_stock");
+                Menu_count_list.add(Menu_count);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("DB Error");
+        }
         
+        for (int i = 0; i < Menu_name_list.size(); i++) {
+            JOptionPane.showMessageDialog(null, Menu_name_list.get(i) + " 재고가 "+ Menu_count_list.get(i) +"개 남았습니다.");
+        }
+
     }
+
     public static List<String> findCommonElements(List<String> list1, List<String> list2) {
         List<String> commonElements = new ArrayList<>(list1);
         commonElements.retainAll(list2);
 
         return commonElements;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
