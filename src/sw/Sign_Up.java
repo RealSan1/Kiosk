@@ -1,4 +1,6 @@
 package sw;
+
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -7,13 +9,21 @@ import static sw.Main.orcle_PW;
 import static sw.Main.orcle_url;
 
 public class Sign_Up extends javax.swing.JFrame {
+
+    String phoneNum;
+    String userName;
+    String userBirth;
     
+    boolean phonecheck = false;
     boolean status = false; //중복검사 확인 (중복 검사버튼을 누르지 않으면 회원가입 불가)
-    
+
     public Sign_Up() {
         initComponents();
-        lblWarn.hide();
-        lblWarn1.hide();
+        lblWarn.setForeground(Sign.getBackground());
+        lblWarn1.setForeground(Sign.getBackground());
+        lblCheck.setVisible(false);
+        txtCheck.setVisible(false);
+        btnCheck.setVisible(false);
     }
 
     /**
@@ -25,14 +35,13 @@ public class Sign_Up extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         Sign = new javax.swing.JPanel();
         Sign_Up_Label = new javax.swing.JLabel();
         Input_ID_text = new javax.swing.JTextField();
         Sign_button = new javax.swing.JButton();
         Cancel_button = new javax.swing.JButton();
         Input_Name_text = new javax.swing.JTextField();
-        Input_PW_text = new javax.swing.JTextField();
-        Input_PWC_text = new javax.swing.JTextField();
         Duplicate_button = new javax.swing.JButton();
         lblID = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
@@ -40,16 +49,44 @@ public class Sign_Up extends javax.swing.JFrame {
         lblPWC = new javax.swing.JLabel();
         lblWarn = new javax.swing.JLabel();
         lblWarn1 = new javax.swing.JLabel();
+        btn_check = new javax.swing.JButton();
+        lblPhoneNum = new javax.swing.JLabel();
+        Input_PhoneNum_text = new javax.swing.JTextField();
+        Input_PW_text = new javax.swing.JPasswordField();
+        Input_PWC_text = new javax.swing.JPasswordField();
+        Check = new javax.swing.JPanel();
+        radioKT = new javax.swing.JRadioButton();
+        radioSKT = new javax.swing.JRadioButton();
+        radioLG = new javax.swing.JRadioButton();
+        lblTitle = new javax.swing.JLabel();
+        lblCom = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        txtBirth = new javax.swing.JTextField();
+        lblN = new javax.swing.JLabel();
+        lblBirth = new javax.swing.JLabel();
+        txtPN1 = new javax.swing.JTextField();
+        lblPN = new javax.swing.JLabel();
+        txtPN2 = new javax.swing.JTextField();
+        txtPN3 = new javax.swing.JTextField();
+        lblHypen1 = new javax.swing.JLabel();
+        lblHypen2 = new javax.swing.JLabel();
+        btnCheckRequest = new javax.swing.JButton();
+        txtCheck = new javax.swing.JTextField();
+        lblCheck = new javax.swing.JLabel();
+        btnCheck = new javax.swing.JButton();
+        lblBack = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.CardLayout());
 
         Sign.setBackground(new java.awt.Color(35, 35, 35));
-        Sign.setMinimumSize(new java.awt.Dimension(356, 402));
-        Sign.setPreferredSize(new java.awt.Dimension(356, 402));
+        Sign.setMaximumSize(new java.awt.Dimension(405, 410));
+        Sign.setMinimumSize(new java.awt.Dimension(405, 410));
+        Sign.setPreferredSize(new java.awt.Dimension(405, 410));
 
         Sign_Up_Label.setFont(new java.awt.Font("맑은 고딕", 1, 24)); // NOI18N
         Sign_Up_Label.setForeground(new java.awt.Color(255, 255, 255));
-        Sign_Up_Label.setText("회원가입");
+        Sign_Up_Label.setText("회원 가입");
 
         Input_ID_text.setBackground(new java.awt.Color(25, 25, 25));
         Input_ID_text.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
@@ -61,7 +98,7 @@ public class Sign_Up extends javax.swing.JFrame {
 
         Sign_button.setBackground(new java.awt.Color(211, 211, 211));
         Sign_button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        Sign_button.setText("계정 생성");
+        Sign_button.setText("회원 가입");
         Sign_button.setEnabled(false);
         Sign_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,23 +115,14 @@ public class Sign_Up extends javax.swing.JFrame {
             }
         });
 
+        Input_Name_text.setEditable(false);
         Input_Name_text.setBackground(new java.awt.Color(25, 25, 25));
         Input_Name_text.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         Input_Name_text.setForeground(new java.awt.Color(255, 255, 255));
         Input_Name_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         Input_Name_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
-        Input_PW_text.setBackground(new java.awt.Color(25, 25, 25));
-        Input_PW_text.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        Input_PW_text.setForeground(new java.awt.Color(255, 255, 255));
-        Input_PW_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Input_PW_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
-        Input_PWC_text.setBackground(new java.awt.Color(25, 25, 25));
-        Input_PWC_text.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        Input_PWC_text.setForeground(new java.awt.Color(255, 255, 255));
-        Input_PWC_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Input_PWC_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Input_Name_text.setEnabled(false);
+        Input_Name_text.setFocusable(false);
 
         Duplicate_button.setBackground(new java.awt.Color(211, 211, 211));
         Duplicate_button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
@@ -122,110 +150,412 @@ public class Sign_Up extends javax.swing.JFrame {
         lblPWC.setText("비밀번호 확인");
 
         lblWarn.setForeground(new java.awt.Color(255, 0, 0));
-        lblWarn.setText("* 비밀번호: 8~16자, 특수문자를 사용해 주세요. ");
+        lblWarn.setText("* 비밀번호: 8~16자의 영문 소문자, 숫자를 사용해 주세요. ");
 
         lblWarn1.setForeground(new java.awt.Color(255, 0, 0));
         lblWarn1.setText("* 비밀번호 확인: 비밀번호가 일치하지 않습니다.");
+
+        btn_check.setBackground(new java.awt.Color(211, 211, 211));
+        btn_check.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        btn_check.setText("인증하기");
+        btn_check.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_checkActionPerformed(evt);
+            }
+        });
+
+        lblPhoneNum.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblPhoneNum.setForeground(new java.awt.Color(255, 255, 255));
+        lblPhoneNum.setText("전화번호");
+
+        Input_PhoneNum_text.setEditable(false);
+        Input_PhoneNum_text.setBackground(new java.awt.Color(25, 25, 25));
+        Input_PhoneNum_text.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        Input_PhoneNum_text.setForeground(new java.awt.Color(255, 255, 255));
+        Input_PhoneNum_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        Input_PhoneNum_text.setActionCommand("<Not Set>");
+        Input_PhoneNum_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Input_PhoneNum_text.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        Input_PhoneNum_text.setEnabled(false);
+        Input_PhoneNum_text.setFocusable(false);
+
+        Input_PW_text.setBackground(new java.awt.Color(35, 35, 35));
+        Input_PW_text.setForeground(new java.awt.Color(255, 255, 255));
+        Input_PW_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        Input_PW_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        Input_PWC_text.setBackground(new java.awt.Color(35, 35, 35));
+        Input_PWC_text.setForeground(new java.awt.Color(255, 255, 255));
+        Input_PWC_text.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        Input_PWC_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         javax.swing.GroupLayout SignLayout = new javax.swing.GroupLayout(Sign);
         Sign.setLayout(SignLayout);
         SignLayout.setHorizontalGroup(
             SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Cancel_button)
+                .addGap(67, 67, 67)
+                .addComponent(Sign_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
             .addGroup(SignLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignLayout.createSequentialGroup()
-                        .addComponent(Sign_Up_Label)
-                        .addGap(140, 140, 140))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignLayout.createSequentialGroup()
+                    .addGroup(SignLayout.createSequentialGroup()
+                        .addComponent(lblID)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Input_ID_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Duplicate_button))
+                    .addGroup(SignLayout.createSequentialGroup()
+                        .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPhoneNum)
+                            .addComponent(lblName))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Input_Name_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(SignLayout.createSequentialGroup()
+                                .addComponent(Input_PhoneNum_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_check, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(SignLayout.createSequentialGroup()
                         .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblWarn)
+                            .addComponent(lblWarn1)
                             .addGroup(SignLayout.createSequentialGroup()
                                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblPWC)
-                                    .addComponent(lblPW, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblName, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblID, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(lblPW, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(15, 15, 15)
                                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Input_Name_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(SignLayout.createSequentialGroup()
-                                        .addComponent(Input_ID_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Duplicate_button))
-                                    .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblWarn1))
-                        .addGap(11, 11, 11))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(Cancel_button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Sign_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                                    .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(24, 24, 24))
+            .addGroup(SignLayout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(Sign_Up_Label)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         SignLayout.setVerticalGroup(
             SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SignLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(Sign_Up_Label)
-                .addGap(48, 48, 48)
-                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Input_ID_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Duplicate_button)
-                    .addComponent(lblID))
                 .addGap(18, 18, 18)
+                .addComponent(Sign_Up_Label)
+                .addGap(32, 32, 32)
+                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SignLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblID))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Input_ID_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Duplicate_button)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Input_PhoneNum_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_check)
+                    .addComponent(lblPhoneNum))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Input_Name_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblName))
-                .addGap(18, 18, 18)
-                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPW))
-                .addGap(18, 18, 18)
-                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPWC))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPW)
+                    .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPWC)
+                    .addComponent(Input_PWC_text, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addComponent(lblWarn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblWarn1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(SignLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Sign_button)
                     .addComponent(Cancel_button))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(59, 59, 59))
         );
 
-        getContentPane().add(Sign, java.awt.BorderLayout.CENTER);
+        getContentPane().add(Sign, "card2");
+
+        Check.setBackground(new java.awt.Color(35, 35, 35));
+        Check.setMaximumSize(new java.awt.Dimension(405, 410));
+        Check.setMinimumSize(new java.awt.Dimension(405, 410));
+        Check.setPreferredSize(new java.awt.Dimension(405, 410));
+
+        buttonGroup1.add(radioKT);
+        radioKT.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        radioKT.setForeground(new java.awt.Color(255, 255, 255));
+        radioKT.setSelected(true);
+        radioKT.setText("KT");
+
+        buttonGroup1.add(radioSKT);
+        radioSKT.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        radioSKT.setForeground(new java.awt.Color(255, 255, 255));
+        radioSKT.setText("SKT");
+
+        buttonGroup1.add(radioLG);
+        radioLG.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        radioLG.setForeground(new java.awt.Color(255, 255, 255));
+        radioLG.setText("LG U+");
+
+        lblTitle.setFont(new java.awt.Font("맑은 고딕", 1, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitle.setText("휴대폰 인증");
+
+        lblCom.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblCom.setForeground(new java.awt.Color(255, 255, 255));
+        lblCom.setText("통신사");
+
+        txtName.setBackground(new java.awt.Color(25, 25, 25));
+        txtName.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        txtName.setForeground(new java.awt.Color(255, 255, 255));
+        txtName.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        txtName.setToolTipText("");
+        txtName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        txtBirth.setBackground(new java.awt.Color(25, 25, 25));
+        txtBirth.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        txtBirth.setForeground(new java.awt.Color(255, 255, 255));
+        txtBirth.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        txtBirth.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblN.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblN.setForeground(new java.awt.Color(255, 255, 255));
+        lblN.setText("이름");
+
+        lblBirth.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblBirth.setForeground(new java.awt.Color(255, 255, 255));
+        lblBirth.setText("생년월일 8자리");
+
+        txtPN1.setBackground(new java.awt.Color(25, 25, 25));
+        txtPN1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        txtPN1.setForeground(new java.awt.Color(255, 255, 255));
+        txtPN1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPN1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblPN.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblPN.setForeground(new java.awt.Color(255, 255, 255));
+        lblPN.setText("전화번호");
+
+        txtPN2.setBackground(new java.awt.Color(25, 25, 25));
+        txtPN2.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        txtPN2.setForeground(new java.awt.Color(255, 255, 255));
+        txtPN2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPN2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        txtPN3.setBackground(new java.awt.Color(25, 25, 25));
+        txtPN3.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        txtPN3.setForeground(new java.awt.Color(255, 255, 255));
+        txtPN3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPN3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblHypen1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblHypen1.setForeground(new java.awt.Color(255, 255, 255));
+        lblHypen1.setText("-");
+
+        lblHypen2.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblHypen2.setForeground(new java.awt.Color(255, 255, 255));
+        lblHypen2.setText("-");
+
+        btnCheckRequest.setBackground(new java.awt.Color(211, 211, 211));
+        btnCheckRequest.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        btnCheckRequest.setText("인증 요청");
+        btnCheckRequest.setPreferredSize(new java.awt.Dimension(269, 26));
+        btnCheckRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckRequestActionPerformed(evt);
+            }
+        });
+
+        txtCheck.setBackground(new java.awt.Color(25, 25, 25));
+        txtCheck.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        txtCheck.setForeground(new java.awt.Color(255, 255, 255));
+        txtCheck.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        txtCheck.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblCheck.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblCheck.setForeground(new java.awt.Color(255, 255, 255));
+        lblCheck.setText("인증번호");
+
+        btnCheck.setBackground(new java.awt.Color(211, 211, 211));
+        btnCheck.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        btnCheck.setText("인증 완료");
+        btnCheck.setPreferredSize(new java.awt.Dimension(269, 26));
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckActionPerformed(evt);
+            }
+        });
+
+        lblBack.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        lblBack.setForeground(new java.awt.Color(255, 255, 255));
+        lblBack.setText("◀");
+        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBackMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CheckLayout = new javax.swing.GroupLayout(Check);
+        Check.setLayout(CheckLayout);
+        CheckLayout.setHorizontalGroup(
+            CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CheckLayout.createSequentialGroup()
+                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CheckLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(CheckLayout.createSequentialGroup()
+                                .addGap(0, 58, Short.MAX_VALUE)
+                                .addComponent(lblCom)
+                                .addGap(18, 18, 18)
+                                .addComponent(radioKT, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(radioSKT, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(CheckLayout.createSequentialGroup()
+                                .addComponent(lblBack)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblTitle)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioLG, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CheckLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(CheckLayout.createSequentialGroup()
+                                .addComponent(lblCheck)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnCheckRequest, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CheckLayout.createSequentialGroup()
+                                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblBirth)
+                                    .addComponent(lblN, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPN, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(18, 18, 18)
+                                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(CheckLayout.createSequentialGroup()
+                                        .addComponent(txtPN1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblHypen1, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPN2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(lblHypen2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(7, 7, 7)
+                                        .addComponent(txtPN3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnCheck, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(62, 62, 62))
+        );
+        CheckLayout.setVerticalGroup(
+            CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CheckLayout.createSequentialGroup()
+                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CheckLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblTitle))
+                    .addGroup(CheckLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblBack)))
+                .addGap(42, 42, 42)
+                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioLG)
+                    .addComponent(radioSKT)
+                    .addComponent(radioKT)
+                    .addComponent(lblCom))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBirth))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPN)
+                    .addComponent(txtPN1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPN2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPN3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHypen1)
+                    .addComponent(lblHypen2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCheckRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(CheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCheck, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(Check, "card3");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void Sign_buttonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_Sign_buttonActionPerformed
         try {
-            String sql = "insert into USERS(USER_ID, USER_PW, USER_NAME)" + "values (?,?,?)"; // DML 명령어
+            String sql = "insert into USERS(USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_BIRTH)" + "values (?,?,?,?,?)"; // DML 명령어
             Connection con = DriverManager.getConnection(Main.orcle_url, Main.orcle_ID, Main.orcle_PW); // DB 연결
             PreparedStatement pstmt = con.prepareStatement(sql);
+
+            boolean lengthBool = false;
+            boolean numBool = false;
+            boolean engBool = false;
+
+            if (Input_PW_text.getText().length() >= 8 && Input_PW_text.getText().length() <= 16) {
+                lengthBool = true;
+            }
+            // 비밀번호 문자로 쪼개서 검사
+            if (Input_PW_text.getText().length() > 0) {
+                String[] token = Input_PW_text.getText().split("");
+                for (int i = 0; i < token.length; i++) {
+                    char c = token[i].charAt(0);
+                    if (c > 48 && c < 57) {
+                        numBool = true;
+                    }
+                    if (c > 97 && c < 122) {
+                        engBool = true;
+                    }
+                }
+            }
+
+            if (lengthBool == true && numBool == true && engBool == true) {
+                lblWarn.setForeground(Sign.getBackground());
+            }
+            if (Input_PW_text.getText().equals(Input_PWC_text.getText())) {
+                lblWarn1.setForeground(Sign.getBackground());
+            }
+
             // DB 접근과정
-            if(status == false){
-                JOptionPane.showMessageDialog(null, "중복확인 해주세요");
-                
-            }
-            else if(!(Input_PW_text.getText().equals(Input_PWC_text.getText()))){
-                lblWarn1.show();
-            }
-            else{
-                
+            if (Input_Name_text.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "이름을 입력하세요.");
+            } else if (Input_PW_text.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요.");
+            } else if (lengthBool == false || numBool == false || engBool == false) {
+                lblWarn.setForeground(Color.red);
+            } else if (!(Input_PW_text.getText().equals(Input_PWC_text.getText()))) {
+                lblWarn1.setForeground(Color.red);
+            } else {
                 pstmt.setString(1, Input_ID_text.getText());
                 pstmt.setString(2, Input_PW_text.getText());
-                pstmt.setString(3, Input_Name_text.getText());
+                pstmt.setString(3, userName);
+                pstmt.setString(4, phoneNum);
+                pstmt.setString(5, userBirth);
                 pstmt.executeUpdate(); //입력값 DB 업데이트
                 JOptionPane.showMessageDialog(null, "회원가입 완료");
                 dispose();
             }
         } catch (SQLException ex) {
-            System.out.println("Sing_Up Error");
+            System.out.println("Sign_Up Error" + ex.getMessage());
         }
     }//GEN-LAST:event_Sign_buttonActionPerformed
 
@@ -235,30 +565,125 @@ public class Sign_Up extends javax.swing.JFrame {
     }//GEN-LAST:event_Cancel_buttonActionPerformed
 
     private void Duplicate_buttonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_Duplicate_buttonActionPerformed
-        try
-            {
+        try {
             String sql = "select USER_ID from users"; //sql명령문
             Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             // DB 접근과정
-            
-            while(rs.next()){ 
+
+            while (rs.next()) {
                 String User_ID = rs.getString("User_ID");
-                if(User_ID.equals(Input_ID_text.getText())){
+                if (Input_ID_text.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "아이디를 입력하세요.");
+                    status = false;
+                    break;
+                } else if (User_ID.equals(Input_ID_text.getText())) {
                     JOptionPane.showMessageDialog(null, "중복된 아이디 입니다.");
-                } else{
-                    System.out.println("Yes");
+                    status = false;
+                    break;
+                } else {
                     status = true;
-                    Sign_button.setEnabled(status); //중복이 아니면 가입버튼 활성화
                 }
             }
-            
+            if(status == true){
+                JOptionPane.showMessageDialog(null, "사용 가능한 아이디 입니다.");
+                Input_ID_text.setEnabled(false);
+                Duplicate_button.setEnabled(false);
+            }    
+            if(status == true && phonecheck == true)
+                Sign_button.setEnabled(true);
+
         } catch (SQLException ex) {
             System.out.println("Duplicate Error");
         }
-            
     }//GEN-LAST:event_Duplicate_buttonActionPerformed
+
+    private void btn_checkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_checkActionPerformed
+        Sign.setVisible(false);
+        Check.setVisible(true);
+    }//GEN-LAST:event_btn_checkActionPerformed
+
+    private void btnCheckRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckRequestActionPerformed
+        try {
+
+            boolean lengthBool = false;
+
+            if (txtBirth.getText().length() == 8) {
+                lengthBool = true;
+            }
+
+            if (txtName.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "이름을 입력하세요.");
+            } else if (txtBirth.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "생년월일을 입력하세요.");
+            } else if (lengthBool == false) {
+                JOptionPane.showMessageDialog(null, "올바른 생년월일 8자리를 입력하세요.");
+            } else if (txtPN1.getText().trim().equals("") || txtPN2.getText().trim().equals("") || txtPN3.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "전화번호를 입력하세요.");
+            } else {
+                phoneNum = txtPN1.getText().trim() + "-";
+                phoneNum += txtPN2.getText().trim() + "-";
+                phoneNum += txtPN3.getText().trim();
+                btnCheckRequest.setEnabled(false);
+                lblCheck.setVisible(true);
+                txtCheck.setVisible(true);
+                btnCheck.setVisible(true);
+            }
+        } catch (Exception ex) {
+            System.out.println("Check_Request Error");
+        }
+    }//GEN-LAST:event_btnCheckRequestActionPerformed
+
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        try {
+            if (txtCheck.getText().trim().equals("0000")) {
+                try {
+                    String sql = "select USER_PHONE from users"; //sql명령문
+                    Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(sql);
+                    // DB 접근과정
+
+                    while (rs.next()) {
+                        String user_phone = rs.getString("USER_PHONE");
+                        if (user_phone.equals(phoneNum)) {
+                            JOptionPane.showMessageDialog(null, "이미 가입된 전화번호입니다.");
+                            break;
+                        } else {
+                            System.out.println("Yes");
+                            phonecheck = true;
+                        }
+                    }
+                } catch (SQLException ex) {
+                    System.out.println("Phone Duplicate Error");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "인증번호가 일치하지 않습니다.");
+            }
+            
+            if(phonecheck == true){
+                JOptionPane.showMessageDialog(null, "휴대폰 인증 완료");
+                userName = txtName.getText().trim();
+                userBirth = txtBirth.getText().trim();
+                Sign.setVisible(true);
+                Check.setVisible(false);
+                Input_PhoneNum_text.setText(phoneNum);
+                Input_Name_text.setText(userName);
+                btn_check.setEnabled(false);
+            }
+            if(status == true && phonecheck == true)
+                Sign_button.setEnabled(true);
+        } catch (Exception ex) {
+            System.out.println("PhoneNum Check Error");
+        }
+    }//GEN-LAST:event_btnCheckActionPerformed
+
+    private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
+        Sign.setVisible(true);
+        Check.setVisible(false);
+    }//GEN-LAST:event_lblBackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -300,19 +725,44 @@ public class Sign_Up extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel_button;
+    private javax.swing.JPanel Check;
     private javax.swing.JButton Duplicate_button;
     private javax.swing.JTextField Input_ID_text;
     private javax.swing.JTextField Input_Name_text;
-    private javax.swing.JTextField Input_PWC_text;
-    private javax.swing.JTextField Input_PW_text;
+    private javax.swing.JPasswordField Input_PWC_text;
+    private javax.swing.JPasswordField Input_PW_text;
+    private javax.swing.JTextField Input_PhoneNum_text;
     private javax.swing.JPanel Sign;
     private javax.swing.JLabel Sign_Up_Label;
     private javax.swing.JButton Sign_button;
+    private javax.swing.JButton btnCheck;
+    private javax.swing.JButton btnCheckRequest;
+    private javax.swing.JButton btn_check;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel lblBack;
+    private javax.swing.JLabel lblBirth;
+    private javax.swing.JLabel lblCheck;
+    private javax.swing.JLabel lblCom;
+    private javax.swing.JLabel lblHypen1;
+    private javax.swing.JLabel lblHypen2;
     private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblN;
     private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblPN;
     private javax.swing.JLabel lblPW;
     private javax.swing.JLabel lblPWC;
+    private javax.swing.JLabel lblPhoneNum;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblWarn;
     private javax.swing.JLabel lblWarn1;
+    private javax.swing.JRadioButton radioKT;
+    private javax.swing.JRadioButton radioLG;
+    private javax.swing.JRadioButton radioSKT;
+    private javax.swing.JTextField txtBirth;
+    private javax.swing.JTextField txtCheck;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPN1;
+    private javax.swing.JTextField txtPN2;
+    private javax.swing.JTextField txtPN3;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,22 +2,28 @@ package sw;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-
-/**
- *
- * @author 산
- */
 public class Main extends javax.swing.JFrame {
     static String orcle_url = "jdbc:oracle:thin:@116.39.188.187:1521:orcl"; //DB URL
     static String orcle_ID = "c##san"; //DB ID
     static String orcle_PW = "123"; // DB Password  
     static User_Info Info;
-
+    
+//    static String orcle_url = "jdbc:oracle:thin:@localhost:1521:xe";    
+//    static String orcle_ID = "C##kiosk"; //DB ID
+//    static String orcle_PW = "1234"; // DB Password  
+    static Main main;
+    static Order order;
+    
+    
     /**
      * Creates new form Login
      */
     public Main() {
         initComponents();
+        main = this;
+    }
+    public static Main getInstance(){
+        return main;
     }
 
     /**
@@ -34,15 +40,16 @@ public class Main extends javax.swing.JFrame {
         Input_PW_TextField = new javax.swing.JPasswordField();
         Input_ID_TextField = new javax.swing.JTextField();
         Login_Button = new javax.swing.JButton();
-        Sing_Up_Button = new javax.swing.JLabel();
+        Sign_Up_Button = new javax.swing.JLabel();
         Find_PW_Button = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        lblPW = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("로그인 창");
         setMinimumSize(new java.awt.Dimension(1072, 606));
         setName("frame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1072, 606));
 
         Main.setBackground(new java.awt.Color(35, 35, 35));
         Main.setPreferredSize(new java.awt.Dimension(1072, 606));
@@ -54,21 +61,25 @@ public class Main extends javax.swing.JFrame {
         Login.setPreferredSize(new java.awt.Dimension(970, 500));
 
         Input_PW_TextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Input_PW_TextField.setText("Password");
         Input_PW_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 Input_PW_TextFieldFocusGained(evt);
             }
         });
+        Input_PW_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Input_PW_TextFieldActionPerformed(evt);
+            }
+        });
 
         Input_ID_TextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        Input_ID_TextField.setText("ID");
         Input_ID_TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 Input_ID_TextFieldFocusGained(evt);
             }
         });
 
+        Login_Button.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         Login_Button.setText("로그인");
         Login_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,18 +87,18 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Sing_Up_Button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        Sing_Up_Button.setForeground(new java.awt.Color(255, 255, 255));
-        Sing_Up_Button.setText("계정 생성");
-        Sing_Up_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+        Sign_Up_Button.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
+        Sign_Up_Button.setForeground(new java.awt.Color(255, 255, 255));
+        Sign_Up_Button.setText("회원 가입");
+        Sign_Up_Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Sing_Up_ButtonMouseClicked(evt);
+                Sign_Up_ButtonMouseClicked(evt);
             }
         });
 
-        Find_PW_Button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        Find_PW_Button.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         Find_PW_Button.setForeground(new java.awt.Color(255, 255, 255));
-        Find_PW_Button.setText("비밀번호 찾기");
+        Find_PW_Button.setText("ID / 비밀번호 찾기");
         Find_PW_Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Find_PW_ButtonMouseClicked(evt);
@@ -101,25 +112,48 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        lblPW.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        lblPW.setForeground(new java.awt.Color(255, 255, 255));
+        lblPW.setText("비밀번호");
+        lblPW.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPWMouseClicked(evt);
+            }
+        });
+
+        lblID.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
+        lblID.setForeground(new java.awt.Color(255, 255, 255));
+        lblID.setText("ID");
+        lblID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIDMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout LoginLayout = new javax.swing.GroupLayout(Login);
         Login.setLayout(LoginLayout);
         LoginLayout.setHorizontalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginLayout.createSequentialGroup()
-                .addContainerGap(441, Short.MAX_VALUE)
+                .addContainerGap(355, Short.MAX_VALUE)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
-                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(LoginLayout.createSequentialGroup()
-                                .addComponent(Sing_Up_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Find_PW_Button))
-                            .addGroup(LoginLayout.createSequentialGroup()
+                                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPW))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Input_ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Login_Button)))
+                                .addComponent(Login_Button))
+                            .addGroup(LoginLayout.createSequentialGroup()
+                                .addComponent(Sign_Up_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(Find_PW_Button)
+                                .addGap(21, 21, 21)))
                         .addGap(433, 433, 433))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -128,16 +162,20 @@ public class Main extends javax.swing.JFrame {
         LoginLayout.setVerticalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
-                .addContainerGap(237, Short.MAX_VALUE)
+                .addContainerGap(229, Short.MAX_VALUE)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(LoginLayout.createSequentialGroup()
-                        .addComponent(Input_ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Input_ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblID))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPW)))
                     .addComponent(Login_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Sing_Up_Button)
+                .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Sign_Up_Button)
                     .addComponent(Find_PW_Button))
                 .addGap(208, 208, 208)
                 .addComponent(jButton1)
@@ -166,10 +204,10 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Sing_Up_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sing_Up_ButtonMouseClicked
+    private void Sign_Up_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Sign_Up_ButtonMouseClicked
         new Sign_Up().setVisible(true);
 
-    }//GEN-LAST:event_Sing_Up_ButtonMouseClicked
+    }//GEN-LAST:event_Sign_Up_ButtonMouseClicked
 
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
         boolean connection = false; //접속상태확인     
@@ -178,47 +216,53 @@ public class Main extends javax.swing.JFrame {
         String User_Name = null;
         String User_RemainTime = null;
         String User_UseTime = null;
-            try {
-            String sql = "select * from users"; //sql명령문
-            Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            // DB 접근과정
-            
-            while(rs.next()){ //DB 입력
-                User_ID = rs.getString("User_ID");
-                User_PW = rs.getString("User_PW");
-                User_Name = rs.getString("User_Name");
-                User_RemainTime = rs.getString("User_RemainTime");
-                User_UseTime = rs.getString("User_UseTime");
-                if (User_ID.equals(Input_ID_TextField.getText()) && User_PW.equals(Input_PW_TextField.getText())){
-                    connection = true; // ID랑 PW같다면 로그인
-                    break;
-                 }
-                }
-                if (connection){  //로그인 완료 시                    
-                    Info = new User_Info(User_ID, User_PW, User_Name, User_RemainTime, User_UseTime); //생성자
-                    if (Info.getUser_RemainTime().equals("0")) {  // 만약 보유시간이 0이면 충전화면 출력
-                        new AddTime().setVisible(true);
+        if(Input_ID_TextField.getText().equals("admin")&&Input_PW_TextField.getText().equals("admin")){
+            new Admin().setVisible(true);
+            Main.setVisible(false);
+            dispose();
+        }else{ 
+                try {
+                String sql = "select * from users"; //sql명령문
+                Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                // DB 접근과정
+
+                while(rs.next()){ //DB 입력
+                    User_ID = rs.getString("User_ID");
+                    User_PW = rs.getString("User_PW");
+                    User_Name = rs.getString("User_Name");
+                    User_RemainTime = rs.getString("User_RemainTime");
+                    User_UseTime = rs.getString("User_UseTime");
+                    if (User_ID.equals(Input_ID_TextField.getText()) && User_PW.equals(Input_PW_TextField.getText())){
+                        connection = true; // ID랑 PW같다면 로그인
+                        break;
+                     }
                     }
-                    if (Info.getUser_RemainTime().equals("0")) {
-                        new AddTime().setVisible(true); //만약 시간이 남은시간이 0이면 충전화면 창 뜨기
-                        } else {
-                        dispose();
-                        new Order().setVisible(true);
-                        
-//                        Login.setVisible(false);
-//                        Order.setVisible(true);
-//                        User_name_Text.setText(Info.getUser_Name());
-//                        User_RemainTime_Text.setText(Info.getUser_RemainTime());
+                    if (connection){  //로그인 완료 시                    
+                        Info = new User_Info(User_ID, User_PW, User_Name, User_RemainTime, User_UseTime); //생성자
+                        if (Info.getUser_RemainTime().equals("0")) {  // 만약 보유시간이 0이면 충전화면 출력
+                            new AddTime().setVisible(true);
+                        }
+                        else {
+                            dispose();
+                            order = Order.getInstance();
+                            order.setVisible(true);
+                            AddTime.Timer_m();
+                            Order.timer_run = false;
+    //                        Login.setVisible(false);
+    //                        Order.setVisible(true);
+    //                        User_name_Text.setText(Info.getUser_Name());
+    //                        User_RemainTime_Text.setText(Info.getUser_RemainTime());
                         }   
-                } else{
-                    JOptionPane.showMessageDialog(null, "등록된 아이디가 아닙니다.");
-                }
-            
-         } catch (SQLException ex) {
-            System.err.println("Login Error");
-        }
+                    } else{
+                        JOptionPane.showMessageDialog(null, "아이디 또는 패스워드가 일치하지 않습니다.");
+                    }
+
+             } catch (SQLException ex) {
+                System.err.println("Login Error");
+            }
+        }    
              
     }//GEN-LAST:event_Login_ButtonActionPerformed
 
@@ -240,11 +284,25 @@ public class Main extends javax.swing.JFrame {
 
     private void Find_PW_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Find_PW_ButtonMouseClicked
         //비밀번호 찾기
+        new FindUser().setVisible(true);
     }//GEN-LAST:event_Find_PW_ButtonMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void lblPWMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPWMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblPWMouseClicked
+
+    private void lblIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIDMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblIDMouseClicked
+
+    private void Input_PW_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Input_PW_TextFieldActionPerformed
+        // 비밀번호 입력 후 엔터치면 로그인
+        Login_ButtonActionPerformed(evt);
+    }//GEN-LAST:event_Input_PW_TextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,7 +347,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel Login;
     private javax.swing.JButton Login_Button;
     private javax.swing.JPanel Main;
-    private javax.swing.JLabel Sing_Up_Button;
+    private javax.swing.JLabel Sign_Up_Button;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblPW;
     // End of variables declaration//GEN-END:variables
 }
