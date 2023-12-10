@@ -264,9 +264,9 @@
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="3" rowCount="1">
-                    <Column editable="true" title="&#xba54;&#xb274; &#xc774;&#xb984;" type="java.lang.Object"/>
-                    <Column editable="true" title="&#xac00;&#xaca9;" type="java.lang.Object"/>
-                    <Column editable="true" title="&#xc7ac;&#xace0;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xba54;&#xb274; &#xc774;&#xb984;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xac00;&#xaca9;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xc7ac;&#xace0;" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>
@@ -633,10 +633,10 @@
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="1">
-                    <Column editable="true" title="&#xba54;&#xb274; &#xc774;&#xb984;" type="java.lang.Object"/>
-                    <Column editable="true" title="&#xac00;&#xaca9;" type="java.lang.Object"/>
-                    <Column editable="true" title="&#xce74;&#xd14c;&#xace0;&#xb9ac;" type="java.lang.Object"/>
-                    <Column editable="true" title="&#xc7ac;&#xace0;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xba54;&#xb274; &#xc774;&#xb984;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xac00;&#xaca9;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xce74;&#xd14c;&#xace0;&#xb9ac;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xc7ac;&#xace0;" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>
@@ -805,8 +805,8 @@
                       <Component id="lblTime" alignment="3" max="32767" attributes="0"/>
                       <Component id="btnTime" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="jScrollPane3" min="-2" pref="297" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jScrollPane3" min="-2" pref="315" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -903,9 +903,9 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="3" rowCount="0">
-                    <Column editable="true" title="ID" type="java.lang.Object"/>
-                    <Column editable="true" title="&#xc774;&#xb984;" type="java.lang.Object"/>
-                    <Column editable="true" title="&#xb0a8;&#xc740; &#xc2dc;&#xac04;" type="java.lang.Object"/>
+                    <Column editable="false" title="ID" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xc774;&#xb984;" type="java.lang.Object"/>
+                    <Column editable="false" title="&#xb0a8;&#xc740; &#xc2dc;&#xac04;" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>

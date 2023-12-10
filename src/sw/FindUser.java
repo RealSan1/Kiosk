@@ -1121,7 +1121,8 @@ public class FindUser extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBackMouseClicked
 
     private void lblBack4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBack4MouseClicked
-        // TODO add your handling code here:
+        ChangePW.setVisible(false);
+        FindPW.setVisible(true);
     }//GEN-LAST:event_lblBack4MouseClicked
 
     /**

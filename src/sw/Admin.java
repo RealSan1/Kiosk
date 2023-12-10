@@ -274,7 +274,15 @@ public class Admin extends javax.swing.JFrame {
             new String [] {
                 "메뉴 이름", "가격", "재고"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabMenuDB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabMenuDBMouseClicked(evt);
@@ -494,7 +502,15 @@ public class Admin extends javax.swing.JFrame {
             new String [] {
                 "메뉴 이름", "가격", "카테고리", "재고"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabMenuDB1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabMenuDB1MouseClicked(evt);
@@ -678,7 +694,15 @@ public class Admin extends javax.swing.JFrame {
             new String [] {
                 "ID", "이름", "남은 시간"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabTimeDB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabTimeDBMouseClicked(evt);
@@ -771,8 +795,8 @@ public class Admin extends javax.swing.JFrame {
                     .addComponent(txtTime1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnTime, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
 
@@ -880,10 +904,8 @@ public class Admin extends javax.swing.JFrame {
 
     private void setDBdataFood(String FoodName, String stock) {
         String SQL = "update menu set menu_stock = ? where menu_name = ?";
-        int row = tabMenuDB.getSelectedRow();
         try {
             DB_open();
-            System.out.println(row);
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, stock);
             pstmt.setString(2, FoodName);
@@ -1080,6 +1102,7 @@ public class Admin extends javax.swing.JFrame {
         getDBdataFood("Select * from menu", "AddMenu");
     }//GEN-LAST:event_btnSearchAllMenuActionPerformed
 
+    /*사진 파일 삽입*/
     private void btnJPGFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJPGFileActionPerformed
         int result = jFileChooser1.showOpenDialog(null);
         if (result == jFileChooser1.APPROVE_OPTION) {
@@ -1111,7 +1134,8 @@ public class Admin extends javax.swing.JFrame {
             return;
         }
         String SQL = "delete from menu where menu_name=?";
-        int ckDel = JOptionPane.showConfirmDialog(null, "정말로 삭제하시겠습니까?", "삭제 확인", JOptionPane.YES_NO_OPTION);
+        int ckDel = JOptionPane.showConfirmDialog(null, "정말로 삭제하시겠습니까?",
+                "삭제 확인", JOptionPane.YES_NO_OPTION);
         if (ckDel == JOptionPane.YES_OPTION) {
             try {
                 DB_open();
@@ -1120,6 +1144,10 @@ public class Admin extends javax.swing.JFrame {
                 pstmt.executeUpdate();
                 getDBdataFood("Select * from menu", "AddMenu");
                 JOptionPane.showMessageDialog(null, "메뉴를 삭제했습니다.");
+                txtMenuName.setText("");
+                txtPrice.setText("");
+                txtStock.setText("");
+                jComboBox1.setSelectedIndex(0);
             } catch (Exception e) {
                 System.out.println("setDBerr");
                 System.out.println("SQLException : " + e.getMessage());
@@ -1134,7 +1162,8 @@ public class Admin extends javax.swing.JFrame {
             return;
         }
         String SQL = "insert into menu values(?,?,?,?)";
-        int ckDel = JOptionPane.showConfirmDialog(null, "정말로 추가하시겠습니까?", "추가 확인", JOptionPane.YES_NO_OPTION);
+        int ckDel = JOptionPane.showConfirmDialog(null, "정말로 추가하시겠습니까?", 
+                "추가 확인", JOptionPane.YES_NO_OPTION);
         if (ckDel == JOptionPane.YES_OPTION) {
             try {
                 DB_open();
