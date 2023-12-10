@@ -102,6 +102,7 @@ public class Admin extends javax.swing.JFrame {
 //            if(cnt == 3) getDBdata("Select * from users where user_id = '"+id+"' and user_name = '"+name+"'");
             getDBdata("Select * from users");
             System.out.println(SQL);
+            JOptionPane.showMessageDialog(null, "시간이 변경되었습니다.");
         } catch (Exception e) {
             System.out.println("setDBerr");
             System.out.println("SQLException : " + e.getMessage());
@@ -253,9 +254,9 @@ public class Admin extends javax.swing.JFrame {
                     .addComponent(btnInventory1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                     .addComponent(btnInventory4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(105, 105, 105)
-                .addGroup(MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInventory3, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                    .addComponent(btnTime1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTime1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInventory3, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
                 .addGap(52, 52, 52)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -281,7 +282,7 @@ public class Admin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabMenuDB);
 
-        btnAllSearchMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnAllSearchMenu.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnAllSearchMenu.setText("전체 검색");
         btnAllSearchMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,7 +301,7 @@ public class Admin extends javax.swing.JFrame {
         lblNameMenu.setForeground(new java.awt.Color(255, 255, 255));
         lblNameMenu.setText("메뉴 이름");
 
-        btnSearchFood.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnSearchFood.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnSearchFood.setText("검색");
         btnSearchFood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,7 +309,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        btnSoldOut.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnSoldOut.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnSoldOut.setText("재고 수정");
         btnSoldOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -329,7 +330,7 @@ public class Admin extends javax.swing.JFrame {
         lblPriceStockChange.setForeground(new java.awt.Color(255, 255, 255));
         lblPriceStockChange.setText("가격 / 재고 수정");
 
-        btnPriceChange.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnPriceChange.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnPriceChange.setText("가격 수정");
         btnPriceChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -501,7 +502,7 @@ public class Admin extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabMenuDB1);
 
-        btnSearchMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnSearchMenu.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnSearchMenu.setText("검색");
         btnSearchMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -509,7 +510,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        btnSearchAllMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnSearchAllMenu.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnSearchAllMenu.setText("전체 검색");
         btnSearchAllMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -517,7 +518,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        btnJPGFile.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnJPGFile.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnJPGFile.setText("사진 파일");
         btnJPGFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -525,7 +526,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        btnDelMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnDelMenu.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnDelMenu.setText("메뉴 삭제");
         btnDelMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -533,7 +534,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        btnAddMenu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        btnAddMenu.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnAddMenu.setText("메뉴 추가");
         btnAddMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -587,11 +588,10 @@ public class Admin extends javax.swing.JFrame {
                             .addComponent(lblAddDelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSearchAllMenu))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSearchMenu)
-                            .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMenuName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearchMenu))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(AddDelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -618,6 +618,7 @@ public class Admin extends javax.swing.JFrame {
 
         Time.setBackground(new java.awt.Color(35, 35, 35));
 
+        btnAllSearch.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnAllSearch.setText("전체 검색");
         btnAllSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -625,6 +626,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
+        btnSearch.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnSearch.setText("검색");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -661,6 +663,7 @@ public class Admin extends javax.swing.JFrame {
         lblTime.setForeground(new java.awt.Color(255, 255, 255));
         lblTime.setText("변경 시간");
 
+        btnTime.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnTime.setText("시간 변경");
         btnTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -721,7 +724,7 @@ public class Admin extends javax.swing.JFrame {
                             .addGroup(TimeLayout.createSequentialGroup()
                                 .addComponent(lblTimeMan2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAllSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnAllSearch))
                             .addGroup(TimeLayout.createSequentialGroup()
                                 .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(TimeLayout.createSequentialGroup()
@@ -732,10 +735,10 @@ public class Admin extends javax.swing.JFrame {
                                         .addComponent(lblTime)
                                         .addGap(18, 18, 18)
                                         .addComponent(txtTime1)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                                .addGap(32, 32, 32)
                                 .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(TimeLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -817,7 +820,7 @@ public class Admin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "조회되지 않는 유저입니다 올바르게 입력해주세요.");
             } else {
                 if (time <= -1) {
-                    JOptionPane.showMessageDialog(null, "시간을 제대로 넣어주세요");
+                    JOptionPane.showMessageDialog(null, "시간을 올바르게 입력해주세요.");
                 } else {
                     setDBdata(name, id, time);
                 }
@@ -888,6 +891,7 @@ public class Admin extends javax.swing.JFrame {
             System.out.println("update stock value = " + stock);
             System.out.println("update name value = " + FoodName);
             getDBdataFood("Select * from menu", "MenuInventory");
+            JOptionPane.showMessageDialog(null, "재고를 변경했습니다.");
         } catch (Exception e) {
             System.out.println("setDBerr");
             System.out.println("SQLException : " + e.getMessage());
@@ -903,6 +907,7 @@ public class Admin extends javax.swing.JFrame {
             pstmt.setString(2, FoodName);
             pstmt.executeUpdate();
             getDBdataFood("Select * from menu", "MenuInventory");
+            JOptionPane.showMessageDialog(null, "가격을 변경했습니다.");
         } catch (Exception e) {
             System.out.println("setDBerr");
             System.out.println("SQLException : " + e.getMessage());
@@ -1102,7 +1107,7 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnJPGFileActionPerformed
     private void delMenu(String menuName) {
         if (menuName.equals("")) {
-            JOptionPane.showMessageDialog(null, "제대로 입력해주세요");
+            JOptionPane.showMessageDialog(null, "메뉴를 입력해주세요");
             return;
         }
         String SQL = "delete from menu where menu_name=?";
@@ -1114,6 +1119,7 @@ public class Admin extends javax.swing.JFrame {
                 pstmt.setString(1, menuName);
                 pstmt.executeUpdate();
                 getDBdataFood("Select * from menu", "AddMenu");
+                JOptionPane.showMessageDialog(null, "메뉴를 삭제했습니다.");
             } catch (Exception e) {
                 System.out.println("setDBerr");
                 System.out.println("SQLException : " + e.getMessage());
@@ -1139,6 +1145,7 @@ public class Admin extends javax.swing.JFrame {
                 pstmt.setString(4, stock);
                 pstmt.executeUpdate();
                 getDBdataFood("Select * from menu", "AddMenu");
+                JOptionPane.showMessageDialog(null, "메뉴를 추가했습니다.");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "이미 있는 메뉴입니다.");
                 System.out.println("SQLException : " + e.getMessage());

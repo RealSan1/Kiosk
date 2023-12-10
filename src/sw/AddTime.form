@@ -150,7 +150,7 @@
         <Component class="javax.swing.JButton" name="AddTime_2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="12" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="2&#xc2dc;&#xac04;"/>
           </Properties>
@@ -161,7 +161,7 @@
         <Component class="javax.swing.JButton" name="AddTime_1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="12" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="1&#xc2dc;&#xac04;"/>
           </Properties>
@@ -172,7 +172,7 @@
         <Component class="javax.swing.JButton" name="AddTime_4">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="12" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="4&#xc2dc;&#xac04;"/>
           </Properties>
@@ -183,7 +183,7 @@
         <Component class="javax.swing.JButton" name="AddTime_3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="12" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="3&#xc2dc;&#xac04;"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -195,7 +195,7 @@
         <Component class="javax.swing.JButton" name="AddTime_10">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="12" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="10&#xc2dc;&#xac04;"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -207,7 +207,7 @@
         <Component class="javax.swing.JButton" name="AddTime_5">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="12" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="5&#xc2dc;&#xac04;"/>
           </Properties>
@@ -218,7 +218,7 @@
         <Component class="javax.swing.JButton" name="Exit_Button">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="12" style="1"/>
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="16" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xb2eb;&#xae30;"/>
           </Properties>

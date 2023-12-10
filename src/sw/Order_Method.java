@@ -53,7 +53,10 @@ public class Order_Method {
             table_price = Integer.parseInt(Order.order.jTable1.getValueAt(i, 2).toString());
             table_sum += table_price;
         }
-        Order.order.txtPrice.setHorizontalAlignment(SwingConstants.RIGHT);
-        Order.order.txtPrice.setText(Integer.toString(table_sum) + "₩");
+        Order.order.txtPrice.setHorizontalAlignment(SwingConstants.LEFT);
+        if(table_sum == 0)
+            Order.order.txtPrice.setText("가격 : ");
+        else
+            Order.order.txtPrice.setText("가격 : " + Integer.toString(table_sum) + "₩");
     }
 }

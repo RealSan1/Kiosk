@@ -292,7 +292,7 @@ public class Order extends javax.swing.JFrame {
 
         Menu.setBackground(new java.awt.Color(80, 80, 80));
         Menu.setForeground(new java.awt.Color(255, 255, 255));
-        Menu.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        Menu.setFont(new java.awt.Font("맑은 고딕", 0, 16)); // NOI18N
 
         Food.setBackground(new java.awt.Color(80, 80, 80));
         Food.setName("식사"); // NOI18N
@@ -530,7 +530,7 @@ public class Order extends javax.swing.JFrame {
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("DB Error");
-            JOptionPane.showMessageDialog(null, "문제가 있습니다");
+            JOptionPane.showMessageDialog(null, "재고가 부족합니다.");
         }
 
     }//GEN-LAST:event_btnOrderActionPerformed
@@ -684,7 +684,7 @@ public class Order extends javax.swing.JFrame {
             jTable1.setValueAt(objRowData.Count, i, 1);
             jTable1.setValueAt(objRowData.Price, i, 2);
         }
-
+        OM.ShowPrice();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 
@@ -694,6 +694,7 @@ public class Order extends javax.swing.JFrame {
         Object[] reowData = {null, null, null};
         model.addRow(reowData);
         prices.clear();
+        OM.ShowPrice();
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

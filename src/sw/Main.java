@@ -79,6 +79,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        Login_Button.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         Login_Button.setText("로그인");
         Login_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +87,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Sign_Up_Button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        Sign_Up_Button.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         Sign_Up_Button.setForeground(new java.awt.Color(255, 255, 255));
         Sign_Up_Button.setText("회원 가입");
         Sign_Up_Button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,7 +96,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Find_PW_Button.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        Find_PW_Button.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         Find_PW_Button.setForeground(new java.awt.Color(255, 255, 255));
         Find_PW_Button.setText("ID / 비밀번호 찾기");
         Find_PW_Button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,7 +112,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        lblPW.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblPW.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         lblPW.setForeground(new java.awt.Color(255, 255, 255));
         lblPW.setText("비밀번호");
         lblPW.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,7 +121,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        lblID.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        lblID.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         lblID.setForeground(new java.awt.Color(255, 255, 255));
         lblID.setText("ID");
         lblID.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -134,14 +135,14 @@ public class Main extends javax.swing.JFrame {
         LoginLayout.setHorizontalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginLayout.createSequentialGroup()
-                .addContainerGap(363, Short.MAX_VALUE)
+                .addContainerGap(355, Short.MAX_VALUE)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
                         .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(LoginLayout.createSequentialGroup()
                                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblPW, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPW))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(Input_PW_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,7 +162,7 @@ public class Main extends javax.swing.JFrame {
         LoginLayout.setVerticalGroup(
             LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginLayout.createSequentialGroup()
-                .addContainerGap(237, Short.MAX_VALUE)
+                .addContainerGap(229, Short.MAX_VALUE)
                 .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(LoginLayout.createSequentialGroup()
                         .addGroup(LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

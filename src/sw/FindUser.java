@@ -116,6 +116,7 @@ public class FindUser extends javax.swing.JFrame {
 
         Choose.setBackground(new java.awt.Color(35, 35, 35));
 
+        btnFindPW.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnFindPW.setText("비밀번호 찾기");
         btnFindPW.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +124,7 @@ public class FindUser extends javax.swing.JFrame {
             }
         });
 
+        btnFindID.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         btnFindID.setText("아이디 찾기");
         btnFindID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,8 +139,8 @@ public class FindUser extends javax.swing.JFrame {
             .addGroup(ChooseLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(btnFindID, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addComponent(btnFindPW, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(btnFindPW)
                 .addGap(50, 50, 50))
         );
         ChooseLayout.setVerticalGroup(
@@ -802,7 +804,7 @@ public class FindUser extends javax.swing.JFrame {
                     .addGroup(ChangePWLayout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(btnCancel)
-                        .addGap(68, 68, 68)
+                        .addGap(67, 67, 67)
                         .addComponent(btnChangePW))
                     .addGroup(ChangePWLayout.createSequentialGroup()
                         .addContainerGap()
@@ -814,7 +816,7 @@ public class FindUser extends javax.swing.JFrame {
                         .addGroup(ChangePWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblWarn1)
                             .addComponent(lblWarn))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         ChangePWLayout.setVerticalGroup(
             ChangePWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -826,7 +828,7 @@ public class FindUser extends javax.swing.JFrame {
                     .addGroup(ChangePWLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblBack4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(ChangePWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Input_PW_text, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPW))
@@ -839,9 +841,9 @@ public class FindUser extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblWarn1)
                 .addGap(42, 42, 42)
-                .addGroup(ChangePWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnChangePW)
-                    .addComponent(btnCancel))
+                .addGroup(ChangePWLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(btnChangePW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(59, 59, 59))
         );
 

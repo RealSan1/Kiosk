@@ -175,7 +175,7 @@ public class AddTime extends javax.swing.JFrame {
         AddTime_Label.setForeground(new java.awt.Color(255, 255, 255));
         AddTime_Label.setText("시간 충전");
 
-        AddTime_2.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
+        AddTime_2.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         AddTime_2.setText("2시간");
         AddTime_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,7 +183,7 @@ public class AddTime extends javax.swing.JFrame {
             }
         });
 
-        AddTime_1.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
+        AddTime_1.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         AddTime_1.setText("1시간");
         AddTime_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +191,7 @@ public class AddTime extends javax.swing.JFrame {
             }
         });
 
-        AddTime_4.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
+        AddTime_4.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         AddTime_4.setText("4시간");
         AddTime_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +199,7 @@ public class AddTime extends javax.swing.JFrame {
             }
         });
 
-        AddTime_3.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
+        AddTime_3.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         AddTime_3.setText("3시간");
         AddTime_3.setToolTipText("");
         AddTime_3.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +208,7 @@ public class AddTime extends javax.swing.JFrame {
             }
         });
 
-        AddTime_10.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
+        AddTime_10.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         AddTime_10.setText("10시간");
         AddTime_10.setToolTipText("");
         AddTime_10.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +217,7 @@ public class AddTime extends javax.swing.JFrame {
             }
         });
 
-        AddTime_5.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
+        AddTime_5.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         AddTime_5.setText("5시간");
         AddTime_5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,7 +225,7 @@ public class AddTime extends javax.swing.JFrame {
             }
         });
 
-        Exit_Button.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
+        Exit_Button.setFont(new java.awt.Font("맑은 고딕", 1, 16)); // NOI18N
         Exit_Button.setText("닫기");
         Exit_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

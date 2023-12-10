@@ -32,7 +32,7 @@ public class Sales_history extends javax.swing.JFrame {
 
                 if (temp != current && temp != 0) //주문이 들어오면
                 {
-                    JOptionPane.showMessageDialog(null, "새로운 주문이 입력되었습니다.");
+                    JOptionPane.showMessageDialog(null, "새로운 주문이 있습니다.");
                     int Cul = current - temp;
                     String Id = null;
                     String Menu_name = null;
@@ -224,6 +224,7 @@ public class Sales_history extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
+        jButton1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         jButton1.setText("주문 확인");
         jButton1.setToolTipText("");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +233,7 @@ public class Sales_history extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
         jButton2.setText("전체 주문 내역");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,26 +245,30 @@ public class Sales_history extends javax.swing.JFrame {
         Time.setLayout(TimeLayout);
         TimeLayout.setHorizontalGroup(
             TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TimeLayout.createSequentialGroup()
-                .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TimeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(TimeLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblBack1)
-                        .addGap(304, 304, 304)
-                        .addComponent(lblTimeMan2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TimeLayout.createSequentialGroup()
+                                .addComponent(lblBack1)
+                                .addGap(304, 304, 304)
+                                .addComponent(lblTimeMan2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TimeLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton1)))
                         .addGap(18, 18, 18)
                         .addComponent(jButton2))
                     .addGroup(TimeLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
+                        .addGap(0, 83, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addGap(87, 87, 87))
         );
         TimeLayout.setVerticalGroup(
             TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TimeLayout.createSequentialGroup()
-                .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(TimeLayout.createSequentialGroup()
+                .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TimeLayout.createSequentialGroup()
                         .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(TimeLayout.createSequentialGroup()
@@ -271,14 +277,15 @@ public class Sales_history extends javax.swing.JFrame {
                             .addGroup(TimeLayout.createSequentialGroup()
                                 .addGap(29, 29, 29)
                                 .addComponent(lblTimeMan2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(39, 39, 39))
-                    .addGroup(TimeLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TimeLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addGap(18, 18, 18)))
+                            .addComponent(jButton2)
+                            .addComponent(jButton1))
+                        .addGap(28, 28, 28)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
