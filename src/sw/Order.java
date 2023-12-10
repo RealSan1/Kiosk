@@ -448,11 +448,11 @@ public class Order extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(OrderLayout.createSequentialGroup()
-                        .addComponent(lblSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSearch)
+                        .addGap(5, 5, 5)
                         .addComponent(Find_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(subPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         OrderLayout.setVerticalGroup(
             OrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -687,7 +687,7 @@ public class Order extends javax.swing.JFrame {
         OM.ShowPrice();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-
+    /*모든 메뉴 삭제*/
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -696,16 +696,19 @@ public class Order extends javax.swing.JFrame {
         prices.clear();
         OM.ShowPrice();
     }//GEN-LAST:event_btnResetActionPerformed
-
+    
+    /*시스템 종료*/
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         AddTime.DBtimeUpdate();
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
-
+    
+    /*시간 충전*/
     private void btnAddTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTimeActionPerformed
         new AddTime().setVisible(true);
     }//GEN-LAST:event_btnAddTimeActionPerformed
 
+    /*수량 +1*/
     private void btnCountPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountPlusActionPerformed
         int selectedRow = jTable1.getSelectedRow();
 
@@ -726,7 +729,8 @@ public class Order extends javax.swing.JFrame {
         //전체 가격 출력
         OM.ShowPrice();
     }//GEN-LAST:event_btnCountPlusActionPerformed
-
+    
+    /*수량 -1*/
     private void btnCountMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountMinusActionPerformed
         int selectedRow = jTable1.getSelectedRow();
 
@@ -752,7 +756,6 @@ public class Order extends javax.swing.JFrame {
         jTable1.setValueAt(sum, selectedRow, 2);
         OM.ShowPrice();
         //전체 가격 출력
-
     }//GEN-LAST:event_btnCountMinusActionPerformed
 
 

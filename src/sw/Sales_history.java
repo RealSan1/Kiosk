@@ -24,7 +24,7 @@ public class Sales_history extends javax.swing.JFrame {
         initComponents();
         ((DefaultTableCellRenderer) jTable1.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER); //head 가운데 정렬
 
-        //스레드 부분
+        /*1초 마다 코드 실행*/
         Timer time = new Timer();
         time.schedule(new TimerTask() {
             @Override
@@ -79,7 +79,8 @@ public class Sales_history extends javax.swing.JFrame {
         }, 0, 1000); //1초마다 새로고침
 
     }
-
+    
+    /*테이블 생성*/
     public void MakeTable(String id, String Menu, String Count, String time) {
         int iCntRow;
         iCntRow = jTable1.getRowCount();
@@ -124,6 +125,7 @@ public class Sales_history extends javax.swing.JFrame {
 
     }
 
+    /*메뉴 주문 후 재고 확인*/
     public void Alert() {
         String Menu_name = null;
         ArrayList<String> Menu_name_list = new ArrayList<>();
@@ -175,6 +177,7 @@ public class Sales_history extends javax.swing.JFrame {
 
     }
 
+    /*값 비교를 위한 함수*/
     public static List<String> findCommonElements(List<String> list1, List<String> list2) {
         List<String> commonElements = new ArrayList<>(list1);
         commonElements.retainAll(list2);
@@ -192,9 +195,9 @@ public class Sales_history extends javax.swing.JFrame {
         lblTimeMan2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
+        btnAllSales = new javax.swing.JButton();
+        btnSelectedClear = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -222,32 +225,40 @@ public class Sales_history extends javax.swing.JFrame {
             new String [] {
                 "아이디", "메뉴", "수량", "주문 시간"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
-        jButton1.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        jButton1.setText("주문 내역 지우기");
-        jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        btnClear.setText("주문 내역 지우기");
+        btnClear.setToolTipText("");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        jButton2.setText("전체 주문 내역");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAllSales.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        btnAllSales.setText("전체 주문 내역");
+        btnAllSales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAllSalesActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
-        jButton3.setText("선택 주문 지우기");
-        jButton3.setToolTipText("");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSelectedClear.setFont(new java.awt.Font("맑은 고딕", 1, 14)); // NOI18N
+        btnSelectedClear.setText("선택 주문 지우기");
+        btnSelectedClear.setToolTipText("");
+        btnSelectedClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSelectedClearActionPerformed(evt);
             }
         });
 
@@ -268,11 +279,11 @@ public class Sales_history extends javax.swing.JFrame {
                         .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(TimeLayout.createSequentialGroup()
-                                .addComponent(jButton3)
+                                .addComponent(btnSelectedClear)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)
+                                .addComponent(btnClear)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2)))))
+                                .addComponent(btnAllSales)))))
                 .addGap(76, 76, 76))
         );
         TimeLayout.setVerticalGroup(
@@ -287,9 +298,9 @@ public class Sales_history extends javax.swing.JFrame {
                         .addComponent(lblTimeMan2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addGroup(TimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnSelectedClear)
+                    .addComponent(btnClear)
+                    .addComponent(btnAllSales))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -319,29 +330,26 @@ public class Sales_history extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /*주문 내역 지우기 버튼*/
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         Object[] reowData = {null, null, null};
         model.addRow(reowData);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnClearActionPerformed
 
     private void lblBack1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBack1MouseClicked
         new Admin().setVisible(true);
         dispose();
     }//GEN-LAST:event_lblBack1MouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String Id = null;
-        String Menu_name = null;
-        String count = null;
-        String Time = null;
+    /*전체 주문 내역 버튼*/
+    private void btnAllSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllSalesActionPerformed
+        String Id, Menu_name, count, Time = null;
         ArrayList<String> Id_list = new ArrayList<>();
         ArrayList<String> Menu_name_list = new ArrayList<>();
         ArrayList<String> Count_list = new ArrayList<>();
         ArrayList<String> Time_list = new ArrayList<>();
         try {
-
             String sql = "select User_id, menu_name, count, time from cart order by time desc";   // DML 명령어
             Connection con = DriverManager.getConnection(orcle_url, orcle_ID, orcle_PW); // DB 연결
             Statement stmt = con.createStatement();
@@ -366,9 +374,10 @@ public class Sales_history extends javax.swing.JFrame {
             ex.printStackTrace();
             System.out.println("DB Error");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnAllSalesActionPerformed
+    
+    /*선택 주문 지우기 버튼*/
+    private void btnSelectedClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectedClearActionPerformed
         MakeRowData objRowData;
         Vector myVC = new Vector();
 
@@ -398,7 +407,7 @@ public class Sales_history extends javax.swing.JFrame {
             jTable1.setValueAt(objRowData.Count, i, 2);
             jTable1.setValueAt(objRowData.Time, i, 3);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnSelectedClearActionPerformed
 
     public static class MakeRowData {
         public String Id;
@@ -438,9 +447,9 @@ public class Sales_history extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Time;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAllSales;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnSelectedClear;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
