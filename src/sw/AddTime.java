@@ -79,7 +79,7 @@ public class AddTime extends javax.swing.JFrame {
                 SetTimePrt(remain, elapsed);
                 if(remain==0){
                     timer.stop();
-                    order.dispose();
+                    System.exit(0);
                 }
             }
         });
